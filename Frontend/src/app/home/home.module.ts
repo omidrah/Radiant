@@ -8,12 +8,7 @@ import { M1tabComponent } from './tablist/m1tab/m1tab.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
-import { AlertModule } from 'ngx-bootstrap/alert';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 
 @NgModule({
   declarations: [
@@ -27,13 +22,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ReactiveFormsModule,
     HttpClientModule,
     HttpClientJsonpModule,  
-    //SharedModule,
-    ModalModule.forRoot(),
-    BsDropdownModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    CollapseModule.forRoot(),
-    TabsModule.forRoot(),
-    AlertModule.forRoot(),
+    SharedModule,
     HomeRoutingModule
   ]
 })

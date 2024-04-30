@@ -4,8 +4,7 @@ import { TablistComponent } from './tablist/tablist.component';
 
 const routes: Routes = [
   {
-      path: '',
-      component: TablistComponent,
+      path: '',component: TablistComponent,
   }
 ];
 
