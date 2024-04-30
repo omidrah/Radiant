@@ -1,0 +1,136 @@
+<form [formGroup]="cmdForm" data-toggle="validator" role="form" (ngSubmit)="onSubmit()"
+  style="padding:20px 80px 0px 80px;">
+
+  <div class="row g-2">
+    <div class="col-md">
+      <div class="form-check">
+        <input class="form-check-input" formControlName="testmode" [(ngModel)]="testmode" type="radio" name="testmode" id="txoff"
+          value="txoff" (change)="testmodeChanged($event);" checked>
+        <label class="form-check-label">
+          TxOff
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" formControlName="testmode" [(ngModel)]="testmode" type="radio" name="testmode"
+          id="directmds" value="directmds" (change)="testmodeChanged($event);">
+        <label class="form-check-label">
+          DirectMds
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" formControlName="testmode" [(ngModel)]="testmode" type="radio" name="testmode"
+          id="directpwr" value="directpwr" (change)="testmodeChanged($event);">
+        <label class="form-check-label">
+          DirectPwr
+        </label>
+      </div>
+
+      <hr>
+      <div class="form-check">
+        <input class="form-check-input" formControlName="datamode" [(ngModel)]="datamode" type="radio" name="datamode"
+          id="manual" (change)="datamodeChanged($event);" value="manual" checked>
+        <label class="form-check-label">
+          Radiate Manual
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" formControlName="datamode" [(ngModel)]="datamode" type="radio" name="datamode"
+          id="lpbk" (change)="datamodeChanged($event);" value="lpbk">
+        <label class="form-check-label">
+          Radiate LPBK
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" formControlName="datamode" [(ngModel)]="datamode" type="radio" name="datamode"
+          id="sim" (change)="datamodeChanged($event);" value="sim">
+        <label class="form-check-label">
+          Radiate SIM
+        </label>
+      </div>
+    </div>
+    <div class="col-md" *ngIf="showDirectPwr">      
+          <div class="form-row form-group  col-md-4">
+             <label class="col-sm-4" >Couple</label>
+             <div class="col-sm-8">
+                <input type="number" class="form-control" id="couple" placeholder="couple" formControlName="couple">
+            </div>
+          </div>
+                  
+          <div class="form-row form-group col-md-4">
+              <label class="col-sm-4" >Unit</label>
+              <div class="form-check form-check-inline">                
+                    <label>w</label>
+                    <input formControlName="unit" [(ngModel)]="unit" type="radio" name="unit" id="unitW" value="w" checked>       
+              </div>
+               <div class="form-check form-check-inline">
+                    <label>dBm</label>                 
+                    <input formControlName="unit" [(ngModel)]="unit" type="radio" name="unit" id="unitdBm" value="dBm">                 
+               
+              </div>
+         </div>   
+         
+         <div class="form-row form-group  col-md-4">
+           <label class="col-sm-4" >Pwr</label>
+           <div class="col-sm-8">
+            <input type="number" class="form-control" id="pwr" formControlName="pwr">{{unit}}
+           </div>
+         </div>        
+    </div>
+
+    <div class="col-md" *ngIf="showDirectMds">      
+        <div class="form-row form-group col-md-4">
+          <label class="col-sm-4">Att</label>
+          <div class="col-sm-8">
+              <input type="number" class="form-control" id="att" formControlName="att" step=".5">(+20/-80)
+          </div>
+        </div>
+        <div class="form-rowform-group col-md-4">          
+            <label class="col-sm-4">Rx Ok</label>            
+            <label class="col-sm-4">Rx Fail</label>
+        </div>      
+    </div>
+
+    <div class="col-md">  
+      <div class="form-floating">    
+      <app-digiclock></app-digiclock>
+      </div>
+     
+      <hr>
+      <div class="col-md">
+         <div class="form-floating">
+          <div class="progress progress-bar-vertical">
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+              aria-valuemax="100" style="height: 60%;">
+              <span class="sr-only">60% Complete</span>
+            </div>
+            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="10" aria-valuemin="0"
+              aria-valuemax="100" style="height: 10%;">
+              <span class="sr-only">10% Complete</span>
+            </div>
+            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+              aria-valuemax="100" style="height: 20%;">
+              <span class="sr-only">20% Complete</span>
+            </div>
+          </div>        
+        </div>
+        <div class="form-floating">
+          <button type="button" class="btn btn-warning">Start</button>
+          <button type="button" class="btn btn-warning">Stop</button>
+        </div>
+      </div>
+
+
+      <div class="form-floating">
+        <span id="hour" class="badge badge-secondary">14</span>
+        <span id="minute" class="badge badge-secondary">25</span>
+        <span id="second" class="badge badge-secondary">35</span>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <button type="submit" class="btn btn-warning">Submit</button>
+</form>
+<alert type="success" *ngIf="showValue">
+  {{cmdForm.value | json}}
+  <strong>Well done!</strong> You successfully read this important alert message.
+</alert>
