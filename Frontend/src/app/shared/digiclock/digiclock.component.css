@@ -4,7 +4,7 @@
 
 
 *{
-	margin:0;
+	/* margin:0; */
 	padding:0;
 }
 
@@ -42,9 +42,7 @@
 
 
 #clock {
-    font:15px/1.3 Arial, sans-serif;
-	color: #4f4f4f;
-	z-index:1;
+    
     width: 370px;
     padding: 40px;
     /* margin: 200px auto 60px; */
@@ -66,7 +64,7 @@
 
 #clock .display {
     text-align: center;
-    /* padding: 40px 20px 20px; */
+     /* padding: 40px 20px 20px;  */
     border-radius: 6px;
     position: relative;
     /* height: 75px; */
