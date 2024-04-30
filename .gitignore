@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # User-specific files
 *.suo
 *.user
@@ -242,3 +243,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+=======
+*node_modules/*
+>>>>>>> 3843cff111efd2205e3eeccc32a3fed94cb461e7
