@@ -38,7 +38,6 @@ export class CmdComponent implements OnInit {
     //console.log(this.showValue)
   }
   
-
    testmodeChanged($event){
     let radioValue = event.target['value'];
     if(radioValue =='txoff'){
@@ -58,5 +57,7 @@ export class CmdComponent implements OnInit {
   datamodeChanged($event){
     let radioValue = event.target['value'];
      console.log(radioValue);
+     this.showDirectMds = false;
+      this.showDirectPwr =false;
   }
 }

@@ -7,3 +7,16 @@ import { Component } from '@angular/core';
 export class TablistComponent {
 
 }
+/**change record to unrecord button */
+// $('#recButton').addClass("notRec");
+
+// $('#recButton').click(function(){
+// 	if($('#recButton').hasClass('notRec')){
+// 		$('#recButton').removeClass("notRec");
+// 		$('#recButton').addClass("Rec");
+// 	}
+// 	else{
+// 		$('#recButton').removeClass("Rec");
+// 		$('#recButton').addClass("notRec");
+// 	}
+// });	

@@ -1,140 +1,166 @@
-<p>m1tab works!</p>
-<form [formGroup]="m1Form" data-toggle="validator" role="form" (ngSubmit)="onSubmit()"
-  style="padding:20px 80px 0px 80px;">
-
-  <div class="form-row">
-    Uplink Data
-    <div class="form-group col-md-5">
-    </div>
-    <!-- <label> RSSI_Mj</label>
-    <div class="form-group col-md-2">
-      <span  id="dbm" class="badge badge-secondary">125</span> dBm
-    </div>
-    <div class="form-group col-md-2">
-      <span  id="kw"  id="kw" class="badge badge-secondary">125</span> Kw
-    </div> -->
-  </div>
-
-  <div class="form-row">
-    <div class="form-group col-md-2">
-      <span  id="xt" class="badge badge-secondary">xt</span>     
-    </div>
-    <div class="form-group col-md-2">
-      <span  id="xt" class="badge badge-secondary">yt</span>          
-    </div>
-    <div class="form-group col-md-2">
-      <span  id="xt" class="badge badge-secondary">zt</span>     
-    </div>
-    <div class="form-group col-md-2">
-      <span  id="xm" class="badge badge-secondary">Xm</span>     
-    </div>
-    <div class="form-group col-md-2">
-      <span  id="ym" class="badge badge-secondary">Ym</span>    
-    </div>
-    <div class="form-group col-md-2">
-      <span  id="zm" class="badge badge-secondary">Zm</span>          
-    </div>
-  </div>
-
-  <div class="form-row">
-    <div class="form-group col-md-2">
-      <span  id="vxt" class="badge badge-secondary">Vxt</span>          
-    </div>
-    <div class="form-group col-md-2">
-      <span  id="vyt" class="badge badge-secondary">Vyt</span>               
-    </div>
-    <div class="form-group col-md-2">
-      <span  id="vzt" class="badge badge-secondary">Vzt</span>               
-    </div>
-    <div class="form-group col-md-2">
-      <span  id="vxm" class="badge badge-secondary">Vxm</span>          
-    </div>
-    <div class="form-group col-md-2">
-      <span  id="vym" class="badge badge-secondary">Vym</span>                
-    </div>
-    <div class="form-group col-md-2">
-      <span  id="vzm" class="badge badge-secondary">Vzm</span>                
-    </div>
-  </div>
-  <hr>
-  <div class="form-row">
-    Downlink Data
-  </div>
-  <div class="form-row">
-    <div class="form-inline">
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="loopback" value="loopback" checked>
-        <label class="form-check-label">
-          LoopBack
-        </label>
+<form [formGroup]="m1Form" data-toggle="validator" role="form" (ngSubmit)="onSubmit()" style="padding-left:20px;padding-top: 10px;">
+<div class="row">
+  <div class="col-md-5">
+     <span> Uplink Data</span>
+     <div class="col">
+          <div class="col-md-2">
+            <span id="xt" class="badge badge-secondary">xt</span>
+          </div>
+          <div class="col-md-2">
+            <span id="xt" class="badge badge-secondary">yt</span>
+          </div>
+          <div class="col-md-2">
+            <span id="xt" class="badge badge-secondary">zt</span>
+          </div>
+          <div class="col-md-2">
+            <span id="xm" class="badge badge-secondary">Xm</span>
+          </div>
+          <div class="col-md-2">
+            <span id="ym" class="badge badge-secondary">Ym</span>
+          </div>
+          <div class="col-md-2">
+            <span id="zm" class="badge badge-secondary">Zm</span>
+          </div>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="manual" value="manual">
-        <label class="form-check-label">
-          Manual
-        </label>
+      <div class="col">
+        <div class="col-md-2">
+          <span id="vxt" class="badge badge-secondary">Vxt</span>
+        </div>
+        <div class="col-md-2">
+          <span id="vyt" class="badge badge-secondary">Vyt</span>
+        </div>
+        <div class="col-md-2">
+          <span id="vzt" class="badge badge-secondary">Vzt</span>
+        </div>
+        <div class="col-md-2">
+          <span id="vxm" class="badge badge-secondary">Vxm</span>
+        </div>
+        <div class="col-md-2">
+          <span id="vym" class="badge badge-secondary">Vym</span>
+        </div>
+        <div class="col-md-2">
+          <span id="vzm" class="badge badge-secondary">Vzm</span>
+        </div>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="simulate" value="simulate">
-        <label class="form-check-label">
-          Simulate
-        </label>
+  </div>
+  <div class="col-md-7">
+    <div class="row">
+      <div class="col-md-12">
+        <span> Downlink Data </span>
       </div>
-    </div>
+      <div class="col-md-12">
+            <div class="form-inline">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="loopback" value="loopback" checked>
+                <label class="form-check-label">
+                  LoopBack
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="manual" value="manual">
+                <label class="form-check-label">
+                  Manual
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="simulate" value="simulate">
+                <label class="form-check-label">
+                  Simulate
+                </label>
+              </div>
+            </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <label>Xm</label>
+          <div class="col-sm-9 ml-4">
+            <input type="number" class="form-control" id="xm" placeholder="xm">
+          </div>
+        </div>
+        <div class="row">
+          <label>Ym</label>
+          <div class="col-sm-9 ml-4">
+            <input type="number" class="form-control" id="ym" placeholder="ym">
+          </div>
+        </div>
+        <div class="row">
+          <label>Zm</label>
+          <div class="col-sm-9 ml-4">
+            <input type="number" class="form-control" id="zm" placeholder="zm">
+          </div>
+        </div>
+        <div class="row">
+          <label>Status</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control" id="status" placeholder="status">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <span>
+                Self Destruction
+              </span>
+              <div class="col-m-12">
+                  <div class="row">                
+                      <label>Status</label>
+                      <div class="col-sm-6 ml-5">
+                        <input type="number" class="form-control" id="status" placeholder="status">
+                      </div>
+                  </div>
+                  <div class="row">   
+                    <label>Sd Counter</label>
+                    <div class="col-sm-6 ml-2">
+                    <input type="number" class="form-control" id="counter" placeholder="counter">
+                    </div>
+                  </div>
+                  <div class="row">   
+                    <label>Common</label>
+                    <div class="col-sm-6 ml-4">
+                    <input type="number" class="form-control" id="common" placeholder="common">
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <span>
+                Link LED Options
+              </span>
+              <div class="col-md-12">
+                  <div class="row">                
+                    <label>On Time</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" id="onTime" placeholder="onTime">
+                    </div>
+                  </div>
+                  <div class="row">
+                  <label>Link Led</label>
+                  <div class="col-sm-6">
+                  <input type="text" class="form-control" id="linkLed" placeholder="linkLed">
+                  </div>
+                  </div>
+              </div>
+            </div>
+          </div>        
+        </div>        
+      </div>     
+   </div>
   </div>
+  
 
-  <div class="form-row">
-    <div class="form-group col-md-2">
-      <label for="inputEmail4">Xm</label>
-      <input type="text" class="form-control" id="xm" placeholder="xm">
-    </div>
-    <div class="form-group col-md-2">
-      <label for="inputPassword4">Ym</label>
-      <input type="text" class="form-control" id="ym" placeholder="ym">
-    </div>
-    <div class="form-group col-md-2">
-      <label for="inputEmail4">Zm</label>
-      <input type="text" class="form-control" id="zm" placeholder="zm">
-    </div>
-    <div class="form-group col-md-2">
-      <label for="inputEmail4">Status</label>
-      <input type="text" class="form-control" id="status" placeholder="status">
-    </div>
-  </div>
+ 
 
-  <hr>
+  
 
 
-  <div class="form-row">
-    <div class="col">
-      <span>
-        Self Destruction
-      </span>
-    </div>
-    <div class="col">
-      <span>
-        Link LED Options
-      </span>
-    </div>
-  </div>
+  <div class="col">
 
 
-  <div class="form-row">
-    <div class="form-group col-md-4">
-      <label>Status</label>
-      <input type="text" class="form-control" id="status" placeholder="status">
-      <label>Sd Counter</label>
-      <input type="text" class="form-control" id="counter" placeholder="counter">
-      <label>Common</label>
-      <input type="text" class="form-control" id="common" placeholder="common">
-    </div>
-
-    <div class="form-group col-md-4">
-      <label>On Time</label>
-      <input type="text" class="form-control" id="onTime" placeholder="onTime">
-      <label>Link Led</label>
-      <input type="text" class="form-control" id="linkLed" placeholder="linkLed">
-    </div>
+    
 
     <div class="form-group col-md-4">
       <label>Adm</label>
@@ -173,4 +199,5 @@
     </div>
   </div> -->
   <button type="submit" class="btn btn-warning">Submit</button>
+</div>
 </form>

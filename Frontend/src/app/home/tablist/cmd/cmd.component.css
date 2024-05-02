@@ -1,6 +1,11 @@
 body{
     padding: 45px;
 }
+
+.radiobuttonLarger {
+	transform: scale(2);
+ }
+
 .progress-bar-vertical{
     
     width: 35px;

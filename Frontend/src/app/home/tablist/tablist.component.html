@@ -1,4 +1,5 @@
-<div>
+<div class="row">
+  <div class="col-md-9">
     <tabset>
       <tab heading="CMD" id="cmdtab"><app-cmd></app-cmd></tab>
       <tab heading="M1" id="m1tab"><app-m1tab></app-m1tab></tab>
@@ -9,3 +10,26 @@
       <tab heading="M6" id="m6tab">M6</tab>
     </tabset>
   </div>
+  <div class="col-md-3">
+    <div class="row">
+      <div class="col-lg-12">
+        <app-digiclock></app-digiclock>
+      </div>
+      <div class="col-lg-12">
+        <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar" style="width: 25%">25%</div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="timer-time timer-container">
+          <div class="timer-time-set timer-box" id="currentTime">           
+             <button class="buttonRec Rec" title="record">Recording</button>
+             <span id="hoursValue"   class="badge badge-warning">00</span><span>:</span> 
+             <span id="minutesValue" class="badge badge-warning">00</span><span>:</span>
+             <span id="secondsValue" class="badge badge-warning">00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
