@@ -12,7 +12,7 @@ export class TablistComponent implements OnInit {
     
   }  
   ngOnInit(): void {
-    this.tabset.tabs[2].active=true;
+   // this.tabset.tabs[2].active=true;
   }
   activeTabId:string='cmd';
   changeTab($event) {
