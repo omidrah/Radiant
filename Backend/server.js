@@ -1,11 +1,29 @@
-const express = require('express')
-const url     = require('url');
+// Example using Express.js
+const express = require('express');
+const app = express();
 
-const app = express()
 
-app.get('/', function (req, res) {
-  res.send('Hello World');
-  console.log(req.url);
-})
 
-app.listen(3000)
+// Example defining a route in Express
+app.get('/', (req, res) => {
+    res.send('<h1>Hello, Express.js Server!</h1>');
+});
+
+
+
+// Include route files
+const usersRoute = require('./routes/users');
+const productsRoute = require('./routes/products');
+
+
+// Use routes
+app.use('/users', usersRoute);
+app.use('products', productsRoute);
+
+
+
+// Example specifying the port and starting the server
+const port = process.env.PORT || 3000; // You can use environment variables for port configuration
+server.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
