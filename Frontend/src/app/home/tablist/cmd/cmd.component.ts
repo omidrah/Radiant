@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { SharedFormService } from '../../shared-form.service';
 
 
 @Component({
@@ -14,28 +15,31 @@ export class CmdComponent implements OnInit {
   testmode:string='txoff';
   datamode:string='manual';
   unit:string='w';
-  showValue = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private sharedFormService: SharedFormService) {
     this.cmdForm = this.fb.group({
       testmode: new FormControl(),
       datamode: new FormControl(),  
-      couple:new FormControl('')   ,
-      unit:new FormControl('')   ,
-      pwr:new FormControl('')   ,
-      att:new FormControl('')   ,
-
-      
+      couple:new FormControl('') ,
+      unit:new FormControl(''),
+      pwr:new FormControl(''),
+      att:new FormControl('')         
     });
+     // Listen for changes in the entire form
+     this.cmdForm.valueChanges.subscribe(values => {
+      this.saveFormState(values);
+    });
+  }
+
+  saveFormState(formData: any): void {
+    // Implement the logic to save formData to a file
+    // This could be a server call or local storage operation
+    //console.warn(this.cmdForm.value);    
+    let updatedFormData = { ...this.sharedFormService.currentData,...formData };
+    this.sharedFormService.updateFormData(updatedFormData);
   }
   ngOnInit() {
     this.testmode = 'txoff';
-  }
-  onSubmit(): void {
-    
-    this.showValue = !this.showValue;
-    console.warn(this.cmdForm.value);
-    //console.log(this.showValue)
   }
   
    testmodeChanged($event){
