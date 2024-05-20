@@ -44,10 +44,8 @@ export class M5tabComponent implements OnInit, OnDestroy{
 
   ngOnInit() {  
     this.subscription = interval(10000)
-     //.pipe(takeWhile(() => !stop))
      .subscribe(() => {
       //this.loadData(); console.log(this.randomNumber)}
-      console.log(this.sharedFormService.currentData);
       });
       
   }

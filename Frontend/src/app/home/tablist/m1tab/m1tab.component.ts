@@ -46,10 +46,9 @@ export class M1tabComponent implements OnInit, OnDestroy{
   ngOnInit() {  
     //setInterval(()=>{this.loadData(); console.log(this.randomNumber) }, 5000);
     this.subscription = interval(10000)
-  //   //.pipe(takeWhile(() => !stop))
+    //.pipe(takeWhile(() => !stop))
      .subscribe(() => {
-      //this.loadData(); console.log(this.randomNumber)}
-      console.log(this.sharedFormService.currentData);
+      //this.loadData(); console.log(this.randomNumber)}      
       });
       
   }

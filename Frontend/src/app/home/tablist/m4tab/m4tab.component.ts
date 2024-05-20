@@ -46,7 +46,6 @@ export class M4tabComponent implements OnInit, OnDestroy{
      //.pipe(takeWhile(() => !stop))
      .subscribe(() => {
       //this.loadData(); console.log(this.randomNumber)}
-      console.log(this.sharedFormService.currentData);
       });
       
   }
