@@ -18,24 +18,22 @@ export class M1tabComponent implements OnInit, OnDestroy{
   constructor(private fb: FormBuilder , private sharedFormService: SharedFormService) {
     this.m1tabform = this.fb.group({
       m1downdata: new FormControl('loopback'),
-      m1xm: new FormControl(''),  
-      m1ym:new FormControl('') ,
-      m1zm:new FormControl(''),
-      m1status:new FormControl(''),
-      m1selstatus:new FormControl(''),
-      m1counter:new FormControl(''),
-      m1common:new FormControl(''),
-      m1ontime:new FormControl(''),
-      m1linkled:new FormControl(''),
-      m1adm:new FormControl(''),
-      m1freq:new FormControl('')         
+      m1xm: new FormControl(0),  
+      m1ym:new FormControl(0) ,
+      m1zm:new FormControl(0),
+      m1status:new FormControl(0),
+      m1selstatus:new FormControl(0),
+      m1counter:new FormControl(0),
+      m1common:new FormControl(0),
+      m1ontime:new FormControl(0),
+      m1linkled:new FormControl(0),
+      m1adm:new FormControl(0),
+      m1freq:new FormControl(0)         
     });
-
      // Listen for changes in the entire form
      this.m1tabform.valueChanges.subscribe(values => {
       this.saveFormState(values,"m1tab");
     });
-
   }
   
   saveFormState(formData: any,whichtab:string): void {

@@ -1,1 +1,235 @@
-<p>m3tab works!</p>
+
+<div class="row">
+    <div class="col-md-2" >
+      <span> Uplink Data</span>
+      <div class="col mt-3">
+        <div class="row">
+          <div class="col-md-4">
+            <span>xt:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="xt" >{{randomNumber[1]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>yt:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="yt">{{randomNumber[2]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>zt:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="zt">{{randomNumber[3]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Xm:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="xm" >{{randomNumber[4]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Ym:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="ym" >{{randomNumber[5]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Zm:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="zm" >{{randomNumber[6]}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col-md-4">
+            <span>Vxt:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="vxt" >{{randomNumber[7]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Vyt:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="vyt" >{{randomNumber[8]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Vzt:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="vzt" >{{randomNumber[9]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Vxm:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="vxm" >{{randomNumber[10]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Vym:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="vym" >{{randomNumber[9]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Vzm:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="vzm" >{{randomNumber[1]}}</span>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div class="col">
+      <form [formGroup]="m3tabform">
+              <div class="col-md-7 ">
+                <div class="row">
+                  <div class="col-md-12">
+                    <span> Downlink Data </span>
+                  </div>
+                  <div class="col-md-12 mt-3">
+                    <div class="form-inline">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" formControlName="m3downdata" name="m3downdata" id="loopback" value="loopback" checked>
+                        <label class="form-check-label">
+                          LoopBack
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" formControlName="m3downdata" name="m3downdata" id="manual" value="manual">
+                        <label class="form-check-label">
+                          Manual
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" formControlName="m3downdata"  name="m3downdata" id="simulate" value="simulate">
+                        <label class="form-check-label">
+                          Simulate
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 mt-3">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label>Xm</label>
+                      </div>
+                      <div class="col-sm-2">
+                        <input type="number" class="form-control" id="m3xm" placeholder="xm" formControlName="m3xm" name="m3xm">
+                      </div>
+                      <div class="col-sm-2">
+                        <label>Ym</label>
+                      </div>
+                      <div class="col-sm-2">
+                        <input type="number" class="form-control" id="m3ym" placeholder="ym" formControlName="m3ym" name="m3ym">
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-sm-2">
+                        <label>Zm</label>
+                      </div>
+                      <div class="col-sm-2">
+                        <input type="number" class="form-control" id="m3zm" placeholder="zm" formControlName="m3zm" name="m3zm">
+                      </div>
+                      <div class="col-sm-2">
+                        <label>Status</label>
+                      </div>
+                      <div class="col-sm-2">
+                        <input type="number" class="form-control" id="m3status" placeholder="status" formControlName="m3status" name="m3status">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 mt-3">
+                    <div class="row">
+                      <div class="col-md-6 mt-3">
+                        <div class="row">
+                          <span >
+                            Self Destruction
+                          </span>
+                          <div class="col-m-12 mt-2">
+                            <div class="row mt-2">
+                              <label>Status</label>
+                              <div class="col-sm-6 ml-5">
+                                <input type="number" class="form-control" id="m3selstatus" placeholder="status" formControlName="m3selstatus" name="m3selstatus">
+                              </div>
+                            </div>
+                            <div class="row mt-2">
+                              <label>Sd Counter</label>
+                              <div class="col-sm-6 ml-2">
+                                <input type="number" class="form-control" id="m3counter" placeholder="counter" formControlName="m3counter" name="m3counter">
+                              </div>
+                            </div>
+                            <div class="row mt-2">
+                              <label>Common</label>
+                              <div class="col-sm-6 ml-4">
+                                <input type="number" class="form-control" id="m3common" placeholder="common" formControlName="m3common" name="m3common">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mt-3">
+                        <div class="row">
+                          <span>
+                            Link LED Options
+                          </span>
+                          <div class="col-md-12 mt-2">
+                            <div class="row mt-2">
+                              <label>On Time</label>
+                              <div class="col-sm-6">
+                                <input type="number" class="form-control" id="m3ontime" placeholder="onTime" formControlName="m3ontime" name="m3ontime">
+                              </div>
+                            </div>
+                            <div class="row mt-2">
+                              <label>Link Led</label>
+                              <div class="col-sm-6">
+                                <input type="number" class="form-control" id="m3linkled" placeholder="linkLed" formControlName="m3linkled" name="m3linkled">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="row">
+                  <label class="col-md-4">Adm</label>
+                  <div class="col-md-8">
+                    <input type="number" class=" form-control" id="m3adm" placeholder="adm" formControlName="m3adm" name="m3adm">
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <label class="col-md-4">Freq</label>
+                  <div class="col-md-8">
+                  <input type="number" class="form-control" id="m3freq" placeholder="freq" formControlName="m3freq" name="m3freq">
+                  </div>
+                </div>
+              </div>
+      </form>
+     </div>
+  </div>

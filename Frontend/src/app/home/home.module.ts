@@ -8,13 +8,23 @@ import { M1tabComponent } from './tablist/m1tab/m1tab.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
+import { M2tabComponent } from './tablist/m2tab/m2tab.component';
+import { M3tabComponent } from './tablist/m3tab/m3tab.component';
+import { M4tabComponent } from './tablist/m4tab/m4tab.component';
+import { M5tabComponent } from './tablist/m5tab/m5tab.component';
+import { M6tabComponent } from './tablist/m6tab/m6tab.component';
 
 
 @NgModule({
   declarations: [
     CmdComponent,
     TablistComponent,
-    M1tabComponent
+    M1tabComponent,
+    M2tabComponent,
+    M3tabComponent,
+    M4tabComponent,
+    M5tabComponent,
+    M6tabComponent
   ],
   imports: [
     CommonModule,

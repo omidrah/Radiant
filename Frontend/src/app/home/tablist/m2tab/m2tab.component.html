@@ -1,1 +1,235 @@
-<p>m2tab works!</p>
+
+<div class="row">
+    <div class="col-md-2" >
+      <span> Uplink Data</span>
+      <div class="col mt-3">
+        <div class="row">
+          <div class="col-md-4">
+            <span>xt:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="xt" >{{randomNumber[1]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>yt:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="yt">{{randomNumber[2]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>zt:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="zt">{{randomNumber[3]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Xm:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="xm" >{{randomNumber[4]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Ym:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="ym" >{{randomNumber[5]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Zm:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="zm" >{{randomNumber[6]}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col-md-4">
+            <span>Vxt:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="vxt" >{{randomNumber[7]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Vyt:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="vyt" >{{randomNumber[8]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Vzt:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="vzt" >{{randomNumber[9]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Vxm:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="vxm" >{{randomNumber[10]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Vym:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="vym" >{{randomNumber[9]}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span>Vzm:</span>
+          </div>
+          <div class="col-md-8">
+            <span id="vzm" >{{randomNumber[1]}}</span>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div class="col">
+      <form [formGroup]="m2tabform">
+              <div class="col-md-7 ">
+                <div class="row">
+                  <div class="col-md-12">
+                    <span> Downlink Data </span>
+                  </div>
+                  <div class="col-md-12 mt-3">
+                    <div class="form-inline">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" formControlName="m2downdata" name="m2downdata" id="loopback" value="loopback" checked>
+                        <label class="form-check-label">
+                          LoopBack
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" formControlName="m2downdata" name="m2downdata" id="manual" value="manual">
+                        <label class="form-check-label">
+                          Manual
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" formControlName="m2downdata"  name="m2downdata" id="simulate" value="simulate">
+                        <label class="form-check-label">
+                          Simulate
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 mt-3">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label>Xm</label>
+                      </div>
+                      <div class="col-sm-2">
+                        <input type="number" class="form-control" id="m2xm" placeholder="xm" formControlName="m2xm" name="m1xm">
+                      </div>
+                      <div class="col-sm-2">
+                        <label>Ym</label>
+                      </div>
+                      <div class="col-sm-2">
+                        <input type="number" class="form-control" id="m2ym" placeholder="ym" formControlName="m2ym" name="m1ym">
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-sm-2">
+                        <label>Zm</label>
+                      </div>
+                      <div class="col-sm-2">
+                        <input type="number" class="form-control" id="m2zm" placeholder="zm" formControlName="m2zm" name="m2zm">
+                      </div>
+                      <div class="col-sm-2">
+                        <label>Status</label>
+                      </div>
+                      <div class="col-sm-2">
+                        <input type="number" class="form-control" id="m2status" placeholder="status" formControlName="m2status" name="m2status">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 mt-3">
+                    <div class="row">
+                      <div class="col-md-6 mt-3">
+                        <div class="row">
+                          <span >
+                            Self Destruction
+                          </span>
+                          <div class="col-m-12 mt-2">
+                            <div class="row mt-2">
+                              <label>Status</label>
+                              <div class="col-sm-6 ml-5">
+                                <input type="number" class="form-control" id="m2selstatus" placeholder="status" formControlName="m2selstatus" name="m2selstatus">
+                              </div>
+                            </div>
+                            <div class="row mt-2">
+                              <label>Sd Counter</label>
+                              <div class="col-sm-6 ml-2">
+                                <input type="number" class="form-control" id="m2counter" placeholder="counter" formControlName="m2counter" name="m2counter">
+                              </div>
+                            </div>
+                            <div class="row mt-2">
+                              <label>Common</label>
+                              <div class="col-sm-6 ml-4">
+                                <input type="number" class="form-control" id="m2common" placeholder="common" formControlName="m2common" name="m2common">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mt-3">
+                        <div class="row">
+                          <span>
+                            Link LED Options
+                          </span>
+                          <div class="col-md-12 mt-2">
+                            <div class="row mt-2">
+                              <label>On Time</label>
+                              <div class="col-sm-6">
+                                <input type="number" class="form-control" id="m2ontime" placeholder="onTime" formControlName="m2ontime" name="m2ontime">
+                              </div>
+                            </div>
+                            <div class="row mt-2">
+                              <label>Link Led</label>
+                              <div class="col-sm-6">
+                                <input type="number" class="form-control" id="m2linkled" placeholder="linkLed" formControlName="m2linkled" name="m2linkled">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="row">
+                  <label class="col-md-4">Adm</label>
+                  <div class="col-md-8">
+                    <input type="number" class=" form-control" id="m2adm" placeholder="adm" formControlName="m2adm" name="m2adm">
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <label class="col-md-4">Freq</label>
+                  <div class="col-md-8">
+                  <input type="number" class="form-control" id="m2freq" placeholder="freq" formControlName="m2freq" name="m2freq">
+                  </div>
+                </div>
+              </div>
+      </form>
+     </div>
+  </div>

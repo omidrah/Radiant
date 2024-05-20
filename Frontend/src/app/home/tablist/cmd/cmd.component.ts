@@ -12,18 +12,15 @@ export class CmdComponent implements OnInit {
   cmdForm: FormGroup;
   showDirectMds= false;
   showDirectPwr=false;
-  testmode:string='txoff';
-  datamode:string='manual';
-  unit:string='w';
 
   constructor(private fb: FormBuilder,private sharedFormService: SharedFormService) {
     this.cmdForm = this.fb.group({
-      testmode: new FormControl(),
-      datamode: new FormControl(),  
-      couple:new FormControl('') ,
-      unit:new FormControl(''),
-      pwr:new FormControl(''),
-      att:new FormControl('')         
+      testmode: new FormControl('txoff'),
+      datamode: new FormControl('manual'),  
+      couple:new FormControl(0) ,
+      unit:new FormControl('w'),
+      pwr:new FormControl(0),
+      att:new FormControl(0)         
     });
      // Listen for changes in the entire form
      this.cmdForm.valueChanges.subscribe(values => {
@@ -38,9 +35,7 @@ export class CmdComponent implements OnInit {
     this.sharedFormService.updateFormData(formData,whichtab);
     
   }
-  ngOnInit() {
-    this.testmode = 'txoff';
-  }
+  ngOnInit() { }
   
    testmodeChanged($event){
     let radioValue = event.target['value'];
@@ -63,5 +58,15 @@ export class CmdComponent implements OnInit {
      console.log(radioValue);
      this.showDirectMds = false;
       this.showDirectPwr =false;
+  }
+ //return unit radio selected
+  get unit(): any {
+    return this.cmdForm.get('unit').value;
+  }
+  get testmode(): any {
+    return this.cmdForm.get('testmode').value;
+  }
+  get datamode(): any {
+    return this.cmdForm.get('datamode').value;
   }
 }
