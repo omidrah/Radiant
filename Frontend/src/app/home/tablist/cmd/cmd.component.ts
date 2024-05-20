@@ -55,9 +55,9 @@ export class CmdComponent implements OnInit {
 
   datamodeChanged($event){
     let radioValue = event.target['value'];
-     console.log(radioValue);
-     this.showDirectMds = false;
-      this.showDirectPwr =false;
+     //console.log(radioValue);
+     //this.showDirectMds = false;
+      //this.showDirectPwr =false;
   }
  //return unit radio selected
   get unit(): any {

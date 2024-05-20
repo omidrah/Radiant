@@ -8,6 +8,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { UtilService } from './util/UtilService';
+import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
   declarations: [
     DigiclockComponent
@@ -19,7 +20,8 @@ import { UtilService } from './util/UtilService';
     BsDatepickerModule.forRoot(),
     CollapseModule.forRoot(),
     TabsModule.forRoot(),
-    AlertModule.forRoot(),     
+    AlertModule.forRoot(),  
+    NgSelectModule   
   ],
   exports:[
     ModalModule,
@@ -27,6 +29,7 @@ import { UtilService } from './util/UtilService';
     BsDatepickerModule,
     CollapseModule,
     TabsModule,
+    NgSelectModule,
     AlertModule,
     DigiclockComponent
   ],
