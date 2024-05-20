@@ -6,7 +6,11 @@ export class askmodel {
     couple:number;
     unit:string;
     pwr:number;
-    att:number
+    pout:number
+
+    /**freq uniq for all m tab */
+    mfreq:number
+
     /******** */
     m1downdata: string;
     m1xm: number;
@@ -19,7 +23,6 @@ export class askmodel {
     m1ontime:number
     m1linkled:number
     m1adm:number
-    m1freq:number
 
     /******** */
     m2downdata: string;
@@ -33,7 +36,6 @@ export class askmodel {
     m2ontime:number
     m2linkled:number
     m2adm:number
-    m2freq:number
 
     /******** */
     m3downdata: string;
@@ -47,7 +49,6 @@ export class askmodel {
     m3ontime:number
     m3linkled:number
     m3adm:number
-    m3freq:number
 
     /******** */
     m4downdata: string;
@@ -61,7 +62,6 @@ export class askmodel {
     m4ontime:number
     m4linkled:number
     m4adm:number
-    m4freq:number
 
     /******** */
     m5downdata: string;
@@ -75,7 +75,6 @@ export class askmodel {
     m5ontime:number
     m5linkled:number
     m5adm:number
-    m5freq:number
     /******** */
     m6downdata: string;
     m6xm: number;
@@ -88,29 +87,4 @@ export class askmodel {
     m6ontime:number
     m6linkled:number
     m6adm:number
-    m6freq:number
-
     };
-
- export interface cmd {
-    testmode: string;
-    datamode: string;
-    couple:number;
-    unit:string;
-    pwr:number;
-    att:number
-};
-export interface m1tab {
-    m1downdata: string;
-    m1xm: number;
-    m1ym:number;
-    m1zm:number;
-    m1status:number;
-    m1selstatus:number
-    m1counter:number
-    m1common:number
-    m1ontime:number
-    m1linkled:number
-    m1adm:number
-    m1freq:number
-};

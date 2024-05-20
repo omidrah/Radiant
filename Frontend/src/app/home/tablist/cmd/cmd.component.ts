@@ -20,10 +20,10 @@ export class CmdComponent implements OnInit {
       couple:new FormControl(0) ,
       unit:new FormControl('w'),
       pwr:new FormControl(0),
-      att:new FormControl(0)         
+      pout:new FormControl(0)         
     });
      // Listen for changes in the entire form
-     this.cmdForm.valueChanges.subscribe(values => {
+     this.cmdForm.valueChanges.subscribe(values => {      
       this.saveFormState(values,"cmd");
     });
   }
@@ -68,5 +68,14 @@ export class CmdComponent implements OnInit {
   }
   get datamode(): any {
     return this.cmdForm.get('datamode').value;
+  }
+  get couple(): number {
+    return this.cmdForm.get('couple').value;
+  }
+  get pwr(): number {
+    return this.cmdForm.get('pwr').value;
+  }
+  get pout(): number {
+    return this.cmdForm.get('pout').value;
   }
 }

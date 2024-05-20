@@ -10,8 +10,8 @@ import { SharedFormService } from '../../shared-form.service';
 })
 export class M4tabComponent implements OnInit, OnDestroy{
   m4tabform: FormGroup;
-  subscription: Subscription;
   randomNumber: Array<number> = []; 
+  private currentDataSubscription: Subscription;
 
   constructor(private fb: FormBuilder , private sharedFormService: SharedFormService) {
     this.m4tabform = this.fb.group({
@@ -26,7 +26,7 @@ export class M4tabComponent implements OnInit, OnDestroy{
       m4ontime:new FormControl(0),
       m4linkled:new FormControl(0),
       m4adm:new FormControl(0),
-      m4freq:new FormControl(0)         
+      mfreq:new FormControl(0)         
     });
      // Listen for changes in the entire form
      this.m4tabform.valueChanges.subscribe(values => {
@@ -42,12 +42,12 @@ export class M4tabComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {  
-    this.subscription = interval(10000)
-     //.pipe(takeWhile(() => !stop))
-     .subscribe(() => {
-      //this.loadData(); console.log(this.randomNumber)}
-      });
-      
+  /**mfreq share between tabs */    
+  this.currentDataSubscription=this.sharedFormService.currentData.subscribe(data => {
+    this.m4tabform.patchValue({
+      mfreq: data.mfreq
+    } ,{ emitEvent: false });
+  }); 
   }
 
   loadData(){
@@ -58,7 +58,7 @@ export class M4tabComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();    
+    this.currentDataSubscription.unsubscribe();  
   }
 
 

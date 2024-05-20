@@ -10,8 +10,8 @@ import { SharedFormService } from '../../shared-form.service';
 })
 export class M2tabComponent implements OnInit, OnDestroy{
   m2tabform: FormGroup;
-  subscription: Subscription;
   randomNumber: Array<number> = []; 
+  private currentDataSubscription: Subscription;
 
   constructor(private fb: FormBuilder , private sharedFormService: SharedFormService) {
     this.m2tabform = this.fb.group({
@@ -26,11 +26,11 @@ export class M2tabComponent implements OnInit, OnDestroy{
       m2ontime:new FormControl(0),
       m2linkled:new FormControl(0),
       m2adm:new FormControl(0),
-      m2freq:new FormControl(0)         
+      mfreq:new FormControl(0)         
     });
      // Listen for changes in the entire form
      this.m2tabform.valueChanges.subscribe(values => {
-      this.saveFormState(values,"m2tab");
+      this.saveFormState(values,"m2tab");      
     });
   }
   
@@ -42,12 +42,21 @@ export class M2tabComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {  
-    this.subscription = interval(10000)
-     //.pipe(takeWhile(() => !stop))
-     .subscribe(() => {
-      //this.loadData(); console.log(this.randomNumber)}
-      });
-      
+    /**mfreq share between tabs */    
+    this.currentDataSubscription=this.sharedFormService.currentData.subscribe(data => {
+      this.m2tabform.patchValue({
+        mfreq: data.mfreq
+      } ,{ emitEvent: false });
+    }); 
+   // Subscribe to the blur event of each form control
+  //  Object.keys(this.m2tabform.controls).forEach(key => {
+  //   const control = this.m2tabform.get(key);
+  //   if (control) {
+  //     control.valueChanges.subscribe(value => {
+  //       this.saveFormState(this.m2tabform.value, 'm2tab');
+  //     });
+  //   }
+  // });
   }
 
   loadData(){
@@ -58,7 +67,8 @@ export class M2tabComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();    
+    this.currentDataSubscription.unsubscribe();
+ 
   }
 
 }

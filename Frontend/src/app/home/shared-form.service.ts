@@ -12,8 +12,12 @@ export class SharedFormService {
     testmode: 'txoff',
     couple: 0,
     unit: 'w',
-    att: 0,
+    pout: 0,
     pwr: 0,
+
+    /**unique for all tab */
+    mfreq: 0,
+
     /**m1 */
     m1downdata: 'loopback',
     m1xm: 0,
@@ -26,7 +30,6 @@ export class SharedFormService {
     m1ontime: 0,
     m1linkled: 0,
     m1adm: 0,
-    m1freq: 0,
     /**m2 */
     m2downdata: 'loopback',
     m2xm: 0,
@@ -39,7 +42,6 @@ export class SharedFormService {
     m2ontime: 0,
     m2linkled: 0,
     m2adm: 0,
-    m2freq: 0,
     /**m3 */
     m3downdata: 'loopback',
     m3xm: 0,
@@ -52,7 +54,6 @@ export class SharedFormService {
     m3ontime: 0,
     m3linkled: 0,
     m3adm: 0,
-    m3freq: 0,
     /**m4 */
     m4downdata: 'loopback',
     m4xm: 0,
@@ -65,7 +66,6 @@ export class SharedFormService {
     m4ontime: 0,
     m4linkled: 0,
     m4adm: 0,
-    m4freq: 0,
     /**m5 */
     m5downdata: 'loopback',
     m5xm: 0,
@@ -78,7 +78,6 @@ export class SharedFormService {
     m5ontime: 0,
     m5linkled: 0,
     m5adm: 0,
-    m5freq: 0,
     /**m6 */
     m6downdata: 'loopback',
     m6xm: 0,
@@ -90,28 +89,25 @@ export class SharedFormService {
     m6common: 0,
     m6ontime: 0,
     m6linkled: 0,
-    m6adm: 0,
-    m6freq: 0
-
+    m6adm: 0
   });
   //currentData = this.formData.asObservable();
 
 
   get currentData(): Observable<askmodel> { return this.formData$.asObservable(); }
-
   constructor() { }
-
+ 
   updateFormData(newData: any, whichtab: string) {
     // Get the current value without subscribing
     let cData = this.formData$.value;
     switch (whichtab) {
       case 'cmd':
-        cData.testmode = newData['testmode']
-        cData.datamode = newData['datamode']
-        cData.couple = newData['couple']
-        cData.unit = newData['unit']
-        cData.pwr = newData['pwr']
-        cData.att = newData['att']
+        cData.testmode = newData['testmode'];
+        cData.datamode = newData['datamode'];
+        cData.couple = newData['couple'];
+        cData.unit = newData['unit'];
+        cData.pwr = newData['pwr'];
+        cData.pout =this.calcPout(newData['pout']);
         break;
       case 'm1tab':
         cData.m1downdata = newData['m1downdata']
@@ -125,7 +121,7 @@ export class SharedFormService {
         cData.m1ontime = newData['m1ontime']
         cData.m1linkled = newData['m1linkled']
         cData.m1adm = newData['m1adm']
-        cData.m1freq = newData['m1freq']
+        cData.mfreq = newData['mfreq']
         break;
       case 'm2tab':
         cData.m2downdata = newData['m2downdata']
@@ -139,7 +135,8 @@ export class SharedFormService {
         cData.m2ontime = newData['m2ontime']
         cData.m2linkled = newData['m2linkled']
         cData.m2adm = newData['m2adm']
-        cData.m2freq = newData['m2freq']
+        cData.mfreq = newData['mfreq']
+
         break;
       case 'm3tab':
         cData.m3downdata = newData['m3downdata']
@@ -153,7 +150,8 @@ export class SharedFormService {
         cData.m3ontime = newData['m3ontime']
         cData.m3linkled = newData['m3linkled']
         cData.m3adm = newData['m3adm']
-        cData.m3freq = newData['m3freq']
+        cData.mfreq = newData['mfreq']
+
         break;
       case 'm4tab':
         cData.m4downdata = newData['m4downdata']
@@ -167,7 +165,8 @@ export class SharedFormService {
         cData.m4ontime = newData['m4ontime']
         cData.m4linkled = newData['m4linkled']
         cData.m4adm = newData['m4adm']
-        cData.m4freq = newData['m4freq']
+        cData.mfreq = newData['mfreq']
+
         break;
       case 'm5tab':
         cData.m5downdata = newData['m5downdata']
@@ -181,7 +180,8 @@ export class SharedFormService {
         cData.m5ontime = newData['m5ontime']
         cData.m5linkled = newData['m5linkled']
         cData.m5adm = newData['m5adm']
-        cData.m5freq = newData['m5freq']
+        cData.mfreq = newData['mfreq']
+
         break;
       case 'm6tab':
         cData.m6downdata = newData['m6downdata']
@@ -195,12 +195,18 @@ export class SharedFormService {
         cData.m6ontime = newData['m6ontime']
         cData.m6linkled = newData['m6linkled']
         cData.m6adm = newData['m6adm']
-        cData.m6freq = newData['m6freq']
+        cData.mfreq = newData['mfreq']
+
         break;
     }
     this.formData$.next(cData);
   }
+  calcPout(pout:number){
+    //1403-02-31 . mr.Nader said for calculate pout..
+    // 10->0   and -90->200
 
+     return Math.abs((pout -10)*2);
+  }
   saveFormData() {
     // Logic to save formData to a file
     const currentData = this.formData$.value; // Get the current value without subscribing

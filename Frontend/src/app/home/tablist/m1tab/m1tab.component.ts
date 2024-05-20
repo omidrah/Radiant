@@ -12,8 +12,8 @@ import { SharedFormService } from '../../shared-form.service';
 })
 export class M1tabComponent implements OnInit, OnDestroy{
   m1tabform: FormGroup;
-  subscription: Subscription;
   randomNumber: Array<number> = []; 
+  private currentDataSubscription: Subscription;
 
   constructor(private fb: FormBuilder , private sharedFormService: SharedFormService) {
     this.m1tabform = this.fb.group({
@@ -28,9 +28,9 @@ export class M1tabComponent implements OnInit, OnDestroy{
       m1ontime:new FormControl(0),
       m1linkled:new FormControl(0),
       m1adm:new FormControl(0),
-      m1freq:new FormControl(0)         
-    });
-     // Listen for changes in the entire form
+      mfreq:new FormControl(0)         
+    });    
+    //Listen for changes in the entire form
      this.m1tabform.valueChanges.subscribe(values => {
       this.saveFormState(values,"m1tab");
     });
@@ -44,13 +44,21 @@ export class M1tabComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {  
-    //setInterval(()=>{this.loadData(); console.log(this.randomNumber) }, 5000);
-    this.subscription = interval(10000)
-    //.pipe(takeWhile(() => !stop))
-     .subscribe(() => {
-      //this.loadData(); console.log(this.randomNumber)}      
-      });
-      
+    /**mfreq share between tabs */   
+    this.currentDataSubscription=this.sharedFormService.currentData.subscribe(data => {
+      this.m1tabform.patchValue({
+        mfreq: data.mfreq
+      }, { emitEvent: false });
+    });    
+    // Subscribe to the blur event of each form control
+    // Object.keys(this.m1tabform.controls).forEach(key => {
+    //   const control = this.m1tabform.get(key);
+    //   if (control) {
+    //     control.valueChanges.subscribe(value => {
+    //       this.saveFormState(this.m1tabform.value, 'm1tab');
+    //     });
+    //   }
+    // });
   }
 
   loadData(){
@@ -61,7 +69,7 @@ export class M1tabComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();    
+    this.currentDataSubscription.unsubscribe();  
   }
 
 }

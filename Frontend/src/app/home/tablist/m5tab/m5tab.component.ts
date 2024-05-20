@@ -11,8 +11,8 @@ import { SharedFormService } from '../../shared-form.service';
 })
 export class M5tabComponent implements OnInit, OnDestroy{
   m5tabform: FormGroup;
-  subscription: Subscription;
   randomNumber: Array<number> = []; 
+  private currentDataSubscription: Subscription;
 
   constructor(private fb: FormBuilder , private sharedFormService: SharedFormService) {
     this.m5tabform = this.fb.group({
@@ -27,7 +27,7 @@ export class M5tabComponent implements OnInit, OnDestroy{
       m5ontime:new FormControl(0),
       m5linkled:new FormControl(0),
       m5adm:new FormControl(0),
-      m5freq:new FormControl(0)         
+      mfreq:new FormControl(0)         
     });
      // Listen for changes in the entire form
      this.m5tabform.valueChanges.subscribe(values => {
@@ -42,13 +42,14 @@ export class M5tabComponent implements OnInit, OnDestroy{
      this.sharedFormService.updateFormData(formData,whichtab);
   }
 
-  ngOnInit() {  
-    this.subscription = interval(10000)
-     .subscribe(() => {
-      //this.loadData(); console.log(this.randomNumber)}
-      });
-      
-  }
+  ngOnInit() {
+      /**mfreq share between tabs */    
+      this.currentDataSubscription=this.sharedFormService.currentData.subscribe(data => {
+        this.m5tabform.patchValue({
+          mfreq: data.mfreq
+        } ,{ emitEvent: false });
+      }); 
+   }
 
   loadData(){
     this.randomNumber=[];
@@ -56,9 +57,8 @@ export class M5tabComponent implements OnInit, OnDestroy{
       this.randomNumber.push(Math.floor(Math.random() * (1000 - 2 + 1) + 2));
     } 
   }
-
   ngOnDestroy() {
-    this.subscription.unsubscribe();    
+    this.currentDataSubscription.unsubscribe();  
   }
 
 

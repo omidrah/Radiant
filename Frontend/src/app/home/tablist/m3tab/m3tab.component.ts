@@ -10,8 +10,8 @@ import { SharedFormService } from '../../shared-form.service';
 })
 export class M3tabComponent implements OnInit, OnDestroy{
   m3tabform: FormGroup;
-  subscription: Subscription;
   randomNumber: Array<number> = []; 
+  private currentDataSubscription: Subscription;
 
   constructor(private fb: FormBuilder , private sharedFormService: SharedFormService) {
     this.m3tabform = this.fb.group({
@@ -26,7 +26,7 @@ export class M3tabComponent implements OnInit, OnDestroy{
       m3ontime:new FormControl(0),
       m3linkled:new FormControl(0),
       m3adm:new FormControl(0),
-      m3freq:new FormControl(0)         
+      mfreq:new FormControl(0)         
     });
      // Listen for changes in the entire form
      this.m3tabform.valueChanges.subscribe(values => {
@@ -41,13 +41,13 @@ export class M3tabComponent implements OnInit, OnDestroy{
      this.sharedFormService.updateFormData(formData,whichtab);
   }
 
-  ngOnInit() {  
-    this.subscription = interval(10000)
-     //.pipe(takeWhile(() => !stop))
-     .subscribe(() => {
-      //this.loadData(); console.log(this.randomNumber)}
-      });
-      
+  ngOnInit() {
+  /**mfreq share between tabs */    
+  this.currentDataSubscription=this.sharedFormService.currentData.subscribe(data => {
+    this.m3tabform.patchValue({
+      mfreq: data.mfreq
+    } ,{ emitEvent: false });
+  }); 
   }
 
   loadData(){
@@ -56,9 +56,8 @@ export class M3tabComponent implements OnInit, OnDestroy{
       this.randomNumber.push(Math.floor(Math.random() * (1000 - 2 + 1) + 2));
     } 
   }
-
   ngOnDestroy() {
-    this.subscription.unsubscribe();    
+    this.currentDataSubscription.unsubscribe();  
   }
 
 
