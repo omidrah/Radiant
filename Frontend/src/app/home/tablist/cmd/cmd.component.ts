@@ -27,16 +27,16 @@ export class CmdComponent implements OnInit {
     });
      // Listen for changes in the entire form
      this.cmdForm.valueChanges.subscribe(values => {
-      this.saveFormState(values);
+      this.saveFormState(values,"cmd");
     });
   }
 
-  saveFormState(formData: any): void {
+  saveFormState(formData: any,whichtab:string): void {
     // Implement the logic to save formData to a file
     // This could be a server call or local storage operation
     //console.warn(this.cmdForm.value);    
-    let updatedFormData = { ...this.sharedFormService.currentData,...formData };
-    this.sharedFormService.updateFormData(updatedFormData);
+    this.sharedFormService.updateFormData(formData,whichtab);
+    
   }
   ngOnInit() {
     this.testmode = 'txoff';

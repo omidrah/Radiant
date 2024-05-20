@@ -19,32 +19,30 @@ export class M1tabComponent implements OnInit, OnDestroy{
     this.m1tabform = this.fb.group({
       m1downdata: new FormControl('loopback'),
       m1xm: new FormControl(''),  
-      m1ym:new FormControl('')   ,
-      m1zm:new FormControl('')   ,
-      m1status:new FormControl('')   ,
-      m1selstatus:new FormControl('')   ,
-      m1counter:new FormControl('')   ,
-      m1common:new FormControl('')   ,
-      m1ontime:new FormControl('')   ,
-      m1linkled:new FormControl('')   ,
-      m1adm:new FormControl('')   ,
-      m1freq:new FormControl('')   ,
-      
+      m1ym:new FormControl('') ,
+      m1zm:new FormControl(''),
+      m1status:new FormControl(''),
+      m1selstatus:new FormControl(''),
+      m1counter:new FormControl(''),
+      m1common:new FormControl(''),
+      m1ontime:new FormControl(''),
+      m1linkled:new FormControl(''),
+      m1adm:new FormControl(''),
+      m1freq:new FormControl('')         
     });
 
      // Listen for changes in the entire form
      this.m1tabform.valueChanges.subscribe(values => {
-      this.saveFormState(values);
+      this.saveFormState(values,"m1tab");
     });
 
   }
   
-  saveFormState(formData: any): void {
+  saveFormState(formData: any,whichtab:string): void {
     // Implement the logic to save formData to a file
     // This could be a server call or local storage operation
-    //console.warn(this.m1tabform.value);    
-    let updatedFormData = { ...this.sharedFormService.currentData,...formData };
-     this.sharedFormService.updateFormData(updatedFormData);
+    //console.warn(this.m1tabform.value);  
+     this.sharedFormService.updateFormData(formData,whichtab);
   }
 
   ngOnInit() {  
