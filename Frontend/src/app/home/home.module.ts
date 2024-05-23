@@ -13,6 +13,7 @@ import { M3tabComponent } from './tablist/m3tab/m3tab.component';
 import { M4tabComponent } from './tablist/m4tab/m4tab.component';
 import { M5tabComponent } from './tablist/m5tab/m5tab.component';
 import { M6tabComponent } from './tablist/m6tab/m6tab.component';
+import { dataService } from './services/data.service';
 
 
 @NgModule({
@@ -31,9 +32,13 @@ import { M6tabComponent } from './tablist/m6tab/m6tab.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientJsonpModule,  
+    HttpClientJsonpModule,
     SharedModule,
     HomeRoutingModule
-  ]
+  ],
+  exports:[
+    HttpClientModule
+  ],
+  providers:[dataService]
 })
 export class HomeModule { }

@@ -1,8 +1,7 @@
 // shared-form.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { askmodel } from '../shared/models/ask';
-
+import { askmodel } from '../models/ask';
 @Injectable({
   providedIn: 'root'
 })
@@ -93,10 +92,9 @@ export class SharedFormService {
   });
   //currentData = this.formData.asObservable();
 
-
   get currentData(): Observable<askmodel> { return this.formData$.asObservable(); }
   constructor() { }
- 
+
   updateFormData(newData: any, whichtab: string) {
     // Get the current value without subscribing
     let cData = this.formData$.value;
@@ -204,7 +202,6 @@ export class SharedFormService {
   calcPout(pout:number){
     //1403-02-31 . mr.Nader said for calculate pout..
     // 10->0   and -90->200
-
      return Math.abs((pout -10)*2);
   }
   saveFormData() {

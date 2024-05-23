@@ -1,25 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
-import { Subscription, interval } from 'rxjs';
-import { SharedFormService } from '../shared-form.service';
+import { dataService } from '../services/data.service';
 @Component({
-  selector: 'app-tablist', 
+  selector: 'app-tablist',
   templateUrl: './tablist.component.html',
   styleUrl: './tablist.component.css'
 })
 export class TablistComponent implements OnInit {
   @ViewChild('staticTabs') tabset: TabsetComponent;
-  subscription: Subscription;
 
-  constructor(private sharedFormService: SharedFormService){
-    
-  }  
+  constructor(private dataservice:dataService){ }
   ngOnInit(): void {
-   // this.tabset.tabs[2].active=true;    
-    this.subscription = interval(5000)
-     .subscribe(() => {
-      console.log(this.sharedFormService.currentData);
-      });
+   // this.tabset.tabs[2].active=true;
+   this.dataservice.sendDataToserver()
   }
   activeTabId:string='cmd';
   changeTab($event) {
@@ -39,4 +32,4 @@ export class TablistComponent implements OnInit {
 // 		$('#recButton').removeClass("Rec");
 // 		$('#recButton').addClass("notRec");
 // 	}
-// });	
+// });

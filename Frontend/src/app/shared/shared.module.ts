@@ -9,6 +9,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { UtilService } from './util/UtilService';
 import { NgSelectModule } from '@ng-select/ng-select';
+
 @NgModule({
   declarations: [
     DigiclockComponent
@@ -20,8 +21,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     BsDatepickerModule.forRoot(),
     CollapseModule.forRoot(),
     TabsModule.forRoot(),
-    AlertModule.forRoot(),  
-    NgSelectModule   
+    AlertModule.forRoot(),
+    NgSelectModule
   ],
   exports:[
     ModalModule,
@@ -31,11 +32,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
     TabsModule,
     NgSelectModule,
     AlertModule,
-    DigiclockComponent
+    DigiclockComponent,
   ],
   providers:[UtilService]
 })
-export class SharedModule { 
+export class SharedModule {
 
   static forRoot() {
     // Forcing the whole app to use the returned providers from the roorModule only.

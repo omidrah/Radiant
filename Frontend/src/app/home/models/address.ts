@@ -1,5 +1,5 @@
-export class Address {   
-    Missles = [
+
+export const  Addresses = [
         { id: 1, name: '001101' },
         { id: 2, name: '001110' },
         { id: 3, name: '010101' },
@@ -23,6 +23,6 @@ export class Address {
         { id: 21, name: '101011' },
         { id: 22, name: '101110' },
         { id: 23, name: '110110' },
-        { id: 24, name: '111010' }        
+        { id: 24, name: '111010' }
     ];
-}
+

@@ -1,14 +1,18 @@
 {
-  "name": "backend2",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "NodeJs_backend",
+  "version": "1.1.0",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "debug-break": "node --inspect-brk server.js",
+    "debug": "node --inspect server.js"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
+    "date-and-time": "^3.3.0",
     "express": "^4.19.2"
   }
 }
