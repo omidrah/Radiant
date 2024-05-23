@@ -3,7 +3,7 @@
 // Example using Express.js
 const express = require('express');
 const cors = require('cors');
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const fs = require('fs');
 const date = require('date-and-time');
 const { buffer_alloc, buffer_write } = require('./buffer');
@@ -16,8 +16,8 @@ const server = express();
 // server.use(express.json());
 // Enable CORS for all routes
 server.use(cors());
-//server.use(bodyParser.json());
-//server.use(bodyParser.urlencoded({ extended: true }));
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: true }));
 // Example defining a route in Express
 server.get('/', (req, res) => {
     res.send('<h1>Hello, Radiant Company!</h1>');
@@ -29,7 +29,8 @@ server.post('/api/save-data', (req, res) => {
     //const content = `Name: ${name}\nMessage: ${message}\n`;
     let content = JSON.stringify(req.body); 
     buffer_alloc(content.length)    
-    buffer_write(content)
+    let a= buffer_write(content)
+    fs.writeFile('a.txt',a);
     /**generate file name */
     // const now = new Date();
     // const formattedDateTime = date.format(now, 'YYYY-MM-DD-HH-mm-ss');

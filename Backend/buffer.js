@@ -8,6 +8,7 @@
    function buffer_write(str){
     const buf = Buffer.alloc(100); // Creating a new Buffer
     const len = buf.write(str); // Writing to the Buffer
+    return len;
     //The Buffer.write() function returns the length of the string, which is stored in the buffer.
   }
 

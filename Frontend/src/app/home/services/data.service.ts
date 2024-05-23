@@ -16,7 +16,7 @@ export class dataService {
 
       // this.subscription =
        interval(5000)
-     .subscribe(() => {
+       .subscribe(() => {
          this.sharedFormService.currentData.subscribe(c=>{
           this.http.post(`${this.apiUrl}/api/save-data`, c).subscribe
                 (
