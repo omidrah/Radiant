@@ -29,7 +29,17 @@ server.post('/api/save-data', (req, res) => {
     const formattedDateTime = date.format(now, 'YYYY-MM-DD-HH-mm-ss');
     const filePath = `./datalogs/${formattedDateTime}.txt`;
       // Save data to a file (e.g., data.txt)
-    fs.appendFile(filePath, content, (err) => {
+    // fs.appendFile(filePath, content, (err) => {
+    //   if (err) {
+    //     console.error('Error saving data:', err);
+    //     res.status(500).send('Error saving data');
+    //   } else {
+    //     console.log('Data saved successfully!');
+    //     res.status(200).send('Data saved successfully');
+    //   }
+    // });
+     //save data  hex base in file
+    fs.appendFile(filePath,Buffer.from(content).toString('hex') , (err) => {
       if (err) {
         console.error('Error saving data:', err);
         res.status(500).send('Error saving data');
