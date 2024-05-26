@@ -97,12 +97,31 @@ namespace WebApplication5.Controllers
             Array.Copy(checksum, 0, blockdata, 83, 2);
 
             byte[] footer = new byte[3] { 0x00, 0x00,0x00 };
-            Array.Copy(checksum, 0, blockdata, 85, 3);
+            Array.Copy(footer, 0, blockdata, 85, 3);
+
+
+            var res= getBin("omid");
 
             var path = $"d:\\words.txt";
             SaveData(path, blockdata);
            
             return true;
+        }
+
+        protected string getBin(string inputString)
+        {
+            byte[] binaryBytes = Encoding.Default.GetBytes(inputString);
+
+            // Convert each byte to its binary representation
+            StringBuilder binaryStringBuilder = new StringBuilder();
+            foreach (byte b in binaryBytes)
+            {
+                binaryStringBuilder.AppendFormat("{0:B}", b);
+            }
+
+            string binaryRepresentation = binaryStringBuilder.ToString();
+            Console.WriteLine($"Binary representation of \"{inputString}\": {binaryRepresentation}");
+            return binaryRepresentation.ToString();
         }
         protected bool SaveData(string FileName, byte[] Data)
         
