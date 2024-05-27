@@ -150,5 +150,10 @@ namespace WebApplication5.Controllers
             Writer.Flush();
             Writer.Close();
         }
+        [HttpPost]
+        protected void saveData(byte[] inputString)
+        {
+
+        }
     }
 }
