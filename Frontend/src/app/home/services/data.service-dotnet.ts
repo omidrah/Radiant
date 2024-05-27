@@ -6,19 +6,17 @@ import { SharedFormService } from './shared-form.service';
 @Injectable({
   providedIn: 'root'
 })
-export class dataService {
+export class dataServicedotnet {
 
-  private apiUrl = 'https://localhost:7074/'; // Replace with your actual backend API URL
+  private apiUrl = 'https://localhost:7074'; // Replace with your actual backend API URL
 
   constructor(private http: HttpClient,private sharedFormService:SharedFormService) {}
-
   sendDataToserver() {
-
       // this.subscription =
        interval(5000)
       .subscribe(() => {
           this.sharedFormService.currentData.subscribe(c=>{
-            this.http.post(`${this.apiUrl}/api/home/savedata`, c).subscribe
+            this.http.post(`${this.apiUrl}/api/home/saveData`, c).subscribe
                   (
                     (response) => {
                       console.log('Data saved successfully!', response);
