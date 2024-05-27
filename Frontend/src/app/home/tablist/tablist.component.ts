@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
-import { dataService } from '../services/data.service';
+import { dataServicedotnet } from '../services/data.service-dotnet';
+//import { dataService } from '../services/data.service';
 @Component({
   selector: 'app-tablist',
   templateUrl: './tablist.component.html',
@@ -9,7 +10,9 @@ import { dataService } from '../services/data.service';
 export class TablistComponent implements OnInit {
   @ViewChild('staticTabs') tabset: TabsetComponent;
 
-  constructor(private dataservice:dataService){ }
+  //constructor(private dataservice:dataService){ }
+  constructor(private dataservice:dataServicedotnet){ }
+
   ngOnInit(): void {
    // this.tabset.tabs[2].active=true;
    this.dataservice.sendDataToserver()

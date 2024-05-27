@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
  function buffer_alloc(buffLength) {
    //. The expression below creates a buffer with a byte size of 6
@@ -46,3 +47,50 @@
     buffer_write,
     description
    }
+=======
+const fs = require('fs');
+
+
+function hexofstring(str){
+    return  Buffer.from(value).toString('hex') ;
+}
+
+function hexofJson(){
+    let jsonObject = {
+        name: 'John',
+        age: 30,
+        city: 'New York'
+      };
+      
+      let hexJson = JSON.stringify(jsonObject, (key, value) => 
+        typeof value === 'string' ? Buffer.from(value).toString('hex') : value
+      );
+      return hexJson;
+}
+function hexWriteTofile(){
+
+    let jsonObject = {
+    name: 'John',
+    age: 30,
+    city: 'New York'
+    };
+
+    let hexJson = JSON.stringify(jsonObject, (key, value) => 
+    typeof value === 'string' ? Buffer.from(value).toString('hex') : value
+    );
+
+    fs.writeFile('output.txt', hexJson, (err) => {
+        if (err) throw err;
+            console.log('The file has been saved!');
+    });
+}
+
+
+
+
+module.exports ={
+    hexofJson,
+    hexofstring,
+    hexWriteTofile
+}
+>>>>>>> 7b9a7348f5e448fd97c7c4ef4e80a2c9894ce049
