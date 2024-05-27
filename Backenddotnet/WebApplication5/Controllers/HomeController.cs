@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Text;
 
 namespace WebApplication5.Controllers
@@ -98,20 +97,16 @@ namespace WebApplication5.Controllers
 
             byte[] footer = new byte[3] { 0x00, 0x00,0x00 };
             Array.Copy(footer, 0, blockdata, 85, 3);
-
-
-            var res= getBin("omid");
-
-            var path = $"d:\\words.txt";
-            SaveData(path, blockdata);
-           
+            SavebyteArrayToFile(blockdata);           
             return true;
         }
-
-        protected string getBin(string inputString)
+        /// <summary>
+        /// ورودی رشته دریافت شده  و  باینری آن در فایل چاب می شود
+        /// </summary>
+        /// <param name="inputString"></param>
+        protected void SaveStringToFile(string inputString)
         {
-            byte[] binaryBytes = Encoding.Default.GetBytes(inputString);
-
+            byte[] binaryBytes = Encoding.UTF8.GetBytes(inputString);
             // Convert each byte to its binary representation
             StringBuilder binaryStringBuilder = new StringBuilder();
             foreach (byte b in binaryBytes)
@@ -121,29 +116,34 @@ namespace WebApplication5.Controllers
 
             string binaryRepresentation = binaryStringBuilder.ToString();
             Console.WriteLine($"Binary representation of \"{inputString}\": {binaryRepresentation}");
-            return binaryRepresentation.ToString();
+            // Create a new stream to write to the file
+            BinaryWriter Writer = new BinaryWriter(System.IO.File.OpenWrite("d:\\a.txt")); ;     
+            // Writer raw data                
+            Writer.Write(binaryRepresentation);
+            Writer.Flush();
+            Writer.Close();
         }
-        protected bool SaveData(string FileName, byte[] Data)
-        
+        /// <summary>
+        /// آرایه ای از بایت ها دریافت شده  و باینری آن در فایل چاپ میشود
+        /// </summary>
+        /// <param name="inputString"></param>
+        protected void SavebyteArrayToFile(byte[] inputString)
         {
-            BinaryWriter Writer = null;
-            try
+            // Convert each byte to its binary representation
+            StringBuilder binaryStringBuilder = new StringBuilder();
+            foreach (byte b in inputString)
             {
-                // Create a new stream to write to the file
-                Writer = new BinaryWriter(System.IO.File.OpenWrite(FileName));
-
-                // Writer raw data                
-                Writer.Write(Data);
-                Writer.Flush();
-                Writer.Close();
-            }
-            catch
-            {
-                //...
-                return false;
+                binaryStringBuilder.AppendFormat("{0:B}", b);
             }
 
-            return true;
+            string binaryRepresentation = binaryStringBuilder.ToString();
+            Console.WriteLine($"Binary representation of \"{inputString}\": {binaryRepresentation}");
+            // Create a new stream to write to the file
+            BinaryWriter Writer = new BinaryWriter(System.IO.File.OpenWrite("d:\\a.txt")); ;
+            // Writer raw data                
+            Writer.Write(binaryRepresentation);
+            Writer.Flush();
+            Writer.Close();
         }
     }
 }
