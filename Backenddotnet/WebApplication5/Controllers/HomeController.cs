@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Net.Sockets;
+using System.Net;
 using System.Text;
 using System.Text.Json.Nodes;
 
@@ -7,8 +9,14 @@ namespace WebApplication5.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
+        private readonly ILogger _logger;
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+        int num = 1;
         // GET: HomeController
         public bool Index()
         {
@@ -101,7 +109,7 @@ namespace WebApplication5.Controllers
 
             byte[] footer = new byte[3] { 0x00, 0x00, 0x00 };
             Array.Copy(footer, 0, blockdata, 85, 3);
-            SavebyteArrayToFile(blockdata);           
+            SavebyteArrayToFile(blockdata);
             return true;
         }
         /// <summary>
@@ -123,7 +131,7 @@ namespace WebApplication5.Controllers
             Console.WriteLine($"Binary representation of \"{inputString}\": {binaryRepresentation}");
             Console.WriteLine($" \n count of {binaryRepresentation.Length}");
             // Create a new stream to write to the file
-            BinaryWriter Writer = new BinaryWriter(System.IO.File.OpenWrite("d:\\a.txt")); ;     
+            BinaryWriter Writer = new BinaryWriter(System.IO.File.OpenWrite("d:\\a.txt")); ;
             // Writer raw data                
             Writer.Write(binaryRepresentation);
             Writer.Flush();
@@ -133,27 +141,34 @@ namespace WebApplication5.Controllers
         /// آرایه ای از بایت ها دریافت شده  و باینری آن در فایل چاپ میشود
         /// </summary>
         /// <param name="inputString"></param>
-        protected void SavebyteArrayToFile(byte[] inputString)
+        protected async Task SavebyteArrayToFile(byte[] inputString)
         {
             // Convert each byte to its binary representation
             StringBuilder binaryStringBuilder = new StringBuilder();
             foreach (byte b in inputString)
-            {                
+            {
                 binaryStringBuilder.AppendFormat("{0:B}", Convert.ToString(b, 2).PadLeft(8, '0'));
             }
             string binaryRepresentation = binaryStringBuilder.ToString();
             Console.WriteLine($"Binary representation of \"{inputString}\": {binaryRepresentation}");
-        
+            configSocket(binaryRepresentation);
+
             // Create a new stream to write to the file
-            BinaryWriter Writer = new BinaryWriter(System.IO.File.OpenWrite("d:\\a.txt")); ;
+            //BinaryWriter Writer = new BinaryWriter(System.IO.File.OpenWrite($"d:\\a{num}.txt"));
             // Writer raw data                
-            Writer.Write(binaryRepresentation);
-            Writer.Flush();
-            Writer.Close();
+            //Writer.Write(binaryRepresentation);
+            //Writer.Flush();
+            //Writer.Close();
+
+            // Start async Task to Save Image
+            var namefile = DateTime.Now.ToString("yyyy-dd-M-HH-mm-ss");
+            await System.IO.File.WriteAllTextAsync($"d:\\{namefile}.txt", binaryRepresentation);
         }
         [HttpPost("saveData")]
-        public void saveData([FromBody]JsonObject inputString)
+        public async Task<IActionResult> saveData([FromBody] JsonObject inputString)
         {
+
+            _logger.LogInformation("Enter saving...");
             byte[] blockdata = new byte[88];
             var a = "CMD";
 
@@ -244,6 +259,53 @@ namespace WebApplication5.Controllers
             byte[] footer = new byte[3] { 0x00, 0x00, 0x00 };
             Array.Copy(footer, 0, blockdata, 85, 3);
             SavebyteArrayToFile(blockdata);
+
+            return Ok();
+        }
+        /// <summary>
+        /// send byte array to socket
+        /// </summary>
+        /// <param name="inputCommand"></param>
+        public void configSocket(string inputCommand)
+        {
+            Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+            IPAddress ipaddr = IPAddress.Parse("192.168.1.1");
+            int PortInput = 7;
+            try
+            {
+               
+                System.Console.WriteLine(string.Format("IPAddress: {0} - Port: {1}", ipaddr.ToString(), PortInput));
+                client.Connect(ipaddr, PortInput);
+                Console.WriteLine("Connected to the server, type text and press enter to send it to the srever, type <EXIT> to close.");
+                while (true)
+                {
+                    client.Send (Encoding.UTF8.GetBytes(inputCommand));
+
+                    byte[] buffReceived = new byte[128];
+                    int nRecv = client.Receive(buffReceived);
+
+                    Console.WriteLine("Data received: {0}", Encoding.ASCII.GetString(buffReceived, 0, nRecv));
+                }
+            }
+            catch (Exception excp)
+            {
+                Console.WriteLine(excp.ToString());
+            }
+            finally
+            {
+                if (client != null)
+                {
+                    if (client.Connected)
+                    {
+                        client.Shutdown(SocketShutdown.Both);
+                    }
+                    client.Close();
+                    client.Dispose();
+                }
+            }
+
         }
     }
+    
 }
