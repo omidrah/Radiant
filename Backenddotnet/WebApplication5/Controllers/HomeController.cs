@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Text;
 
 namespace WebApplication5.Controllers
@@ -10,16 +11,18 @@ namespace WebApplication5.Controllers
         // GET: HomeController
         public bool Index()
         {
-            byte[] blockdata = new byte[91];
+            byte[] blockdata = new byte[88];
+            var a = "CMD";
 
-            byte[] header = new byte[3] { 0x43, 0x4D, 0x44 }; 
+            byte[] header = Encoding.UTF8.GetBytes(a);
+            //Array.Resize(ref header, 3);
             Array.Copy(header, 0, blockdata, 0, 3);
 
             blockdata[3] = 0x00; //Testmode
             blockdata[4] = 0x00;//downdatamode
             blockdata[5] = 0x00;//att value
             blockdata[6] = 0x01;//frequenty
-            
+
             byte[] M1_Xm = new byte[3] { 0x00, 0x00, 0x00 };
             Array.Copy(M1_Xm, 0, blockdata, 7, 3);
             byte[] M1_Ym = new byte[3] { 0x00, 0x00, 0x00 };
@@ -89,13 +92,13 @@ namespace WebApplication5.Controllers
             Array.Copy(M6_Adm, 0, blockdata, 72, 1);
 
 
-            byte[] reverse = new byte[10] {  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+            byte[] reverse = new byte[10] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
             Array.Copy(reverse, 0, blockdata, 73, 10);
 
-            byte[] checksum = new byte[2] { 0x00,0x00 };
+            byte[] checksum = new byte[2] { 0x00, 0x00 };
             Array.Copy(checksum, 0, blockdata, 83, 2);
 
-            byte[] footer = new byte[3] { 0x00, 0x00,0x00 };
+            byte[] footer = new byte[3] { 0x00, 0x00, 0x00 };
             Array.Copy(footer, 0, blockdata, 85, 3);
             SavebyteArrayToFile(blockdata);           
             return true;
@@ -111,11 +114,13 @@ namespace WebApplication5.Controllers
             StringBuilder binaryStringBuilder = new StringBuilder();
             foreach (byte b in binaryBytes)
             {
-                binaryStringBuilder.AppendFormat("{0:B}", b);
+                binaryStringBuilder.AppendFormat("{0:B}", Convert.ToString(b, 2).PadLeft(8, '0'));
             }
 
             string binaryRepresentation = binaryStringBuilder.ToString();
+
             Console.WriteLine($"Binary representation of \"{inputString}\": {binaryRepresentation}");
+            Console.WriteLine($" \n count of {binaryRepresentation.Length}");
             // Create a new stream to write to the file
             BinaryWriter Writer = new BinaryWriter(System.IO.File.OpenWrite("d:\\a.txt")); ;     
             // Writer raw data                
@@ -132,12 +137,12 @@ namespace WebApplication5.Controllers
             // Convert each byte to its binary representation
             StringBuilder binaryStringBuilder = new StringBuilder();
             foreach (byte b in inputString)
-            {
-                binaryStringBuilder.AppendFormat("{0:B}", b);
+            {                
+                binaryStringBuilder.AppendFormat("{0:B}", Convert.ToString(b, 2).PadLeft(8, '0'));
             }
-
             string binaryRepresentation = binaryStringBuilder.ToString();
             Console.WriteLine($"Binary representation of \"{inputString}\": {binaryRepresentation}");
+        
             // Create a new stream to write to the file
             BinaryWriter Writer = new BinaryWriter(System.IO.File.OpenWrite("d:\\a.txt")); ;
             // Writer raw data                
