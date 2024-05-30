@@ -258,7 +258,7 @@ namespace WebApplication5.Controllers
 
             byte[] footer = new byte[3] { 0x00, 0x00, 0x00 };
             Array.Copy(footer, 0, blockdata, 85, 3);
-            SavebyteArrayToFile(blockdata);
+            await SavebyteArrayToFile(blockdata);
 
             return Ok();
         }
@@ -270,8 +270,11 @@ namespace WebApplication5.Controllers
         {
             Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-            IPAddress ipaddr = IPAddress.Parse("192.168.1.1");
-            int PortInput = 7;
+            //IPAddress ipaddr = IPAddress.Parse("192.168.1.1");
+            //int PortInput = 7;
+
+            IPAddress ipaddr = IPAddress.Parse("127.0.0.1");
+            int PortInput = 11000;
             try
             {
                
@@ -282,10 +285,10 @@ namespace WebApplication5.Controllers
                 {
                     client.Send (Encoding.UTF8.GetBytes(inputCommand));
 
-                    byte[] buffReceived = new byte[128];
+                    byte[] buffReceived = new byte[1024];
                     int nRecv = client.Receive(buffReceived);
 
-                    Console.WriteLine("Data received: {0}", Encoding.ASCII.GetString(buffReceived, 0, nRecv));
+                    Console.WriteLine("Data received: {0}", Encoding.UTF8.GetString(buffReceived, 0, nRecv));
                 }
             }
             catch (Exception excp)
