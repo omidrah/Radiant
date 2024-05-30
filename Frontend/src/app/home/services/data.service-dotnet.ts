@@ -16,7 +16,7 @@ export class dataServicedotnet {
        interval(5000)
       .subscribe(() => {
           this.sharedFormService.currentData.subscribe(c=>{
-            this.http.post(`${this.apiUrl}/api/home/saveData`, c).subscribe
+            this.http.post(`${this.apiUrl}/Home/saveData`, c).subscribe
                   (
                     (response) => {
                       console.log('Data saved successfully!', response);
