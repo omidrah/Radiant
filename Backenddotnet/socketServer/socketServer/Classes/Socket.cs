@@ -88,6 +88,7 @@ namespace socketServer.Classes
                         if (SocketConnected(sk_client, 0))
                         {
                             int bytesRead = sk_client.EndReceive(ar);
+                            Send(sk_client, $"get your Data{DateTime.Now.ToString()}");
                             if (bytesRead > 0)
                             {
                                 client.value = Encoding.ASCII.GetString(client.buffer, 0, bytesRead).ToString();
@@ -167,6 +168,7 @@ namespace socketServer.Classes
             try
             {
                 Console.WriteLine(content);
+                
             }
             catch (Exception ex)
             {
