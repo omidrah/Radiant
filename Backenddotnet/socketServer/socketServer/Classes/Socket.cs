@@ -17,7 +17,8 @@ namespace socketServer.Classes
         }
         public void StartListening()
         {
-            var configSection = _config.GetSection("Config") as Config;
+            var configSection = new Config();
+            _config.GetSection("Config").Bind(configSection);
             if (configSection != null)
             {
                 int.TryParse(configSection.Port, out int port);

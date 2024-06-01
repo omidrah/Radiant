@@ -3,6 +3,10 @@ using Microsoft.Extensions.DependencyInjection;
 using socketServer.Classes;
 using socketServer.Interface;
 
+
+
+//var basePath = Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName;
+
 var builder = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
