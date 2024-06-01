@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using socketServer.Classes;
 using socketServer.Interface;
-using socketServer.Models;
 
 var builder = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -10,12 +9,17 @@ var builder = new ConfigurationBuilder()
 
 
 IConfigurationRoot configuration = builder.Build();
-var appSettings = configuration.Get<appSettings>();
-
+Console.WriteLine(configuration["Config:Ip"]); // Outputs: 127.0.0.1
+Console.WriteLine(configuration["Config:Port"]); // Outputs: 6060
+Console.WriteLine(configuration["Config:BufferSize"]); // Outputs: 102
 
 var serviceCollection = new ServiceCollection();
-serviceCollection.AddSingleton(appSettings);
+serviceCollection.AddSingleton<IConfiguration>(configuration);
 serviceCollection.AddSingleton<IActions,Actions>();
+serviceCollection.AddSingleton<ISocketListener, SocketListener>();
+
 // Add other services here
 IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
+var startPrg = serviceProvider.GetService<ISocketListener>();
+startPrg.StartListening();

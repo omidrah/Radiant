@@ -1,4 +1,5 @@
 ﻿using System.Net.Sockets;
+using socketServer.Classes;
 
 namespace socketServer.Models
 {

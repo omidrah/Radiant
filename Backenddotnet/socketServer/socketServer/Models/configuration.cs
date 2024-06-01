@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MsLogLevel = Microsoft.Extensions.Logging.LogLevel;
+﻿using MsLogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 
 namespace socketServer.Models
@@ -12,14 +7,13 @@ namespace socketServer.Models
     {
         public Config Config { get; set; }
         public Connectionstrings ConnectionStrings { get; set; }
-        public Logging Logging { get; set; }
+        public required Logging Logging { get; set; }
        
     }
     public class Logging
     {
         public bool IncludeScopes { get; set; }
-        public Loglevel LogLevel { get; set; }
-        public string LogIMEI { get; set; }
+        public Loglevel? LogLevel { get; set; }
 
     }
     public class Loglevel
@@ -37,6 +31,6 @@ namespace socketServer.Models
     }
     public class Connectionstrings
     {
-        public string DefaultConnection { get; set; }
+        public string? DefaultConnection { get; set; }
     }
 }

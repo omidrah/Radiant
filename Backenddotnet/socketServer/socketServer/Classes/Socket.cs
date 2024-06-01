@@ -4,27 +4,33 @@ using socketServer.Models;
 using System.Net.Sockets;
 using System.Text;
 
-namespace socketServer
+namespace socketServer.Classes
 {
-    public class AsynchronousSocketListener
+    public class SocketListener : ISocketListener
     {
         private IActions _actions;
-        private IConfiguration _config;
-        public AsynchronousSocketListener(IActions actions, IConfiguration config) {
+        private readonly IConfiguration _config;
+        public SocketListener(IActions actions, IConfiguration config)
+        {
             _actions = actions;
-            _config = config;
+           _config =config; 
         }
         public void StartListening()
         {
-            StaticClass.listener = new Server(ip, port)._listener;
-            while (true)
+            var configSection = _config.GetSection("Config") as Config;
+            if (configSection != null)
             {
-                // Set the event to nonsignaled state.  
-                StaticClass.allDone.Reset();
-                // Start an asynchronous socket to listen for connections.   
-                StaticClass.listener.BeginAccept(new AsyncCallback(AcceptCallback), StaticClass.listener);
-                // Wait until a connection is made before continuing.  
-                StaticClass.allDone.WaitOne();
+                int.TryParse(configSection.Port, out int port);
+                StaticClass.listener = new Server(configSection.Ip, port)._listener;
+                while (true)
+                {
+                    // Set the event to nonsignaled state.  
+                    StaticClass.allDone.Reset();
+                    // Start an asynchronous socket to listen for connections.   
+                    StaticClass.listener.BeginAccept(new AsyncCallback(AcceptCallback), StaticClass.listener);
+                    // Wait until a connection is made before continuing.  
+                    StaticClass.allDone.WaitOne();
+                }
             }
         }
 
@@ -97,7 +103,7 @@ namespace socketServer
                                         }
                                         else
                                         {
-                                            
+
                                         }
                                     }
                                 }
@@ -112,7 +118,7 @@ namespace socketServer
                 }
             }
         }
-       
+
         public void ClientDis(StateObject item)
         {
             try
@@ -167,7 +173,7 @@ namespace socketServer
             }
 
         }
-        public async void Send(Socket socket, String data)
+        public async void Send(Socket socket, string data)
         {
             // Convert the string data to byte data using ASCII encoding.  
             byte[] byteData = Encoding.ASCII.GetBytes(data);
@@ -213,7 +219,7 @@ namespace socketServer
 
             bool part2 = s.Available == 0;
 
-            if ((part1 && part2)) //|| !s.Connected)
+            if (part1 && part2) //|| !s.Connected)
             {
                 return false;
             }
