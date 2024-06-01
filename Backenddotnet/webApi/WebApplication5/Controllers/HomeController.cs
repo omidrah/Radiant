@@ -4,6 +4,8 @@ using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using System.Text.Json.Nodes;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using Newtonsoft.Json.Linq;
 
 namespace WebApplication5.Controllers
 {
@@ -168,16 +170,164 @@ namespace WebApplication5.Controllers
         public async Task<IActionResult> saveData([FromBody] JsonObject inputString)
         {
 
-            _logger.LogInformation("Enter saving...");
+            _logger.LogInformation("***Enter saving***\n");
+            _logger.LogInformation("******************\n");
+            _logger.LogInformation($"{inputString}");
+            _logger.LogInformation("******************\n");
+
+
+
             byte[] blockdata = new byte[88];
             var a = "CMD";
-
             byte[] header = Encoding.UTF8.GetBytes(a);
             //Array.Resize(ref header, 3);
             Array.Copy(header, 0, blockdata, 0, 3);
+         
+            /*cmd tab*/
+            var datamode = 0;var testmode=0;
+            // Access values by key
+            foreach (var property in inputString)
+            {
+                string key = property.Key;
+                switch (key)
+                {
+                    case "datamode":
+                        switch (property.Value.ToString())
+                        {
+                            case "manaul":
+                                datamode = 1;
+                                break;
+                            case "simulate":
+                                datamode = 2;
+                             break;
+                            case "loopback":
+                                datamode = 0;
+                                break;
+                        }
+                        break;
+                    case "testmode":
+                        switch (property.Value.ToString())
+                        {
+                            case "txoff":
+                                testmode = 1;
+                                break;
+                            case "directmds":
+                                testmode = 2;
+                                break;
+                            case "directpwr":
+                                testmode = 0;
+                                break;
+                        }
+                        break;
+                    case "mfreq":
+                        float.TryParse(property.Value.ToString(), out float mfreq);
+                        break;
+                    case "m1xm":
+                        float.TryParse(property.Value.ToString(), out float m1xm);
+                        break;
+                    case "m1ym":
+                        float.TryParse(property.Value.ToString(), out float m1ym);
+                        break;
+                    case "m1zm":
+                        float.TryParse(property.Value.ToString(), out float m1zm);
+                        break;
+                    case "m1staus":
+                        float.TryParse(property.Value.ToString(), out float m1staus);
+                        break;
+                    case "m1adm":
+                        float.TryParse(property.Value.ToString(), out float m1adm);
+                        break;
+                   
+                    case "m2xm":
+                        float.TryParse(property.Value.ToString(), out float m2xm);
+                        break;
+                    case "m2ym":
+                        float.TryParse(property.Value.ToString(), out float m2ym);
+                        break;
+                    case "m2zm":
+                        float.TryParse(property.Value.ToString(), out float m2zm);
+                        break;
+                    case "m2staus":
+                        float.TryParse(property.Value.ToString(), out float m2staus);
+                        break;
+                    case "m2adm":
+                        float.TryParse(property.Value.ToString(), out float m2adm);
+                        break;
 
-            blockdata[3] = 0x00; //Testmode
-            blockdata[4] = 0x00;//downdatamode
+                    
+                    case "m3xm":
+                        float.TryParse(property.Value.ToString(), out float m3xm);
+                        break;
+                    case "m3ym":
+                        float.TryParse(property.Value.ToString(), out float m3ym);
+                        break;
+                    case "m3zm":
+                        float.TryParse(property.Value.ToString(), out float m3zm);
+                        break;
+                    case "m3staus":
+                        float.TryParse(property.Value.ToString(), out float m3staus);
+                        break;
+                    case "m3adm":
+                        float.TryParse(property.Value.ToString(), out float m3adm);
+                        break;
+                    
+                    case "m4xm":
+                        float.TryParse(property.Value.ToString(), out float m4xm);
+                        break;
+                    case "m4ym":
+                        float.TryParse(property.Value.ToString(), out float m4ym);
+                        break;
+                    case "m4zm":
+                        float.TryParse(property.Value.ToString(), out float m4zm);
+                        break;
+                    case "m4staus":
+                        float.TryParse(property.Value.ToString(), out float m4staus);
+                        break;
+                    case "m4adm":
+                        float.TryParse(property.Value.ToString(), out float m4adm);
+                        break;
+
+                    case "m5xm":
+                        float.TryParse(property.Value.ToString(), out float m5xm);
+                        break;
+                    case "m5ym":
+                        float.TryParse(property.Value.ToString(), out float m5ym);
+                        break;
+                    case "m5zm":
+                        float.TryParse(property.Value.ToString(), out float m5zm);
+                        break;
+                    case "m5staus":
+                        float.TryParse(property.Value.ToString(), out float m5staus);
+                        break;
+                    case "m5adm":
+                        float.TryParse(property.Value.ToString(), out float m5adm);
+                        break;
+
+                    case "m6xm":
+                        float.TryParse(property.Value.ToString(), out float m6xm);
+                        break;
+                    case "m6ym":
+                        float.TryParse(property.Value.ToString(), out float m6ym);
+                        break;
+                    case "m6zm":
+                        float.TryParse(property.Value.ToString(), out float m6zm);
+                        break;
+                    case "m6staus":
+                        float.TryParse(property.Value.ToString(), out float m6staus);
+                        break;
+                    case "m6adm":
+                        float.TryParse(property.Value.ToString(), out float m6adm);
+                        break;
+                }
+            }
+
+          
+           
+
+            
+
+            blockdata[3] = 0x00; //Testmode 1
+            blockdata[4] = 0x00;//downdatamode 0
             blockdata[5] = 0x00;//att value
             blockdata[6] = 0x01;//frequenty
 
@@ -256,7 +406,7 @@ namespace WebApplication5.Controllers
             byte[] checksum = new byte[2] { 0x00, 0x00 };
             Array.Copy(checksum, 0, blockdata, 83, 2);
 
-            byte[] footer = new byte[3] { 0x00, 0x00, 0x00 };
+            byte[] footer = new byte[3] { 0x45, 0x4e, 0x44 }; //END
             Array.Copy(footer, 0, blockdata, 85, 3);
             await SavebyteArrayToFile(blockdata);
 
@@ -274,7 +424,7 @@ namespace WebApplication5.Controllers
             //int PortInput = 7;
 
             IPAddress ipaddr = IPAddress.Parse("127.0.0.1");
-            int PortInput = 11000;
+            int PortInput = 6060;
             try
             {
                
