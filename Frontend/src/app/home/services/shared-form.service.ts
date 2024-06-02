@@ -7,6 +7,8 @@ import { askmodel } from '../models/ask';
 })
 export class SharedFormService {
   private formData$ = new BehaviorSubject<askmodel>({
+    header:'CMD',
+    footer:'END',
     datamode: 'manual',
     testmode: 'txoff',
     couple: 0,

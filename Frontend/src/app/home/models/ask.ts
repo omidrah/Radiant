@@ -1,17 +1,18 @@
 export class askmodel {
+    header:string;
+    footer:string;
+   
     // cmd: cmd;
-    // m1tab: m1tab;
     testmode: string;
     datamode: string;
     couple:number;
     unit:string;
     pwr:number;
     pout:number
-
     /**freq uniq for all m tab */
     mfreq:number
 
-    /******** */
+    /******** m1tab*/
     m1downdata: string;
     m1xm: number;
     m1ym:number;
