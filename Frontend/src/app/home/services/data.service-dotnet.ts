@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, interval, switchMap } from 'rxjs';
+import { Observable, Subscription, interval, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { SharedFormService } from './shared-form.service';
 
@@ -9,10 +9,12 @@ import { SharedFormService } from './shared-form.service';
 export class dataServicedotnet {
 
   private apiUrl = 'https://localhost:7074'; // Replace with your actual backend API URL
+  private intervalSubscription: Subscription;
+
 
   constructor(private http: HttpClient,private sharedFormService:SharedFormService) {}
   sendDataToserver() {
-      // this.subscription =
+    this.intervalSubscription =
        interval(5000)
       .subscribe(() => {
           this.sharedFormService.currentData.subscribe(c=>{
@@ -40,5 +42,10 @@ export class dataServicedotnet {
     //     switchMap(c => this.http.post(`http://${this.apiUrl}/api/save-data`, c))
     //   ))
     // )
+  }
+  stopSendingData() {
+    if (this.intervalSubscription) {
+      this.intervalSubscription.unsubscribe();
+    }
   }
 }

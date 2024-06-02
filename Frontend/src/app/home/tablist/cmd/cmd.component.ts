@@ -14,6 +14,18 @@ export class CmdComponent implements OnInit {
   showDirectPwr=false;
 
   constructor(private fb: FormBuilder,private sharedFormService: SharedFormService) {
+   
+  }
+
+  saveFormState(formData: any,whichtab:string): void {
+    // Implement the logic to save formData to a file
+    // This could be a server call or local storage operation
+    //console.warn(this.cmdForm.value);
+    this.sharedFormService.updateFormData(formData,whichtab);
+
+  }
+  ngOnInit() {
+
     this.cmdForm = this.fb.group({
       testmode: new FormControl('txoff'),
       datamode: new FormControl('manual'),
@@ -26,18 +38,7 @@ export class CmdComponent implements OnInit {
      this.cmdForm.valueChanges.subscribe(values => {
       this.saveFormState(values,"cmd");
     });
-  }
-
-  saveFormState(formData: any,whichtab:string): void {
-    // Implement the logic to save formData to a file
-    // This could be a server call or local storage operation
-    //console.warn(this.cmdForm.value);
-    this.sharedFormService.updateFormData(formData,whichtab);
-
-  }
-  ngOnInit() {
-
-
+    
    }
 
    testmodeChanged($event){

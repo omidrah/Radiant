@@ -39,6 +39,7 @@ namespace socketServer.Classes
         {
             try
             {
+
                 // Signal the main thread to continue.  
                 StaticClass.allDone.Set();
                 // Get the socket that handles the client request.  
@@ -58,8 +59,7 @@ namespace socketServer.Classes
                         //Console.WriteLine($"\n Accept Socket Ip = {state.IP} @ {DateTime.Now.ToString("yyyy/M/d HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)} \n");
                         if (SocketConnected(client, 0))
                         {
-                            client.BeginReceive(state.buffer, 0, 1024, SocketFlags.None,
-                                new AsyncCallback(BeginReceiveCallback), state);
+                            client.BeginReceive(state.buffer, 0, 1024, SocketFlags.None,new AsyncCallback(BeginReceiveCallback), state);
                         }
                     }
                     catch (Exception e)
@@ -88,6 +88,7 @@ namespace socketServer.Classes
                         if (SocketConnected(sk_client, 0))
                         {
                             int bytesRead = sk_client.EndReceive(ar);
+
                             Send(sk_client, $"get your Data{DateTime.Now.ToString()}");
                             if (bytesRead > 0)
                             {
@@ -95,6 +96,7 @@ namespace socketServer.Classes
                                 //Console.WriteLine(client.value);
                                 await CheckValue(client).ConfigureAwait(false);
                                 Array.Clear(client.buffer, 0, client.buffer.Length);
+                                Console.Clear();
                                 try
                                 {
                                     if (client.IsConnected)

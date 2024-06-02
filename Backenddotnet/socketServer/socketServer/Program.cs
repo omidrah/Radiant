@@ -13,9 +13,10 @@ var builder = new ConfigurationBuilder()
 
 
 IConfigurationRoot configuration = builder.Build();
-Console.WriteLine(configuration["Config:Ip"]); // Outputs: 127.0.0.1
-Console.WriteLine(configuration["Config:Port"]); // Outputs: 6060
-Console.WriteLine(configuration["Config:BufferSize"]); // Outputs: 102
+Console.WriteLine($" Server : {configuration["Config:Ip"]},Port :{configuration["Config:Port"]}"); // Outputs: 127.0.0.1
+//Console.WriteLine(configuration["Config:Ip"]); // Outputs: 127.0.0.1
+//Console.WriteLine(configuration["Config:Port"]); // Outputs: 6060
+//Console.WriteLine(configuration["Config:BufferSize"]); // Outputs: 102
 
 var serviceCollection = new ServiceCollection();
 serviceCollection.AddSingleton<IConfiguration>(configuration);

@@ -149,12 +149,12 @@ namespace WebApplication5.Controllers
                 binaryStringBuilder.AppendFormat("{0:B}", Convert.ToString(b, 2).PadLeft(8, '0'));
             }
             string binaryRepresentation = binaryStringBuilder.ToString();
-            Console.WriteLine($"Binary representation of \"{inputString}\": {binaryRepresentation}");
+           // Console.WriteLine($"Binary representation of \"{inputString}\": {binaryRepresentation}");
             configSocket(binaryRepresentation);
 
             // Create a new stream to write to the file
             //BinaryWriter Writer = new BinaryWriter(System.IO.File.OpenWrite($"d:\\a{num}.txt"));
-            // Writer raw data                
+            //Writer raw data                
             //Writer.Write(binaryRepresentation);
             //Writer.Flush();
             //Writer.Close();
@@ -167,10 +167,10 @@ namespace WebApplication5.Controllers
         public async Task<IActionResult> saveData([FromBody] JsonObject inputString)
         {
 
-            _logger.LogInformation("***Enter saving***\n");
-            _logger.LogInformation("******************\n");
-            _logger.LogInformation($"{inputString}");
-            _logger.LogInformation("******************\n");
+            //_logger.LogInformation("***Enter saving***\n");
+            //_logger.LogInformation("******************\n");
+            //_logger.LogInformation($"{inputString}");
+            //_logger.LogInformation("******************\n");
 
             byte[] blockdata = new byte[88];
             blockdata[5] = (byte)0;//att value
@@ -207,7 +207,6 @@ namespace WebApplication5.Controllers
                                 break;
                         }
                         blockdata[4] = (byte)datamode;//downdatamode 0
-
                         break;
                     case "testmode":
                         switch (property.Value.ToString())
@@ -225,10 +224,12 @@ namespace WebApplication5.Controllers
                         blockdata[3] = (byte)testmode; //Testmode 1
                         break;
                     case "mfreq":
-                        _ = int.TryParse(property.Value.ToString(), out int mfreq);
-                        blockdata[6] = (byte)mfreq;//frequenty
+                        if (string.IsNullOrEmpty(property.Value.ToString()))
+                        {
+                            _ = int.TryParse(property.Value.ToString(), out int mfreq);
+                            blockdata[6] = (byte)mfreq;//frequenty
+                        }
                         break;
-
                     case "m1xm":
                         _ = int.TryParse(property.Value.ToString(), out int m1xm);
                         byte[] M1_Xm = new byte[3];
@@ -438,10 +439,8 @@ namespace WebApplication5.Controllers
                         byte M6_Adm = (byte)m6adm;
                         blockdata[71] = M6_Adm;
                         break;
-
                 }
             }
-
             byte[] reverse = new byte[10];
             for (int i = 0; i < reverse.Length; i++) //set default to zere
             {
@@ -452,7 +451,6 @@ namespace WebApplication5.Controllers
             byte[] checksum = new byte[2];
             checksum[0] = (byte)0; checksum[1]=(byte)0;
             Array.Copy(checksum, 0, blockdata, 83, 2);
-
            
             await SavebyteArrayToFile(blockdata);
 
@@ -465,25 +463,20 @@ namespace WebApplication5.Controllers
         public void configSocket(string inputCommand)
         {
             Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
             //IPAddress ipaddr = IPAddress.Parse("192.168.1.1");
             //int PortInput = 7;
-
             IPAddress ipaddr = IPAddress.Parse("127.0.0.1");
             int PortInput = 6060;
             try
-            {
-               
+            {               
                 System.Console.WriteLine(string.Format("IPAddress: {0} - Port: {1}", ipaddr.ToString(), PortInput));
                 client.Connect(ipaddr, PortInput);
                 Console.WriteLine("Connected to the server, type text and press enter to send it to the srever, type <EXIT> to close.");
                 while (true)
                 {
                     client.Send (Encoding.UTF8.GetBytes(inputCommand));
-
                     byte[] buffReceived = new byte[1024];
                     int nRecv = client.Receive(buffReceived);
-
                     Console.WriteLine("Data received: {0}", Encoding.UTF8.GetString(buffReceived, 0, nRecv));
                 }
             }
@@ -503,7 +496,6 @@ namespace WebApplication5.Controllers
                     client.Dispose();
                 }
             }
-
         }
     }
     
