@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SharedFormService } from '../../services/shared-form.service';
-
-
 @Component({
   selector: 'app-cmd',
   templateUrl: './cmd.component.html',
@@ -12,20 +10,14 @@ export class CmdComponent implements OnInit {
   cmdForm: FormGroup;
   showDirectMds= false;
   showDirectPwr=false;
-
-  constructor(private fb: FormBuilder,private sharedFormService: SharedFormService) {
-   
-  }
-
+  constructor(private fb: FormBuilder,private sharedFormService: SharedFormService) {}
   saveFormState(formData: any,whichtab:string): void {
     // Implement the logic to save formData to a file
     // This could be a server call or local storage operation
     //console.warn(this.cmdForm.value);
     this.sharedFormService.updateFormData(formData,whichtab);
-
   }
   ngOnInit() {
-
     this.cmdForm = this.fb.group({
       testmode: new FormControl('txoff'),
       datamode: new FormControl('manual'),
@@ -37,11 +29,9 @@ export class CmdComponent implements OnInit {
      // Listen for changes in the entire form
      this.cmdForm.valueChanges.subscribe(values => {
       this.saveFormState(values,"cmd");
-    });
-    
+    });    
    }
-
-   testmodeChanged($event){
+  testmodeChanged($event){
     let radioValue = event.target['value'];
     if(radioValue =='txoff'){
       this.showDirectMds = false;
@@ -56,7 +46,6 @@ export class CmdComponent implements OnInit {
      }
 
   }
-
   datamodeChanged($event){
     let radioValue = event.target['value'];
      //console.log(radioValue);

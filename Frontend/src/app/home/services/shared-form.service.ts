@@ -1,11 +1,14 @@
 // shared-form.service.ts
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subscription, timer } from 'rxjs';
 import { askmodel } from '../models/ask';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class SharedFormService {
+export class SharedFormService implements  OnDestroy  {
+  private timerSubscription: Subscription;
+
   private formData$ = new BehaviorSubject<askmodel>({
     header:'CMD',
     footer:'END',
@@ -95,7 +98,7 @@ export class SharedFormService {
   //currentData = this.formData.asObservable();
 
   get currentData(): Observable<askmodel> { return this.formData$.asObservable(); }
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   updateFormData(newData: any, whichtab: string) {
     // Get the current value without subscribing
@@ -200,11 +203,53 @@ export class SharedFormService {
         break;
     }
     this.formData$.next(cData);
+    const apiUrl = 'http://localhost:5029'; // Replace with your actual backend API URL
+
+    this.http.post(`${apiUrl}/Home/saveData`, cData).subscribe
+        (
+          (response) => {
+            console.log('Data saved successfully!', response);
+          },
+          (error) => {
+            console.error('Error saving data:', error);
+          }
+        );   
   }
   calcPout(pout:number){
     //1403-02-31 . mr.Nader said for calculate pout..
     // 10->0   and -90->200
      return Math.abs((pout -10)*2);
+  }
+/**start timer every 1 seconds read values and send to dotnetbackend */
+  startTimer() {
+    const apiUrl = 'http://localhost:5029'; // Replace with your actual backend API URL
+    this.timerSubscription =timer(0, 20000).subscribe(value => {
+     console.log(this.formData$.value); // Emit the value through the Subject
+     this.http.post(`${apiUrl}/Home/saveData`, this.formData$.value).subscribe
+        (
+          (response) => {
+            console.log('Data saved successfully!', response);
+          },
+          (error) => {
+            console.error('Error saving data:', error);
+          }
+        );     
+    });
+  }
+  startTimer_nodeJsbackend() {
+    const apiUrl = 'http://localhost:3000'; // Replace with your actual backend API URL
+    this.timerSubscription =timer(0, 1000).subscribe(value => {
+     console.log(this.formData$.value); // Emit the value through the Subject
+     this.http.post(`${apiUrl}/api/save-data`, this.formData$.value).subscribe
+        (
+          (response) => {
+            console.log('Data saved successfully!', response);
+          },
+          (error) => {
+            console.error('Error saving data:', error);
+          }
+        );     
+    });
   }
   saveFormData() {
     // Logic to save formData to a file
@@ -212,5 +257,8 @@ export class SharedFormService {
     const blob = new Blob([JSON.stringify(this.currentData)], { type: 'application/json' });
     // Use FileSaver or similar library to trigger the download
     // FileSaver.saveAs(blob, 'data.json');
+  }
+  ngOnDestroy() {
+    this.timerSubscription.unsubscribe();
   }
 }

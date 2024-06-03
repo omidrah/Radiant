@@ -1,29 +1,24 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component,  OnInit, ViewChild } from '@angular/core';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
-import { dataServicedotnet } from '../services/data.service-dotnet';
+import { SharedFormService } from '../services/shared-form.service';
 //import { dataService } from '../services/data.service';
 @Component({
   selector: 'app-tablist',
   templateUrl: './tablist.component.html',
   styleUrl: './tablist.component.css'
 })
-export class TablistComponent implements OnInit,OnDestroy  {
+export class TablistComponent implements OnInit  {
   @ViewChild('staticTabs') tabset: TabsetComponent;
-
-  //constructor(private dataservice:dataService){ }
-  constructor(private dataservice:dataServicedotnet){ }
+ constructor(private sharedService:SharedFormService){ }
 
   ngOnInit(): void {
    // this.tabset.tabs[2].active=true;
-   this.dataservice.sendDataToserver()
+   //this.sharedService.startTimer();  
   }
   activeTabId:string='cmd';
   changeTab($event) {
     this.activeTabId = $event?.id;
     console.log(this.activeTabId);
- }
- ngOnDestroy(): void {
-    this.dataservice.stopSendingData();
  }
 }
 /**change record to unrecord button */

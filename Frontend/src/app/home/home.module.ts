@@ -13,8 +13,7 @@ import { M3tabComponent } from './tablist/m3tab/m3tab.component';
 import { M4tabComponent } from './tablist/m4tab/m4tab.component';
 import { M5tabComponent } from './tablist/m5tab/m5tab.component';
 import { M6tabComponent } from './tablist/m6tab/m6tab.component';
-import { dataService } from './services/data.service';
-import { dataServicedotnet } from './services/data.service-dotnet';
+import { SharedFormService } from './services/shared-form.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +38,6 @@ import { dataServicedotnet } from './services/data.service-dotnet';
   exports:[
     HttpClientModule
   ],
-  providers:[dataService,dataServicedotnet]
+  providers:[SharedFormService]
 })
 export class HomeModule { }
