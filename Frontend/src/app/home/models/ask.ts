@@ -1,17 +1,15 @@
 export class askmodel {
-    header:string;
-    footer:string;
-   
+    header:string;   
     // cmd: cmd;
     testmode: string;
     datamode: string;
     couple:number;
     unit:string;
     pwr:number;
-    pout:number
+    att:number
     /**freq uniq for all m tab */
     mfreq:number
-
+    rsvd1:number; //reserv1 
     /******** m1tab*/
     m1downdata: string;
     m1xm: number;
@@ -24,7 +22,7 @@ export class askmodel {
     m1ontime:number
     m1linkled:number
     m1adm:number
-
+    rsvd2:number;
     /******** */
     m2downdata: string;
     m2xm: number;
@@ -37,7 +35,7 @@ export class askmodel {
     m2ontime:number
     m2linkled:number
     m2adm:number
-
+    rsvd3:number;
     /******** */
     m3downdata: string;
     m3xm: number;
@@ -50,7 +48,7 @@ export class askmodel {
     m3ontime:number
     m3linkled:number
     m3adm:number
-
+    rsvd4:number;
     /******** */
     m4downdata: string;
     m4xm: number;
@@ -63,7 +61,7 @@ export class askmodel {
     m4ontime:number
     m4linkled:number
     m4adm:number
-
+    rsvd5:number;
     /******** */
     m5downdata: string;
     m5xm: number;
@@ -76,6 +74,7 @@ export class askmodel {
     m5ontime:number
     m5linkled:number
     m5adm:number
+    rsvd6:number;
     /******** */
     m6downdata: string;
     m6xm: number;
@@ -88,4 +87,10 @@ export class askmodel {
     m6ontime:number
     m6linkled:number
     m6adm:number
+    /**checksum and reserve7 */
+    checksum:number;
+    rsvd7:number;
+    /** */
+    footer:string;
+
     };

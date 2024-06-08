@@ -11,17 +11,15 @@ export class SharedFormService implements  OnDestroy  {
 
   private formData$ = new BehaviorSubject<askmodel>({
     header:'CMD',
-    footer:'END',
     datamode: 'manual',
     testmode: 'txoff',
     couple: 0,
     unit: 'w',
-    pout: 0,
+    att: 0,
     pwr: 0,
-
     /**unique for all tab */
     mfreq: 0,
-
+    rsvd1:0,
     /**m1 */
     m1downdata: 'loopback',
     m1xm: 0,
@@ -34,6 +32,7 @@ export class SharedFormService implements  OnDestroy  {
     m1ontime: 0,
     m1linkled: 0,
     m1adm: 0,
+    rsvd2:0,
     /**m2 */
     m2downdata: 'loopback',
     m2xm: 0,
@@ -46,6 +45,7 @@ export class SharedFormService implements  OnDestroy  {
     m2ontime: 0,
     m2linkled: 0,
     m2adm: 0,
+    rsvd3:0,
     /**m3 */
     m3downdata: 'loopback',
     m3xm: 0,
@@ -58,6 +58,7 @@ export class SharedFormService implements  OnDestroy  {
     m3ontime: 0,
     m3linkled: 0,
     m3adm: 0,
+    rsvd4:0,
     /**m4 */
     m4downdata: 'loopback',
     m4xm: 0,
@@ -70,6 +71,7 @@ export class SharedFormService implements  OnDestroy  {
     m4ontime: 0,
     m4linkled: 0,
     m4adm: 0,
+    rsvd5:0,
     /**m5 */
     m5downdata: 'loopback',
     m5xm: 0,
@@ -82,6 +84,7 @@ export class SharedFormService implements  OnDestroy  {
     m5ontime: 0,
     m5linkled: 0,
     m5adm: 0,
+    rsvd6:0,
     /**m6 */
     m6downdata: 'loopback',
     m6xm: 0,
@@ -93,7 +96,10 @@ export class SharedFormService implements  OnDestroy  {
     m6common: 0,
     m6ontime: 0,
     m6linkled: 0,
-    m6adm: 0
+    m6adm: 0,
+    checksum:0,
+    rsvd7:0,
+    footer:'END'
   });
   //currentData = this.formData.asObservable();
 
@@ -110,7 +116,7 @@ export class SharedFormService implements  OnDestroy  {
         cData.couple = newData['couple'];
         cData.unit = newData['unit'];
         cData.pwr = newData['pwr'];
-        cData.pout =this.calcPout(newData['pout']);
+        cData.att =this.calcPout(newData['att']);
         break;
       case 'm1tab':
         cData.m1downdata = newData['m1downdata']
@@ -184,7 +190,6 @@ export class SharedFormService implements  OnDestroy  {
         cData.m5linkled = newData['m5linkled']
         cData.m5adm = newData['m5adm']
         cData.mfreq = newData['mfreq']
-
         break;
       case 'm6tab':
         cData.m6downdata = newData['m6downdata']
@@ -199,21 +204,9 @@ export class SharedFormService implements  OnDestroy  {
         cData.m6linkled = newData['m6linkled']
         cData.m6adm = newData['m6adm']
         cData.mfreq = newData['mfreq']
-
         break;
     }
-    this.formData$.next(cData);
-    const apiUrl = 'http://localhost:5029'; // Replace with your actual backend API URL
-
-    this.http.post(`${apiUrl}/Home/saveData`, cData).subscribe
-        (
-          (response) => {
-            console.log('Data saved successfully!', response);
-          },
-          (error) => {
-            console.error('Error saving data:', error);
-          }
-        );   
+    this.formData$.next(cData);   
   }
   calcPout(pout:number){
     //1403-02-31 . mr.Nader said for calculate pout..
@@ -223,7 +216,7 @@ export class SharedFormService implements  OnDestroy  {
 /**start timer every 1 seconds read values and send to dotnetbackend */
   startTimer() {
     const apiUrl = 'http://localhost:5029'; // Replace with your actual backend API URL
-    this.timerSubscription =timer(0, 20000).subscribe(value => {
+    this.timerSubscription =timer(0, 10000).subscribe(value => {
      console.log(this.formData$.value); // Emit the value through the Subject
      this.http.post(`${apiUrl}/Home/saveData`, this.formData$.value).subscribe
         (
@@ -238,7 +231,7 @@ export class SharedFormService implements  OnDestroy  {
   }
   startTimer_nodeJsbackend() {
     const apiUrl = 'http://localhost:3000'; // Replace with your actual backend API URL
-    this.timerSubscription =timer(0, 1000).subscribe(value => {
+    this.timerSubscription =timer(0, 10000).subscribe(value => {
      console.log(this.formData$.value); // Emit the value through the Subject
      this.http.post(`${apiUrl}/api/save-data`, this.formData$.value).subscribe
         (

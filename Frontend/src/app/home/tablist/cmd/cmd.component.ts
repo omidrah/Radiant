@@ -68,7 +68,7 @@ export class CmdComponent implements OnInit {
   get pwr(): number {
     return this.cmdForm.get('pwr').value;
   }
-  get pout(): number {
-    return this.cmdForm.get('pout').value;
+  get att(): number {
+    return this.cmdForm.get('att').value;
   }
 }
