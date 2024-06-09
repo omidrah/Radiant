@@ -4,12 +4,12 @@ namespace WebApplication5.Model
 {
     public static class Utils
     {
-
-        public static async Task FileWriteAsync(string filePath, string message, bool append = false)
+        public static async Task FileWriteAsync(string filepath,string message, bool append = false)
         {
+            var namefile = DateTime.Now.ToString("yyyy-dd-M-HH-mm-ss");          
             try
             {
-                using (FileStream stream = new FileStream(filePath, append ? FileMode.Append : FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
+                using (FileStream stream = new FileStream(Path.Combine(filepath, namefile), append ? FileMode.Append : FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
                 using (StreamWriter sw = new StreamWriter(stream))
                 {
                     await sw.WriteAsync(message);

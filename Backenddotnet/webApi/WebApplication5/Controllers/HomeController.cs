@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 using System.Text.Json.Nodes;
 using WebApplication5.Model;
@@ -12,10 +14,18 @@ namespace WebApplication5.Controllers
     public class HomeController : ControllerBase
     {
         private readonly ILogger _logger;
-        public HomeController(ILogger<HomeController> logger)
+        private readonly Settings _settings;
+
+        public HomeController(ILogger<HomeController> logger, IOptions<Settings> settings)
         {
             _logger = logger;
-        }    
+            _settings = settings.Value;
+        }
+        [HttpGet]
+        public string Get()
+        {
+            return _settings.companyInfo.name; 
+        }
         /// <summary>
         /// آرایه ای از بایت ها دریافت شده  و باینری آن در فایل چاپ میشود
         /// </summary>
@@ -36,17 +46,15 @@ namespace WebApplication5.Controllers
             //    Console.Write(b.ToString("X2") + " ");
             //}
             configSocket(byteArray);
-
             // Start async Task to Save Image
-            var namefile = DateTime.Now.ToString("yyyy-dd-M-HH-mm-ss");
-            await Utils.FileWriteAsync($"d:\\{namefile}.txt", valueFromUi.ToString() + "\n"+ hexValue);
+            var pa= Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + _settings.companyInfo.filePath;
+            await Utils.FileWriteAsync(pa, valueFromUi.ToString() + "\n"+ hexValue);
         }
        
         [HttpPost("saveData")]
         public async Task<IActionResult> saveData([FromBody] JsonObject inputString)
         {
-            var res = new AskResult();
-            StringBuilder sb = new(); 
+            AskResult res = new (); StringBuilder sb = new(); 
             foreach (var property in inputString)
             {
                 string key = property.Key;
@@ -314,18 +322,16 @@ namespace WebApplication5.Controllers
                         }
                         break;
                 }
-            }
-                       
+            }                       
             await SavebyteArrayToFile(sb.ToString(),res);
-
             return Ok();
         }
 
         /// <summary>
         /// send byte array to socket
         /// </summary>
-        /// <param name="inputCommand"></param>
-        private void configSocket(byte[] inputCommand)
+        /// <param name="inputArray"></param>
+        private void configSocket(byte[] inputArray)
         {
             Socket client = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             //IPAddress ipaddr = IPAddress.Parse("192.168.1.10");
@@ -337,7 +343,7 @@ namespace WebApplication5.Controllers
                 _logger.LogInformation($"{DateTime.Now}");
                 Console.WriteLine(string.Format("IPAddress: {0} - Port: {1}", ipaddr.ToString(), PortInput));
                 client.Connect(ipaddr, PortInput);
-                client.Send(inputCommand);
+                client.Send(inputArray);
                 byte[] buffReceived = new byte[108];
                 int nRecv = client.Receive(buffReceived);
                 Console.WriteLine("Data received: {0}", Encoding.ASCII.GetString(buffReceived, 0, nRecv));            
