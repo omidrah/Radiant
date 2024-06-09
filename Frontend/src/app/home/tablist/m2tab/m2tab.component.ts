@@ -21,11 +21,11 @@ export class M2tabComponent implements OnInit, OnDestroy{
       m2ym:new FormControl(0) ,
       m2zm:new FormControl(0),
       m2status:new FormControl(0),
-      m2selstatus:new FormControl(0),
-      m2counter:new FormControl(0),
-      m2common:new FormControl(0),
-      m2ontime:new FormControl(0),
-      m2linkled:new FormControl(0),
+      //m2selstatus:new FormControl(0),
+      //m2counter:new FormControl(0),
+      //m2common:new FormControl(0),
+     // m2ontime:new FormControl(0),
+      //m2linkled:new FormControl(0),
       m2adm:new FormControl(0),
       mfreq:new FormControl(0)
     });

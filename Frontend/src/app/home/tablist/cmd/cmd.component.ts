@@ -24,12 +24,12 @@ export class CmdComponent implements OnInit {
       couple:new FormControl(0) ,
       unit:new FormControl('w'),
       pwr:new FormControl(0),
-      pout:new FormControl(0)
+      att:new FormControl(0)
     });
      // Listen for changes in the entire form
      this.cmdForm.valueChanges.subscribe(values => {
       this.saveFormState(values,"cmd");
-    });    
+    });
    }
   testmodeChanged($event){
     let radioValue = event.target['value'];

@@ -22,11 +22,11 @@ export class M6tabComponent implements OnInit, OnDestroy{
       m6ym:new FormControl(0) ,
       m6zm:new FormControl(0),
       m6status:new FormControl(0),
-      m6selstatus:new FormControl(0),
-      m6counter:new FormControl(0),
-      m6common:new FormControl(0),
-      m6ontime:new FormControl(0),
-      m6linkled:new FormControl(0),
+     // m6selstatus:new FormControl(0),
+      //m6counter:new FormControl(0),
+     // m6common:new FormControl(0),
+     // m6ontime:new FormControl(0),
+     // m6linkled:new FormControl(0),
       m6adm:new FormControl(0),
       mfreq:new FormControl(0)
     });

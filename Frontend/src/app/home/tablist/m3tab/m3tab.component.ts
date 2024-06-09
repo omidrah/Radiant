@@ -22,11 +22,11 @@ export class M3tabComponent implements OnInit, OnDestroy{
       m3ym:new FormControl(0) ,
       m3zm:new FormControl(0),
       m3status:new FormControl(0),
-      m3selstatus:new FormControl(0),
-      m3counter:new FormControl(0),
-      m3common:new FormControl(0),
-      m3ontime:new FormControl(0),
-      m3linkled:new FormControl(0),
+     // m3selstatus:new FormControl(0),
+     // m3counter:new FormControl(0),
+//      m3common:new FormControl(0),
+     // m3ontime:new FormControl(0),
+    //  m3linkled:new FormControl(0),
       m3adm:new FormControl(0),
       mfreq:new FormControl(0)
     });

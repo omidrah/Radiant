@@ -22,11 +22,11 @@ export class M4tabComponent implements OnInit, OnDestroy{
       m4ym:new FormControl(0) ,
       m4zm:new FormControl(0),
       m4status:new FormControl(0),
-      m4selstatus:new FormControl(0),
-      m4counter:new FormControl(0),
-      m4common:new FormControl(0),
-      m4ontime:new FormControl(0),
-      m4linkled:new FormControl(0),
+     // m4selstatus:new FormControl(0),
+    //  m4counter:new FormControl(0),
+     // m4common:new FormControl(0),
+    //  m4ontime:new FormControl(0),
+     // m4linkled:new FormControl(0),
       m4adm:new FormControl(0),
       mfreq:new FormControl(0)
     });

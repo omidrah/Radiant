@@ -206,7 +206,7 @@ export class SharedFormService implements  OnDestroy  {
         cData.mfreq = newData['mfreq']
         break;
     }
-    this.formData$.next(cData);   
+    this.formData$.next(cData);
   }
   calcPout(pout:number){
     //1403-02-31 . mr.Nader said for calculate pout..
@@ -226,13 +226,13 @@ export class SharedFormService implements  OnDestroy  {
           (error) => {
             console.error('Error saving data:', error);
           }
-        );     
+        );
     });
   }
   startTimer_nodeJsbackend() {
     const apiUrl = 'http://localhost:3000'; // Replace with your actual backend API URL
     this.timerSubscription =timer(0, 10000).subscribe(value => {
-     console.log(this.formData$.value); // Emit the value through the Subject
+     //console.log(this.formData$.value); // Emit the value through the Subject
      this.http.post(`${apiUrl}/api/save-data`, this.formData$.value).subscribe
         (
           (response) => {
@@ -241,7 +241,7 @@ export class SharedFormService implements  OnDestroy  {
           (error) => {
             console.error('Error saving data:', error);
           }
-        );     
+        );
     });
   }
   saveFormData() {

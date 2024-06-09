@@ -6,7 +6,7 @@ namespace WebApplication5.Model
     {
         public static async Task FileWriteAsync(string filepath,string message, bool append = false)
         {
-            var namefile = DateTime.Now.ToString("yyyy-dd-M-HH-mm-ss");          
+            var namefile = DateTime.Now.ToString("yyyy-dd-M-HH-mm-ss")+".txt";          
             try
             {
                 using (FileStream stream = new FileStream(Path.Combine(filepath, namefile), append ? FileMode.Append : FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))

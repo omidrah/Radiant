@@ -23,11 +23,11 @@ export class M5tabComponent implements OnInit, OnDestroy{
       m5ym:new FormControl(0) ,
       m5zm:new FormControl(0),
       m5status:new FormControl(0),
-      m5selstatus:new FormControl(0),
-      m5counter:new FormControl(0),
-      m5common:new FormControl(0),
-      m5ontime:new FormControl(0),
-      m5linkled:new FormControl(0),
+     // m5selstatus:new FormControl(0),
+     // m5counter:new FormControl(0),
+     // m5common:new FormControl(0),
+     // m5ontime:new FormControl(0),
+     // m5linkled:new FormControl(0),
       m5adm:new FormControl(0),
       mfreq:new FormControl(0)
     });

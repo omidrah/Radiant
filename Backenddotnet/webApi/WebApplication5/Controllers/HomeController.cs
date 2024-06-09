@@ -47,7 +47,7 @@ namespace WebApplication5.Controllers
             //}
             configSocket(byteArray);
             // Start async Task to Save Image
-            var pa= Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + _settings.companyInfo.filePath;
+            var pa= Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + _settings.companyInfo.filePath;
             await Utils.FileWriteAsync(pa, valueFromUi.ToString() + "\n"+ hexValue);
         }
        
