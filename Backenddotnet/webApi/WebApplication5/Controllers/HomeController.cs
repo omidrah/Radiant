@@ -36,7 +36,7 @@ namespace WebApplication5.Controllers
             {
                 Console.Write(b.ToString("X2") + " ");
             }
-            //configSocket(byteArray);
+            configSocket(byteArray);
 
             // Start async Task to Save Image
             var namefile = DateTime.Now.ToString("yyyy-dd-M-HH-mm-ss");
