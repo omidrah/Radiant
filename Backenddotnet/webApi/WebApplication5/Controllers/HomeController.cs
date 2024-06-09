@@ -15,8 +15,7 @@ namespace WebApplication5.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-        }      
-        
+        }    
         /// <summary>
         /// آرایه ای از بایت ها دریافت شده  و باینری آن در فایل چاپ میشود
         /// </summary>
@@ -31,11 +30,11 @@ namespace WebApplication5.Controllers
             Console.WriteLine("*******************************************************************");
             // Convert the hexadecimal string to a byte array
             byte[] byteArray = Utils.StringToByteArray(hexValue);
-            Console.WriteLine("Byte Array:");
-            foreach (byte b in byteArray)
-            {
-                Console.Write(b.ToString("X2") + " ");
-            }
+            //Console.WriteLine("Byte Array:");
+            //foreach (byte b in byteArray)
+            //{
+            //    Console.Write(b.ToString("X2") + " ");
+            //}
             configSocket(byteArray);
 
             // Start async Task to Save Image
