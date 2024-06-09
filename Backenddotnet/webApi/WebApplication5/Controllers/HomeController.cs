@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json.Nodes;
-using WebApplication5.Model; 
+using WebApplication5.Model;
 
 namespace WebApplication5.Controllers
 {
@@ -299,7 +299,7 @@ namespace WebApplication5.Controllers
                     case "checksum":
                         _ = short.TryParse(property.Value.ToString(), out short checksum);
                         res.checksum = checksum;
-                        sb.Append(Utils.convertToHex(res.checksum));
+                        sb.Append(Utils.convertToHex(res.calculateChecksum()));
                         break;
                     case "rsvd7":
                         _ = byte.TryParse(property.Value.ToString(), out byte rsvd7);
@@ -321,27 +321,27 @@ namespace WebApplication5.Controllers
 
             return Ok();
         }
-       
+
         /// <summary>
         /// send byte array to socket
         /// </summary>
         /// <param name="inputCommand"></param>
         private void configSocket(byte[] inputCommand)
         {
-            Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Socket client = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             //IPAddress ipaddr = IPAddress.Parse("192.168.1.10");
             //int PortInput = 7;
             IPAddress ipaddr = IPAddress.Parse("127.0.0.1");
             int PortInput = 6060;
             try
             {
-                System.Console.WriteLine(string.Format("IPAddress: {0} - Port: {1}", ipaddr.ToString(), PortInput));
+                _logger.LogInformation($"{DateTime.Now}");
+                Console.WriteLine(string.Format("IPAddress: {0} - Port: {1}", ipaddr.ToString(), PortInput));
                 client.Connect(ipaddr, PortInput);
                 client.Send(inputCommand);
                 byte[] buffReceived = new byte[108];
                 int nRecv = client.Receive(buffReceived);
-                Console.WriteLine("Data received: {0}", Encoding.ASCII.GetString(buffReceived, 0, nRecv));
-            
+                Console.WriteLine("Data received: {0}", Encoding.ASCII.GetString(buffReceived, 0, nRecv));            
             }
             catch (Exception excp)
             {

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 
 namespace WebApplication5.Model
 {
@@ -27,7 +28,6 @@ namespace WebApplication5.Model
         public byte m1status { get; set; }
         public byte m1adm { get; set; }
         public byte[] rsvd2 { get; set; }=new byte[2];
-
 
         public int m2xm { get; set; }
         public int m2ym { get; set; }
@@ -132,6 +132,18 @@ namespace WebApplication5.Model
                 barr = paddarr;
             }
             return barr;    
+        }
+        /**/
+        public int calculateChecksum()
+        {
+            return testmode + datamode + att + mfreq +
+                 m1xm + m1ym + m1zm + m1status + m1adm +
+                 m2xm + m2ym + m2zm + m2status + m2adm +
+                 m3xm + m3ym + m3zm + m3status + m3adm +
+                 m4xm + m4ym + m4zm + m4status + m4adm +
+                 m5xm + m5ym + m5zm + m5status + m5adm +
+                 m6xm + m6ym + m6zm + m6status + m6adm;
+                 
         }
     }
 }
