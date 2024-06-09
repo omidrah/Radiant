@@ -74,6 +74,14 @@ namespace socketServer.Classes
                 await _actions.LogErrorAsync(e, "84  AcceptCallback").ConfigureAwait(false);
             }
         }
+        public static string ByteArrayToString(byte[] ba)
+        {
+            StringBuilder hex = new(ba.Length * 2);
+            foreach (byte b in ba)
+                hex.AppendFormat("{0:x2}", b);
+            return hex.ToString();
+        }
+
         public async void BeginReceiveCallback(IAsyncResult ar)
         {
             if (ar.IsCompleted)
@@ -89,14 +97,15 @@ namespace socketServer.Classes
                         {
                             int bytesRead = sk_client.EndReceive(ar);
 
-                            Send(sk_client, $"get your Data{DateTime.Now.ToString()}");
+                            Send(sk_client, $"get your Data{DateTime.Now}");
                             if (bytesRead > 0)
                             {
+                                Console.WriteLine(ByteArrayToString(client.buffer));
                                 client.value = Encoding.ASCII.GetString(client.buffer, 0, bytesRead).ToString();
-                                //Console.WriteLine(client.value);
-                                await CheckValue(client).ConfigureAwait(false);
+                                Console.WriteLine(client.value);
+                                //await CheckValue(client).ConfigureAwait(false);
                                 Array.Clear(client.buffer, 0, client.buffer.Length);
-                                Console.Clear();
+                                //Console.Clear();
                                 try
                                 {
                                     if (client.IsConnected)
@@ -104,10 +113,6 @@ namespace socketServer.Classes
                                         if (sk_client.Connected)
                                         {
                                             sk_client.BeginReceive(client.buffer, 0, 1024, SocketFlags.None, new AsyncCallback(BeginReceiveCallback), client);
-                                        }
-                                        else
-                                        {
-
                                         }
                                     }
                                 }
