@@ -45,7 +45,7 @@ namespace WebApplication5.Controllers
             //{
             //    Console.Write(b.ToString("X2") + " ");
             //}
-            configSocket(byteArray);
+            //configSocket(byteArray);
             // Start async Task to Save Image
             var pa= Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + _settings.companyInfo.filePath;
             await Utils.FileWriteAsync(pa, valueFromUi.ToString() + "\n"+ hexValue);
@@ -148,8 +148,8 @@ namespace WebApplication5.Controllers
                         res.m1status = m1staus;
                         sb.Append(Utils.convertToHex(res.m1status));
                         break;
-                    case "m1adm":
-                        _ = byte.TryParse(property.Value.ToString(), out byte m1adm);
+                    case "m1adm":                        
+                        byte m1adm =  (byte)Utils.ConvertBinaryStringToUInt32("00" + property.Value.ToString());                        
                         res.m1adm = m1adm;
                         sb.Append(Utils.convertToHex(res.m1adm));
                         break;
@@ -179,7 +179,7 @@ namespace WebApplication5.Controllers
                         sb.Append(res.m2status.ToString("X2")); 
                         break;
                     case "m2adm":
-                        _ = byte.TryParse(property.Value.ToString(), out byte m2adm);
+                        byte m2adm = (byte)Utils.ConvertBinaryStringToUInt32("00" + property.Value.ToString());
                         res.m6xm = m2adm;
                         sb.Append(res.m2adm.ToString("X2")); 
                         break;
@@ -208,8 +208,8 @@ namespace WebApplication5.Controllers
                         res.m3status=  m3staus;    
                         sb.Append(res.m3status.ToString("X2"));
                         break;
-                    case "m3adm":                        
-                        _ = byte.TryParse(property.Value.ToString(), out byte m3adm);
+                    case "m3adm":
+                        byte m3adm = (byte)Utils.ConvertBinaryStringToUInt32("00" + property.Value.ToString());
                         res.m3adm = m3adm;  
                         sb.Append(res.m3adm.ToString("X2"));
                         break;
@@ -239,7 +239,7 @@ namespace WebApplication5.Controllers
                         sb.Append(res.m4status.ToString("X2"));
                         break;
                     case "m4adm":
-                        _ = byte.TryParse(property.Value.ToString(), out byte m4adm);
+                        byte m4adm = (byte)Utils.ConvertBinaryStringToUInt32("00" + property.Value.ToString());
                         res.m4adm = m4adm;  
                         sb.Append(res.m4adm.ToString("X2"));
                         break;
@@ -269,7 +269,7 @@ namespace WebApplication5.Controllers
                         sb.Append(Utils.convertToHex(res.m5status)); 
                         break;
                     case "m5adm":
-                        _ = byte.TryParse(property.Value.ToString(), out byte m5adm);
+                        byte m5adm = (byte)Utils.ConvertBinaryStringToUInt32("00" + property.Value.ToString());
                         res.m5adm = m5adm;  
                         sb.Append(Utils.convertToHex(res.m5adm));
                         break;
@@ -299,7 +299,7 @@ namespace WebApplication5.Controllers
                         sb.Append(Utils.convertToHex(res.m6status));
                         break;
                     case "m6adm":
-                        _ = byte.TryParse(property.Value.ToString(), out byte m6adm);
+                        byte m6adm = (byte)Utils.ConvertBinaryStringToUInt32("00" + property.Value.ToString()); 
                         res.m6adm = m6adm;  
                         sb.Append(Utils.convertToHex(res.m6adm));
                         break;
@@ -333,6 +333,7 @@ namespace WebApplication5.Controllers
         /// <param name="inputArray"></param>
         private void configSocket(byte[] inputArray)
         {
+
             Socket client = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             //IPAddress ipaddr = IPAddress.Parse("192.168.1.10");
             //int PortInput = 7;

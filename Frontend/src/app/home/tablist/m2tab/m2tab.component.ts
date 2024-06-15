@@ -26,7 +26,7 @@ export class M2tabComponent implements OnInit, OnDestroy{
       //m2common:new FormControl(0),
      // m2ontime:new FormControl(0),
       //m2linkled:new FormControl(0),
-      m2adm:new FormControl(0),
+      m2adm:new FormControl(1),
       mfreq:new FormControl(0)
     });
      // Listen for changes in the entire form

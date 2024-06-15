@@ -27,7 +27,7 @@ export class M3tabComponent implements OnInit, OnDestroy{
 //      m3common:new FormControl(0),
      // m3ontime:new FormControl(0),
     //  m3linkled:new FormControl(0),
-      m3adm:new FormControl(0),
+      m3adm:new FormControl(1),
       mfreq:new FormControl(0)
     });
      // Listen for changes in the entire form

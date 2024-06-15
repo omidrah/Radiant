@@ -27,7 +27,7 @@ export class M6tabComponent implements OnInit, OnDestroy{
      // m6common:new FormControl(0),
      // m6ontime:new FormControl(0),
      // m6linkled:new FormControl(0),
-      m6adm:new FormControl(0),
+      m6adm:new FormControl(1),
       mfreq:new FormControl(0)
     });
      // Listen for changes in the entire form

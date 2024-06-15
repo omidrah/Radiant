@@ -26,7 +26,7 @@ export class M1tabComponent implements OnInit, OnDestroy{
       //m1common:new FormControl(0),
       //m1ontime:new FormControl(0),
       //m1linkled:new FormControl(0),
-      m1adm:new FormControl(0),
+      m1adm:new FormControl('001101'),
       mfreq:new FormControl(0)
     });
     //Listen for changes in the entire form

@@ -84,5 +84,54 @@ namespace WebApplication5.Model
         {
             return string.Join("0x", numb.ToString("X2"));
         }
+
+        /// <summary>
+        /// convert a binary string to an uint
+        /// </summary>
+        /// <param name="binaryString"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="FormatException"></exception>
+        public static uint ConvertBinaryStringToUInt32(string binaryString)
+        {
+            if (binaryString is null)
+            {
+                throw new ArgumentNullException(nameof(binaryString));
+            }
+
+            if (binaryString.Length > 32)
+            {
+                throw new ArgumentOutOfRangeException(nameof(binaryString), binaryString.Length, "The specified binary string can not be longer than 32 characters.");
+            }
+
+            uint result = 0u;
+
+            for (int i = 0; i < binaryString.Length; i++)
+            {
+                result <<= 1;
+
+                char c = binaryString[i];
+
+                if (c == '0')
+                {
+                }
+                else if (c == '1')
+                {
+                    result |= 1u;
+                }
+                else
+                {
+                    throw new FormatException($"Character {i} of binary string \"{binaryString}\" is an invalid '{c}'. Can only be '0' or '1'.");
+                }
+            }
+
+            return result;
+        }
+
+        //To convert from decimal to hex
+        /* string hexValue = decValue.ToString("X");  OR   string.Format("{0:x}", intValue);*/
+        //To convert from hex to decimal 
+        /*int decValue = Convert.ToInt32(hexValue, 16);    OR  Convert.ToInt64(hexString, 16);*/
     }
 }
