@@ -120,8 +120,8 @@ namespace WebApplication5.Controllers
                             sb.Append(res.mfreq.ToString("X2"));
                         }
                         break;
-                    case "rsvd1":                        
-                            _ = byte.TryParse(property.Value.ToString(), out byte rsvd1);
+                    case "rsvd1":
+                        byte rsvd1 = 0;
                             res.rsvd1 = rsvd1;
                             sb.Append(Utils.convertToHex(res.rsvd1));                        
                         break;
@@ -304,12 +304,12 @@ namespace WebApplication5.Controllers
                         sb.Append(Utils.convertToHex(res.m6adm));
                         break;
                     case "checksum":
-                        _ = short.TryParse(property.Value.ToString(), out short checksum);
+                        _ = UInt16.TryParse(property.Value.ToString(), out UInt16 checksum);
                         res.checksum = checksum;
                         sb.Append(Utils.convertToHex(res.calculateChecksum()));
                         break;
                     case "rsvd7":
-                        _ = byte.TryParse(property.Value.ToString(), out byte rsvd7);
+                        byte rsvd7 = 0 ;
                         res.rsvd7 = rsvd7;
                         sb.Append(Utils.convertToHex(res.rsvd7));
                         break;
@@ -334,7 +334,6 @@ namespace WebApplication5.Controllers
         private void configSocket(byte[] inputArray)
         {
 
-return;
             Socket client = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPAddress ipaddr = IPAddress.Parse("192.168.1.15");
             int PortInput = 7;

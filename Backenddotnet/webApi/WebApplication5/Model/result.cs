@@ -62,7 +62,8 @@ namespace WebApplication5.Model
         public int m6zm { get; set; }
         public byte m6status { get; set; }
         public byte m6adm { get; set; }
-        public short checksum { get; set; } = 0;
+
+        public UInt16 checksum { get; set; } = 0;
 
         public byte rsvd7 { get; set; } = 0;
         //public byte[] reverse { get; set; } = new byte[10];
