@@ -173,7 +173,7 @@
                             <div class="row mt-2">
                               <label>Status</label>
                               <div class="col-sm-6 ml-5">
-                                <input type="number" class="form-control" id="m1selstatus" placeholder="status"  name="m1selstatus">
+                                <input type="text" inputmode="numeric" class="form-control" id="m1selstatus" placeholder="status"  name="m1selstatus">
                               </div>
                             </div>
                             <div class="row mt-2">
@@ -235,4 +235,8 @@
               </div>
       </form>
      </div>
+     <div style="text-align:center">
+        <input (input)="onInputChange($event)" class="input" value={{value}} placeholder="Tap on the virtual keyboard to start" />
+        <div class="simple-keyboard"></div>
+    </div>
   </div>

@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { interval, takeWhile,Subscription, share } from 'rxjs';
 import { SharedFormService } from '../../services/shared-form.service';
 import { Addresses } from '../../models/address';
+import Keyboard from 'simple-keyboard/build/components/Keyboard';
 
 @Component({
   selector: 'app-m1tab',
@@ -10,6 +11,9 @@ import { Addresses } from '../../models/address';
   styleUrl: './m1tab.component.css'
 })
 export class M1tabComponent implements OnInit, OnDestroy{
+  keyboard: Keyboard;
+  value = "";
+
   m1tabform: FormGroup;
   randomNumber: Array<number> = [];
   private currentDataSubscription: Subscription;
@@ -71,5 +75,38 @@ export class M1tabComponent implements OnInit, OnDestroy{
   ngOnDestroy() {
     this.currentDataSubscription.unsubscribe();
   }
+/**keypad */
+  ngAfterViewInit() {
+    this.keyboard = new Keyboard({
+      onChange: input => this.onChange(input),
+      onKeyPress: button => this.onKeyPress(button)
+    });
+  }
+
+  onChange = (input: string) => {
+    this.value = input;
+    console.log("Input changed", input);
+  };
+
+  onKeyPress = (button: string) => {
+    console.log("Button pressed", button);
+    /**
+     * If you want to handle the shift and caps lock buttons
+     */
+    if (button === "{shift}" || button === "{lock}") this.handleShift();
+  };
+
+  onInputChange = (event: any) => {
+    this.keyboard.setInput(event.target.value);
+  };
+
+  handleShift = () => {
+    let currentLayout = this.keyboard.options.layoutName;
+    let shiftToggle = currentLayout === "default" ? "shift" : "default";
+
+    this.keyboard.setOptions({
+      layoutName: shiftToggle
+    });
+  };
 
 }
