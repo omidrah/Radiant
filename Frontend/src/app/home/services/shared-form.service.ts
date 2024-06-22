@@ -175,7 +175,6 @@ export class SharedFormService implements  OnDestroy  {
         // cData.m4linkled = newData['m4linkled']
         cData.m4adm = newData['m4adm']
         cData.mfreq = newData['mfreq']
-
         break;
       case 'm5tab':
         cData.m5downdata = newData['m5downdata']

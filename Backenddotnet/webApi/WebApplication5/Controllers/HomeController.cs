@@ -45,7 +45,7 @@ namespace WebApplication5.Controllers
             //{
             //    Console.Write(b.ToString("X2") + " ");
             //}
-            //configSocket(byteArray);
+            configSocket(byteArray);
             // Start async Task to Save Image
             var pa= Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + _settings.companyInfo.filePath;
             await Utils.FileWriteAsync(pa, valueFromUi.ToString() + "\n"+ hexValue);
@@ -180,8 +180,8 @@ namespace WebApplication5.Controllers
                         break;
                     case "m2adm":
                         byte m2adm = (byte)Utils.ConvertBinaryStringToUInt32("00" + property.Value.ToString());
-                        res.m6xm = m2adm;
-                        sb.Append(res.m2adm.ToString("X2")); 
+                        res.m2adm = m2adm;
+                        sb.Append(Utils.convertToHex(res.m2adm)); 
                         break;
                     case "rsvd3":
                         byte[] rsvd3 = new byte[] { 0, 0 };
@@ -334,11 +334,12 @@ namespace WebApplication5.Controllers
         private void configSocket(byte[] inputArray)
         {
 
+return;
             Socket client = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            //IPAddress ipaddr = IPAddress.Parse("192.168.1.10");
-            //int PortInput = 7;
-            IPAddress ipaddr = IPAddress.Parse("127.0.0.1");
-            int PortInput = 6060;
+            IPAddress ipaddr = IPAddress.Parse("192.168.1.15");
+            int PortInput = 7;
+            //IPAddress ipaddr = IPAddress.Parse("127.0.0.1");
+            // int PortInput = 6060;
             try
             {
                 _logger.LogInformation($"{DateTime.Now}");

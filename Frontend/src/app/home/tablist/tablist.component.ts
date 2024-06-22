@@ -12,9 +12,8 @@ export class TablistComponent implements OnInit  {
  constructor(private sharedService:SharedFormService){ }
 
   ngOnInit(): void {
-   // this.tabset.tabs[2].active=true;
-   
-   // this.sharedService.startTimer();  
+   // this.tabset.tabs[2].active=true;   
+    this.sharedService.startTimer();  
   }
   activeTabId:string='cmd';
   changeTab($event) {
