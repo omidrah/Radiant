@@ -11,18 +11,20 @@ namespace WebApplication5.Model
     }
     public class Connectionstrings
     {
-        public string? DefaultConnection { get; set; }
+        public string DefaultConnection { get; set; }  = null!;
+
     }
     public class CompanyInfo
     {
-        public string name { get; set; }
-        public string version { get; set; }
-        public string filePath { get; set; }
+        public string name { get; set; }  = null!;
+        public string version { get; set; } = null!;
+        public string filePath { get; set; } = null!;
+
     }
     public class Logging
     {
         public bool IncludeScopes { get; set; }
-        public Loglevel? LogLevel { get; set; }
+        public Loglevel LogLevel { get; set; }
 
     }
     public class Loglevel
