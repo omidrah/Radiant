@@ -63,7 +63,7 @@ namespace WebApplication5.Model
         public byte m6status { get; set; }
         public byte m6adm { get; set; }
 
-        public ushort checksum { get; set; } = 0;
+        public UInt16 checksum { get; set; } = 0;
 
         public byte rsvd7 { get; set; } = 0;
         //public byte[] reverse { get; set; } = new byte[10];
@@ -135,9 +135,9 @@ namespace WebApplication5.Model
             return barr;    
         }
         /**/
-        public ushort calculateChecksum()
+        public UInt16 calculateChecksum()
         {
-            return (ushort)(testmode + datamode + att + mfreq +
+            return (UInt16)(testmode + datamode + att + mfreq +
                  m1xm + m1ym + m1zm + m1status + m1adm +
                  m2xm + m2ym + m2zm + m2status + m2adm +
                  m3xm + m3ym + m3zm + m3status + m3adm +

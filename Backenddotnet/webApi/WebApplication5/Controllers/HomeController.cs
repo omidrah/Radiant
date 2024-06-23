@@ -125,8 +125,9 @@ namespace WebApplication5.Controllers
                             res.rsvd1 = rsvd1;
                             sb.Append(Utils.convertToHex(res.rsvd1));                        
                         break;
+
                     case "m1xm":
-                        _ = Int32.TryParse(property.Value.ToString(), out Int32 m1xm);
+                        _ = int.TryParse(property.Value.ToString(), out int m1xm);
                         //byte[] M1_Xm = BitConverter.GetBytes(m1xm); //convert int to byteArray
                         //Array.Copy(M1_Xm, 0, blockdata, 7, 4);
                         res.m1xm = m1xm;
@@ -185,7 +186,7 @@ namespace WebApplication5.Controllers
                         sb.Append(Utils.convertToHex(res.m2adm)); 
                         break;
                     case "rsvd3":
-                        byte[] rsvd3 = new byte[] { 0, 0 };
+                        byte[] rsvd3 =  { 0, 0 };
                         res.rsvd3 = rsvd3;
                         sb.Append(Utils.convertToHex(res.rsvd3));
                         break;
@@ -310,7 +311,7 @@ namespace WebApplication5.Controllers
                         break;
                     case "checksum":
                         res.checksum = res.calculateChecksum();
-                        sb.Append(Utils.convertToHex(res.checksum));
+                        sb.Append(res.checksum);
                         break;
                     case "rsvd7":
                         byte rsvd7 = 0 ;
