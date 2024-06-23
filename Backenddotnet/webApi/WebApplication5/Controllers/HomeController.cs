@@ -158,6 +158,7 @@ namespace WebApplication5.Controllers
                         res.rsvd2 = rsvd2;
                         sb.Append(Utils.convertToHex(res.rsvd2));
                         break;
+                   
                     case "m2xm":
                         _ = int.TryParse(property.Value.ToString(), out int m2xm);
                         res.m2xm = m2xm;
@@ -170,13 +171,13 @@ namespace WebApplication5.Controllers
                         break;
                     case "m2zm":
                         _ = int.TryParse(property.Value.ToString(), out int m2zm);
-                        res.m2ym= m2zm;
+                        res.m2zm= m2zm;
                         sb.Append(Utils.convertToHex(res.m2zm));
                         break;
                     case "m2status":
                         _ = byte.TryParse(property.Value.ToString(), out byte m2staus);
                         res.m2status = m2staus;
-                        sb.Append(res.m2status.ToString("X2")); 
+                        sb.Append(Utils.convertToHex(res.m2status)); 
                         break;
                     case "m2adm":
                         byte m2adm = (byte)Utils.ConvertBinaryStringToUInt32("00" + property.Value.ToString());
@@ -188,6 +189,7 @@ namespace WebApplication5.Controllers
                         res.rsvd3 = rsvd3;
                         sb.Append(Utils.convertToHex(res.rsvd3));
                         break;
+
                     case "m3xm":
                         _ = int.TryParse(property.Value.ToString(), out int m3xm);
                         res.m3xm = m3xm;    
@@ -211,13 +213,14 @@ namespace WebApplication5.Controllers
                     case "m3adm":
                         byte m3adm = (byte)Utils.ConvertBinaryStringToUInt32("00" + property.Value.ToString());
                         res.m3adm = m3adm;  
-                        sb.Append(res.m3adm.ToString("X2"));
+                        sb.Append(Utils.convertToHex(res.m3adm));
                         break;
                     case "rsvd4":
                         byte[] rsvd4 = new byte[] { 0, 0 };
                         res.rsvd4 = rsvd4;
                         sb.Append(Utils.convertToHex(res.rsvd4));
                         break;
+                        
                     case "m4xm":
                         _ = int.TryParse(property.Value.ToString(), out int m4xm);
                         res.m4xm= m4xm; 
@@ -236,7 +239,7 @@ namespace WebApplication5.Controllers
                     case "m4status":
                         _ = byte.TryParse(property.Value.ToString(), out byte m4staus);
                         res.m4status = m4staus;  
-                        sb.Append(res.m4status.ToString("X2"));
+                        sb.Append(Utils.convertToHex(res.m4adm));
                         break;
                     case "m4adm":
                         byte m4adm = (byte)Utils.ConvertBinaryStringToUInt32("00" + property.Value.ToString());
@@ -248,6 +251,7 @@ namespace WebApplication5.Controllers
                         res.rsvd6 = rsvd5;
                         sb.Append(Utils.convertToHex(res.rsvd5));
                         break;
+
                     case "m5xm":
                         _ = int.TryParse(property.Value.ToString(), out int m5xm);
                         res.m5xm = m5xm;
@@ -278,6 +282,7 @@ namespace WebApplication5.Controllers
                         res.rsvd6 = rsvd6;
                         sb.Append(Utils.convertToHex(res.rsvd6));
                         break;
+
                     case "m6xm":
                         _ = int.TryParse(property.Value.ToString(), out int m6xm);
                         res.m6xm = m6xm;    
@@ -304,15 +309,15 @@ namespace WebApplication5.Controllers
                         sb.Append(Utils.convertToHex(res.m6adm));
                         break;
                     case "checksum":
-                        _ = UInt16.TryParse(property.Value.ToString(), out UInt16 checksum);
-                        res.checksum = checksum;
-                        sb.Append(Utils.convertToHex(res.calculateChecksum()));
+                        res.checksum = res.calculateChecksum();
+                        sb.Append(Utils.convertToHex(res.checksum));
                         break;
                     case "rsvd7":
                         byte rsvd7 = 0 ;
                         res.rsvd7 = rsvd7;
                         sb.Append(Utils.convertToHex(res.rsvd7));
                         break;
+                        
                     case "footer":
                         var foot = property.Value.ToString();
                         for (var i = 0; i < foot.Length; i++)
