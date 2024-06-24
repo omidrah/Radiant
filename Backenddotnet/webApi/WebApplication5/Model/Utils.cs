@@ -72,10 +72,14 @@ namespace WebApplication5.Model
         {
             return string.Join("", BitConverter.GetBytes(numb).Reverse().Select(b => b.ToString("X2")));
         }       
-        public static string convertToHex(short numb)
+        public static string convertToHex(UInt16 numb)
         {
             return string.Join("", BitConverter.GetBytes(numb).Reverse().Select(b => b.ToString("X2")));
         }       
+        public static string convertToHex(short numb)
+        {
+            return string.Join("", BitConverter.GetBytes(numb).Reverse().Select(b => b.ToString("X2")));
+        }     
         public static string convertToHex(byte[] numb)
         {
             return string.Join("", numb.Reverse().Select(b => b.ToString("X2")));

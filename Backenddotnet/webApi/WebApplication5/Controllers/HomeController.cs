@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.VisualBasic.CompilerServices;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Net;
 using System.Net.Sockets;
@@ -311,7 +312,7 @@ namespace WebApplication5.Controllers
                         break;
                     case "checksum":
                         res.checksum = res.calculateChecksum();
-                        sb.Append(res.checksum);
+                        sb.Append(Utils.convertToHex(res.checksum));
                         break;
                     case "rsvd7":
                         byte rsvd7 = 0 ;
