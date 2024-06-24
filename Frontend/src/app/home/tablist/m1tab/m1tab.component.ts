@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component,  OnDestroy, OnInit } from '@angular/core';
+
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { interval, takeWhile,Subscription, share } from 'rxjs';
 import { SharedFormService } from '../../services/shared-form.service';
@@ -7,10 +8,9 @@ import { Addresses } from '../../models/address';
 @Component({
   selector: 'app-m1tab',
   templateUrl: './m1tab.component.html',
-  styleUrl: './m1tab.component.css'
+  styleUrl: './m1tab.component.css',
 })
 export class M1tabComponent implements OnInit, OnDestroy{
-  value = "";
 
   m1tabform: FormGroup;
   randomNumber: Array<number> = [];
@@ -73,9 +73,4 @@ export class M1tabComponent implements OnInit, OnDestroy{
   ngOnDestroy() {
     this.currentDataSubscription.unsubscribe();
   }
-/**keypad */
-
- 
-
-
 }
