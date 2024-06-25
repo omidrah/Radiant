@@ -1,16 +1,25 @@
 <div id="clock" class="light">
   <div class="display clock-display">
-      <div class="weekdays">
-          <ul class="clock-weekdays-block">
-              <li class="day-block" *ngFor="let day of days" [class.active]="today === day">{{ day }}</li>
-          </ul>
-      </div>
-      <div class="digits">
-          <span class="time">{{ currentTime }}</span>
-      </div>
-      <div class="clock-date">
-          <div class="small">{{ currentDate }}</div>
-      </div>
+    <div class="weekdays">
+      <ul class="clock-weekdays-block">
+        <li class="day-block" *ngFor="let day of days" [class.active]="today === day">{{ day }}</li>
+      </ul>
+    </div>
+    <div class="digits">
+      <span class="time">{{ currentTime }}</span>
+    </div>
+    <div class="clock-date">
+      <div class="small">{{ currentDate }}</div>
+    </div>
   </div>
-  <button type="button" class="btn btn-primary" (click)="setTime()">Set</button>
+
+ <!-- Updated time setter with Bootstrap grid system -->
+ <div class="row time-setter">
+  <div class="col-md-6">
+    <input type="time" [(ngModel)]="inputTime" class="form-control" />
+  </div>
+  <div class="col-md-6">
+    <button type="button" class="btn btn-primary set-button"  (click)="setTime()">Set</button>
+  </div>
+</div>
 </div>

@@ -56,6 +56,18 @@
   color: #cacaca;
 }
 
-.btn-primary {
-  margin-top: 20px;
+.time-setter {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.time-setter input {
+  margin-right: 10px;
+  padding: 5px;
+  font-size: 18px;
+}
+.set-button {
+  font-weight: bold;
+  font-size: 18px; /* Adjust the font size as needed */
 }

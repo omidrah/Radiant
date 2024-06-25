@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { CLASS_LIST, DAYS_SHORT } from '../util/calendar.constants';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
-import { UtilService } from '../util/UtilService';
 
 @Component({
   selector: 'app-digiclock',
@@ -13,7 +11,9 @@ export class DigiclockComponent implements OnInit, OnDestroy {
   public currentDate: string;
   public today: string;
   public days: string[] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+  public inputTime: string; // Added inputTime to bind with input field
   private subscriptions: Subscription[] = [];
+  private customTime: Date | null = null; // Added customTime to hold user-set time
 
   constructor() {}
 
@@ -31,13 +31,18 @@ export class DigiclockComponent implements OnInit, OnDestroy {
   }
 
   private updateTime(): void {
-    const now = new Date();
+    const now = this.customTime || new Date();
     this.currentTime = now.toLocaleTimeString('en-US', { hour12: true });
     this.currentDate = now.toDateString();
     this.today = this.days[now.getDay()];
   }
 
   setTime(): void {
-    console.log('Set button clicked');
+    if (this.inputTime) {
+      const [hours, minutes] = this.inputTime.split(':').map(Number);
+      this.customTime = new Date();
+      this.customTime.setHours(hours, minutes, 0);
+      this.updateTime(); // Update the display immediately after setting new time
+    }
   }
 }

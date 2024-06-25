@@ -1,4 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
+
 import { CommonModule } from '@angular/common';
 import { DigiclockComponent } from './digiclock/digiclock.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
@@ -16,6 +18,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
   ],
   imports: [
     CommonModule,
+    FormsModule, // Add FormsModule here
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
