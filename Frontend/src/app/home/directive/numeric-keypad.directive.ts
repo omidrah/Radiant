@@ -15,6 +15,7 @@ import { NumericKeypadComponent } from '../numeric-keypad/numeric-keypad.compone
 })
 export class NumericKeypadDirective {
   private keypadComponentRef: ComponentRef<NumericKeypadComponent>;
+  private initialValue: string;
 
   constructor(
     private el: ElementRef,
@@ -24,10 +25,17 @@ export class NumericKeypadDirective {
   ) {}
 
   @HostListener('focus') onFocus() {
+
+    if (this.el.nativeElement.value.trim() === '0') {
+      this.el.nativeElement.value = '';
+    }
+    this.initialValue = this.el.nativeElement.value;
+    this.selectInputText();
     this.showKeypad();
   }
 
   @HostListener('click') onClick() {
+    this.initialValue = this.el.nativeElement.value;
     this.showKeypad();
   }
 
@@ -35,6 +43,9 @@ export class NumericKeypadDirective {
     setTimeout(() => this.hideKeypad(), 100); // Delay to prevent immediate hiding on clicking keypad
   }
 
+  private selectInputText() {
+    this.el.nativeElement.select();
+  }
   private showKeypad() {
     if (!this.keypadComponentRef) {
       const factory = this.resolver.resolveComponentFactory(NumericKeypadComponent);
@@ -45,7 +56,18 @@ export class NumericKeypadDirective {
 
       this.keypadComponentRef.instance.numberPressed.subscribe((number: number) => this.appendNumber(number));
       this.keypadComponentRef.instance.backspacePressed.subscribe(() => this.backspace());
-      this.keypadComponentRef.instance.clearPressed.subscribe(() => this.clear());
+      // this.keypadComponentRef.instance.clearPressed.subscribe(() => this.clear());
+      this.keypadComponentRef.instance.enterPressed.subscribe(() => {
+        this.enter();
+        this.hideKeypad();
+      });
+      this.keypadComponentRef.instance.escPressed.subscribe(() => {
+        this.esc();
+        this.hideKeypad();
+      });
+      this.keypadComponentRef.instance.increasePressed.subscribe(() => this.increase());
+      this.keypadComponentRef.instance.decreasePressed.subscribe(() => this.decrease());
+      this.keypadComponentRef.instance.decimalPressed.subscribe(() => this.appendDecimal());
 
       this.positionKeypad(domElem);
     }
@@ -68,17 +90,66 @@ export class NumericKeypadDirective {
   }
 
   private appendNumber(number: number) {
-    this.el.nativeElement.value += number;
-    this.el.nativeElement.dispatchEvent(new Event('input'));
-  }
 
+    this.el.nativeElement.value += number;
+    //only enter key set change value
+    //this.el.nativeElement.dispatchEvent(new Event('input'));
+  }
+  private appendDecimal() {
+    // Prevent multiple decimals
+    if (!this.el.nativeElement.value.includes('.')) {
+      this.el.nativeElement.value += '.';
+      //only enter key set change value
+      //this.el.nativeElement.dispatchEvent(new Event('input'));
+    }
+  }
   private backspace() {
     this.el.nativeElement.value = this.el.nativeElement.value.slice(0, -1);
-    this.el.nativeElement.dispatchEvent(new Event('input'));
+    //only enter key set change value
+    //this.el.nativeElement.dispatchEvent(new Event('input'));
   }
 
-  private clear() {
-    this.el.nativeElement.value = '';
-    this.el.nativeElement.dispatchEvent(new Event('input'));
+  // private clear() {
+  //   this.el.nativeElement.value = '';
+  //   this.el.nativeElement.dispatchEvent(new Event('input'));
+  // }
+
+  private enter() {
+    // Trigger change event to notify Angular about the new value
+    this.el.nativeElement.dispatchEvent(new Event('input', { bubbles: true }));
+    this.el.nativeElement.dispatchEvent(new Event('change', { bubbles: true }));
+    this.el.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+  }
+
+  private esc() {
+    // Revert to initial value
+    this.el.nativeElement.value = this.initialValue || 0;
+    this.el.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+  }
+
+  private increase() {
+    let value = parseInt(this.el.nativeElement.value, 10);
+    if (!isNaN(value)) {
+      value += 1;
+      this.el.nativeElement.value = value.toString();
+      //only enter key set change value
+      //this.el.nativeElement.dispatchEvent(new Event('input'));
+    }
+    else{
+      this.el.nativeElement.value = 0;
+    }
+  }
+
+  private decrease() {
+    let value = parseInt(this.el.nativeElement.value, 10);
+    if (!isNaN(value)) {
+      value -= 1;
+      this.el.nativeElement.value = value.toString();
+      //only enter key set change value
+      //this.el.nativeElement.dispatchEvent(new Event('input'));
+    }
+    else{
+      this.el.nativeElement.value = 0;
+    }
   }
 }

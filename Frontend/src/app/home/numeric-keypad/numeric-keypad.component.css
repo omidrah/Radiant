@@ -8,11 +8,22 @@
 
 .keypad-row {
   display: flex;
+  justify-content: space-between;
 }
 
 button {
   flex: 1;
   margin: 5px;
   padding: 15px;
-  font-size: 18px;
+  font-size: 24px;
+  font-weight:600;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+button:active {
+  background: #e0e0e0;
 }
