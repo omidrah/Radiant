@@ -15,7 +15,7 @@ import { NumericKeypadComponent } from '../numeric-keypad/numeric-keypad.compone
 })
 export class NumericKeypadDirective {
   private keypadComponentRef: ComponentRef<NumericKeypadComponent>;
-  private initialValue: string;
+  private previousValue: string;
 
   constructor(
     private el: ElementRef,
@@ -29,13 +29,13 @@ export class NumericKeypadDirective {
     if (this.el.nativeElement.value.trim() === '0') {
       this.el.nativeElement.value = '';
     }
-    this.initialValue = this.el.nativeElement.value;
+    this.previousValue = this.el.nativeElement.value;
     this.selectInputText();
     this.showKeypad();
   }
 
   @HostListener('click') onClick() {
-    this.initialValue = this.el.nativeElement.value;
+    this.previousValue = this.el.nativeElement.value;
     this.showKeypad();
   }
 
@@ -98,10 +98,19 @@ export class NumericKeypadDirective {
   private appendDecimal() {
     // Prevent multiple decimals
     if (!this.el.nativeElement.value.includes('.')) {
+
       this.el.nativeElement.value += '.';
       //only enter key set change value
       //this.el.nativeElement.dispatchEvent(new Event('input'));
     }
+
+else{
+
+  let value = parseInt(this.el.nativeElement.value, 10);
+  console.log(value)
+
+}
+
   }
   private backspace() {
     this.el.nativeElement.value = this.el.nativeElement.value.slice(0, -1);
@@ -123,7 +132,7 @@ export class NumericKeypadDirective {
 
   private esc() {
     // Revert to initial value
-    this.el.nativeElement.value = this.initialValue || 0;
+    this.el.nativeElement.value = this.previousValue || 0;
     this.el.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
   }
 
