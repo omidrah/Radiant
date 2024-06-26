@@ -1,29 +1,49 @@
 .keypad-container {
-  display: inline-block;
-  margin: 10px;
-  background: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: 250px;
+  margin: 20px auto;
 }
 
-.keypad-row {
-  display: flex;
-  justify-content: space-between;
-}
+.keypad-button {
+  width: 100%;
+  padding: 20px;
 
-button {
-  flex: 1;
-  margin: 5px;
-  padding: 15px;
+  text-align: center;
+  cursor: pointer;
   font-size: 24px;
   font-weight:600;
   background: #ffffff;
   border: 1px solid #ccc;
   border-radius: 3px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-button:active {
-  background: #e0e0e0;
+.keypad-button:hover {
+  background-color: #e0e0e0;
+}
+
+.keypad-button:active {
+  background-color: #d0d0d0;
+}
+.keypad-red{
+  background-color:red;
+}
+.keypad-green{
+  background-color:green;
+}
+
+.keypad-blue{
+  background-color:blue;
+}
+.keypad-button.zero {
+  grid-column: span 2;
+}
+
+.keypad-button.enter {
+  grid-column: span 2;
 }

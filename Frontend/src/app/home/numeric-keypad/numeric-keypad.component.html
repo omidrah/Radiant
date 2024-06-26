@@ -1,28 +1,19 @@
-<div class="keypad-container" (mousedown)="$event.preventDefault()">
-  <div class="keypad-row">
-    <button (click)="appendNumber(1)">1</button>
-    <button (click)="appendNumber(2)">2</button>
-    <button (click)="appendNumber(3)">3</button>
-    <button (click)="increase()">↑</button>
 
-  </div>
-  <div class="keypad-row">
-    <button (click)="appendNumber(4)">4</button>
-    <button (click)="appendNumber(5)">5</button>
-    <button (click)="appendNumber(6)">6</button>
-    <button (click)="decrease()">↓</button>
-  </div>
-  <div class="keypad-row">
-    <button (click)="appendNumber(7)">7</button>
-    <button (click)="appendNumber(8)">8</button>
-    <button (click)="appendNumber(9)">9</button>
-    <button (click)="appendNumber(0)">0</button>
-  </div>
-  <div class="keypad-row">
-    <button (click)="appendDecimal()">.</button>
-    <button (click)="backspace()">←</button>
-    <!-- <button (click)="clear()">C</button> -->
-    <button (click)="esc()">Esc</button>
-    <button (click)="enter()">Enter</button>
-  </div>
+<div class="keypad-container" (mousedown)="$event.preventDefault()">
+  <div class="keypad-button" (click)="appendNumber(1)">1</div>
+  <div class="keypad-button" (click)="appendNumber(2)">2</div>
+  <div class="keypad-button" (click)="appendNumber(3)">3</div>
+  <div class="keypad-button keypad-red" (click)="esc()">Esc</div>
+  <div class="keypad-button" (click)="appendNumber(4)">4</div>
+  <div class="keypad-button" (click)="appendNumber(5)">5</div>
+  <div class="keypad-button" (click)="appendNumber(6)">6</div>
+  <div class="keypad-button keypad-blue" (click)="increase()">▲</div>
+  <div class="keypad-button" (click)="appendNumber(7)">7</div>
+  <div class="keypad-button" (click)="appendNumber(8)">8</div>
+  <div class="keypad-button" (click)="appendNumber(9)">9</div>
+  <div class="keypad-button keypad-blue" (click)="decrease()">▼</div>
+  <div class="keypad-button" (click)="appendDecimal()">.</div>
+  <div class="keypad-button" (click)="appendNumber(0)">0</div>
+  <div class="keypad-button" (click)="backspace()">←</div>
+  <div class="keypad-button keypad-green" (click)="enter()">↵</div>
 </div>
