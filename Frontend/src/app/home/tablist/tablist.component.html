@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-8">
     <tabset #staticTabs>
       <tab heading="CMD" id="cmdtab" (selectTab)="changeTab($event)"><app-cmd></app-cmd></tab>
       <tab heading="M1"  id="m1tab"  (selectTab)="changeTab($event)" ><app-m1tab></app-m1tab></tab>
@@ -10,7 +10,7 @@
       <tab heading="M6"  id="m6tab"  (selectTab)="changeTab($event)"><app-m6tab></app-m6tab></tab>
     </tabset>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-4">
     <div class="row">
       <div class="col-lg-12">
         <app-digiclock></app-digiclock>
