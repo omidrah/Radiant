@@ -5,13 +5,15 @@ body{
     font-weight: 600; /*400 is norman*/
 }
 
+
+/*for genreate box  in forms*/
 .group-container {
     display: flex;
     flex-direction: column;
     height: 100%;
     width: 100%;
   }
-  
+
   .group-box {
     border: 1px solid #ccc;
     padding: 10px;
@@ -19,7 +21,13 @@ body{
     border-radius: 5px;
     flex: 1;
   }
-  
+
   .group-box h3 {
     margin-top: 0;
   }
+/*border on lable*/
+.label-border {
+  border: 2px solid #abaeb1; /* Blue border */
+  padding: 5px 10px;
+  display: inline-block;
+}

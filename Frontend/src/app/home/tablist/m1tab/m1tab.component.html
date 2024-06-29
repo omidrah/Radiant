@@ -1,43 +1,43 @@
-<div style="padding-left:10px;padding-top: 10px; font-size: 20px !important;">
+<div style="padding-left:10px;padding-top: 2px; font-size: 20px !important;">
   <form [formGroup]="m1tabform">
-    <div class="row group-container">
+    <div class="group-container">
       <div class="group-box">
         <h3>Uplink Data</h3>
         <div class="row">
           <div class="col-1">
-            <span>xt</span>
+            xt
           </div>
-          <div class="col-1">
-            <span id="xt">{{randomNumber[1]}}</span>
+          <div class="col-1 label-border">
+            <span id="xt" >{{randomNumber[1]}}</span>
           </div>
-          <div class="col-1">
+          <div class="col-1 ">
             <span>yt</span>
           </div>
-          <div class="col-1">
+          <div class="col-1 label-border">
             <span id="yt">{{randomNumber[2]}}</span>
           </div>
           <div class="col-1">
             <span>zt</span>
           </div>
-          <div class="col-1">
+          <div class="col-1 label-border">
             <span id="zt">{{randomNumber[3]}}</span>
           </div>
           <div class="col-1">
             <span>Xm</span>
           </div>
-          <div class="col-1">
+          <div class="col-1 label-border">
             <span id="xm">{{randomNumber[4]}}</span>
           </div>
           <div class="col-1">
             <span>Ym</span>
           </div>
-          <div class="col-1">
+          <div class="col-1 label-border">
             <span id="ym">{{randomNumber[5]}}</span>
           </div>
           <div class="col-1">
             <span>Zm</span>
           </div>
-          <div class="col-1">
+          <div class="col-1 label-border">
             <span id="zm">{{randomNumber[6]}}</span>
           </div>
         </div>
@@ -45,65 +45,65 @@
           <div class="col-1">
             <span>Vxt</span>
           </div>
-          <div class="col-1">
+          <div class="col-1 label-border">
             <span id="vxt">{{randomNumber[7]}}</span>
           </div>
 
           <div class="col-1">
             <span>Vyt</span>
           </div>
-          <div class="col-1">
+          <div class="col-1 label-border">
             <span id="vyt">{{randomNumber[8]}}</span>
           </div>
 
           <div class="col-1">
             <span>Vzt</span>
           </div>
-          <div class="col-1">
+          <div class="col-1 label-border">
             <span id="vzt">{{randomNumber[9]}}</span>
           </div>
 
           <div class="col-1">
             <span>Vxm</span>
           </div>
-          <div class="col-1">
+          <div class="col-1 label-border">
             <span id="vxm">{{randomNumber[10]}}</span>
           </div>
 
           <div class="col-1">
             <span>Vym</span>
           </div>
-          <div class="col-1">
+          <div class="col-1 label-border">
             <span id="vym">{{randomNumber[9]}}</span>
           </div>
 
           <div class="col-1">
             <span>Vzm</span>
           </div>
-          <div class="col-1">
+          <div class="col-1 label-border">
             <span id="vzm">{{randomNumber[1]}}</span>
           </div>
         </div>
       </div>
     </div>
-    <div class="row group-container">
+    <div class="group-container">
       <div class="group-box">
         <h3>Downlink Data</h3>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Mode</label>
+        <div class="row">
+          <div class="col-1">Mode</div>
           <div class="col-sm-10">
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" formControlName="m1downdata" name="m1downdata" id="loopback"
+              <input class="form-check-input  radiobuttonLarger" type="radio" formControlName="m1downdata" name="m1downdata" id="loopback"
                 value="loopback" checked>
               <label class="form-check-label" for="loopback">LoopBack</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" formControlName="m1downdata" name="m1downdata" id="manual"
+              <input class="form-check-input  radiobuttonLarger" type="radio" formControlName="m1downdata" name="m1downdata" id="manual"
                 value="manual">
               <label class="form-check-label" for="manual">Manual</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" formControlName="m1downdata" name="m1downdata" id="simulate"
+              <input class="form-check-input  radiobuttonLarger" type="radio" formControlName="m1downdata" name="m1downdata" id="simulate"
                 value="simulate">
               <label class="form-check-label" for="simulate">Simulate</label>
             </div>
@@ -130,7 +130,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 group-box">
+      <div class="col-12">
         <div class="row">
           <div class="col-md-4 group-box">
             <h3>Self Destruction</h3>
