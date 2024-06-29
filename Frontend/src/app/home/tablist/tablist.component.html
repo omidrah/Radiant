@@ -2,7 +2,7 @@
   <div class="col-md-8">
     <tabset #staticTabs>
       <tab heading="CMD" id="cmdtab" (selectTab)="changeTab($event)"><app-cmd></app-cmd></tab>
-      <tab heading="M1"  id="m1tab"  (selectTab)="changeTab($event)" ><app-m1tab></app-m1tab></tab>
+      <tab heading="M1"  id="m1tab"  (selectTab)="changeTab($event)"><app-m1tab></app-m1tab></tab>
       <tab heading="M2"  id="m2tab"  (selectTab)="changeTab($event)"><app-m2tab></app-m2tab></tab>
       <tab heading="M3"  id="m3tab"  (selectTab)="changeTab($event)"><app-m3tab></app-m3tab></tab>
       <tab heading="M4"  id="m4tab"  (selectTab)="changeTab($event)"><app-m4tab></app-m4tab></tab>
@@ -15,9 +15,8 @@
       <div class="col-lg-12">
         <app-digiclock></app-digiclock>
       </div>
-      <div class="col-lg-12 " style="  margin-top: 10px;">
-        <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25"
-                aria-valuemin="0" aria-valuemax="100">
+      <div class="col-lg-12 " style="margin-top: 10px;">
+        <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
           <div class="progress-bar" style="width: 25%">25%</div>
         </div>
       </div>

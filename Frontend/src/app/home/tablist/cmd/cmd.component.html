@@ -1,117 +1,110 @@
-<form [formGroup]="cmdForm" data-toggle="validator" role="form"
-  style="padding-left:10px;padding-top: 10px;">
-
+<form [formGroup]="cmdForm" data-toggle="validator" role="form" style="padding-left:10px;padding-top: 10px;">
   <div class="row mt-2">
-    <div class="col-md-3">
-      <div class="form-check">
-        <input class="form-check-input radiobuttonLarger" formControlName="testmode"  type="radio"
-          name="testmode" id="txoff" value="txoff" (change)="testmodeChanged($event);" checked>
-        <label class="form-check-label">
-          TxOff
-        </label>
+    <div class="col-md-5 group-container">
+      <div class="group-box">
+          <h3>Operation Mode</h3>        
+        <div class="form-check" style="padding-left: 80px;">
+          <input class="form-check-input radiobuttonLarger" formControlName="testmode"  type="radio"
+            name="testmode" id="txoff" value="txoff" (change)="testmodeChanged($event);" checked>
+          <label class="form-check-label">
+            TxOff
+          </label>
+        </div>
+        <div class="form-check mt-2" style="padding-left: 80px;">
+          <input class="form-check-input radiobuttonLarger" formControlName="testmode"  type="radio"
+            name="testmode" id="directmds" value="directmds" (change)="testmodeChanged($event);">
+          <label class="form-check-label">
+            DirectMds
+          </label>
+        </div>
+        <div class="form-check mt-2" style="padding-left: 80px;">
+          <input class="form-check-input radiobuttonLarger" formControlName="testmode"  type="radio"
+            name="testmode" id="directpwr" value="directpwr" (change)="testmodeChanged($event);">
+          <label class="form-check-label">
+            DirectPwr
+          </label>
+        </div>
       </div>
-      <div class="form-check mt-2">
-        <input class="form-check-input radiobuttonLarger" formControlName="testmode"  type="radio"
-          name="testmode" id="directmds" value="directmds" (change)="testmodeChanged($event);">
-        <label class="form-check-label">
-          DirectMds
-        </label>
-      </div>
-      <div class="form-check mt-2">
-        <input class="form-check-input radiobuttonLarger" formControlName="testmode"  type="radio"
-          name="testmode" id="directpwr" value="directpwr" (change)="testmodeChanged($event);">
-        <label class="form-check-label">
-          DirectPwr
-        </label>
-      </div>
-
-      <div class="form-check mt-2">
-        <input class="form-check-input radiobuttonLarger" formControlName="datamode"  type="radio"
-          name="datamode" id="manual" (change)="datamodeChanged($event);" value="manual" checked>
-        <label class="form-check-label">
-          Radiate Manual
-        </label>
-      </div>
-      <div class="form-check mt-2">
-        <input class="form-check-input radiobuttonLarger" formControlName="datamode"  type="radio"
-          name="datamode" id="lpbk" (change)="datamodeChanged($event);" value="lpbk">
-        <label class="form-check-label">
-          Radiate LPBK
-        </label>
-      </div>
-      <div class="form-check mt-2">
-        <input class="form-check-input radiobuttonLarger" formControlName="datamode" type="radio"
-          name="datamode" id="sim" (change)="datamodeChanged($event);" value="sim">
-        <label class="form-check-label">
-          Radiate SIM
-        </label>
+      <div class="group-box">
+        <h3>Radiate Mode</h3>
+          <div class="form-check mt-2 " style="padding-left: 80px;">
+            <input class="form-check-input radiobuttonLarger" formControlName="datamode"  type="radio"
+              name="datamode" id="manual" (change)="datamodeChanged($event);" value="manual" checked>
+            <label class="form-check-label">
+              Manual
+            </label>
+          </div>
+          <div class="form-check mt-2" style="padding-left: 80px;">
+            <input class="form-check-input radiobuttonLarger" formControlName="datamode"  type="radio"
+              name="datamode" id="lpbk" (change)="datamodeChanged($event);" value="lpbk">
+            <label class="form-check-label">
+              LPBK
+            </label>
+          </div>
+          <div class="form-check mt-2" style="padding-left: 80px;">
+            <input class="form-check-input radiobuttonLarger" formControlName="datamode" type="radio"
+              name="datamode" id="sim" (change)="datamodeChanged($event);" value="sim">
+            <label class="form-check-label">
+              SIM
+            </label>
+          </div>
       </div>
     </div>
-    <div class="col-md-5" *ngIf="showDirectPwr">
-      <div class="row mt-2">
-        <div class="col-sm-3">
-          <label>Couple</label>
-        </div>
-        <div class="col-sm-9">
-          <input type="number" class="form-control" id="couple" placeholder="couple" formControlName="couple" name="couple">
-        </div>
-      </div>
-
-      <div class="row mt-2">
-        <div class="col-sm-3">
-          <label>Unit</label>
-        </div>
-
-        <div class="col-sm-9">
-          <div class="form-check form-check-inline">
-            <label>w</label>
-            <input formControlName="unit"  type="radio" name="unit" id="unitW" value="w" checked>
+    <div class="col-md-5 group-container" *ngIf="showDirectPwr">
+      <div class="mt-5 ml-3 group-box" >
+        <div class="row">
+          <div class="col-sm-5">
+            <label>Couple</label>
           </div>
-          <div class="form-check form-check-inline">
-            <label>dBm</label>
-            <input formControlName="unit"  type="radio" name="unit" id="unitdBm" value="dBm" >
+          <div class="col-sm-6">
+            <input type="number" class="form-control" id="couple" placeholder="couple" formControlName="couple" name="couple">
           </div>
         </div>
-      </div>
-
-      <div class="row mt-2">
-        <div class="col-sm-3">
-          <label>Pwr</label>
-        </div>
-        <div class="col-sm-9">
-            <div class="row">
-              <div class="col-sm-10">
-              <input type="number" class="form-control" id="pwr" formControlName="pwr" name="pwr">
-              </div>
-              <div class="col-sm-2">
-                {{unit}}
-              </div>
+        <div class="row mt-2">
+          <div class="col-sm-4">
+            <label>Unit</label>
+          </div>
+          <div class="col-sm-8">
+            <div class="form-check form-check-inline">
+              <label>w</label>
+              <input formControlName="unit"  type="radio" name="unit" id="unitW" value="w" checked>
             </div>
+            <div class="form-check form-check-inline">
+              <label>dBm</label>
+              <input formControlName="unit"  type="radio" name="unit" id="unitdBm" value="dBm" >
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
-
-    <div class="col-md-4" *ngIf="showDirectMds">
-      <div class="row">
-        <div class="col-sm-3">
-        <label>Pout</label>
-        </div>
-        <div class="col-sm-9">
-          <div class="row">
-             <div class="col-sm-10">
-                <input type="number" class="form-control" id="att" formControlName="att" step=".5" min="-90"
-                    max="10">
-              </div>
-              <div class="col-sm-2">
-                (+10/-90)dBm
+        <div class="row mt-2">
+          <div class="col-sm-3">
+            <label>Pwr</label>
+          </div>
+          <div class="col-sm-9">
+              <div class="row">
+                <div class="col-sm-6">
+                <input type="number" class="form-control" id="pwr" formControlName="pwr" name="pwr">
+                </div>
+                <div class="col-sm-3">
+                  {{unit}}
+                </div>
               </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <!-- <label class="col-sm-4 success">Rx Ok</label>
-        <label class="col-sm-4 Fail">Rx Fail</label> -->
+    </div>
+    <div class="col-md-7 group-container" *ngIf="showDirectMds">
+      <div class="mt-5 ml-3 group-box" >
+        <div class="row">
+          <div class="col-sm-3">
+              <label>Pout</label>
+          </div>        
+          <div class="col-sm-3">
+            <input type="number" class="form-control" id="att" formControlName="att" step=".5" min="-90" max="10">
+          </div>
+          <div class="col-sm-6">
+            (+10/-90)dBm
+          </div>        
+        </div>      
       </div>
     </div>
   </div>
