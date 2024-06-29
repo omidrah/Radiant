@@ -22,7 +22,6 @@
     display:block;
  }
 
-
  .group-container {
     display: flex;
     flex-direction: column;
@@ -39,4 +38,14 @@
 
   .group-box h3 {
     margin-top: 0;
+  }
+/*set for aligned title and radio button*/
+  .form-check {
+    display: flex;
+    align-items: center;
+    padding-left: 80px;
+  }
+
+  .form-check-input {
+    margin-right: 10px;
   }
