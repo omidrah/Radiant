@@ -4,3 +4,22 @@ body{
     font-size: 28px;
     font-weight: 600; /*400 is norman*/
 }
+
+.group-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .group-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    flex: 1;
+  }
+  
+  .group-box h3 {
+    margin-top: 0;
+  }

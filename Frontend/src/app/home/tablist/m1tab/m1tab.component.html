@@ -1,240 +1,192 @@
-
-  <div class="row">
-    <div class="col-md-2" >
-      <span> Uplink Data</span>
-      <div class="col mt-3">
+<div style="padding-left:10px;padding-top: 10px; font-size: 20px !important;">
+  <form [formGroup]="m1tabform">
+    <div class="row group-container">
+      <div class="group-box">
+        <h3>Uplink Data</h3>
         <div class="row">
-          <div class="col-md-4">
-            <span>xt:</span>
+          <div class="col-1">
+            <span>xt</span>
           </div>
-          <div class="col-md-8">
-            <span id="xt" >{{randomNumber[1]}}</span>
+          <div class="col-1">
+            <span id="xt">{{randomNumber[1]}}</span>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <span>yt:</span>
+          <div class="col-1">
+            <span>yt</span>
           </div>
-          <div class="col-md-8">
+          <div class="col-1">
             <span id="yt">{{randomNumber[2]}}</span>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <span>zt:</span>
+          <div class="col-1">
+            <span>zt</span>
           </div>
-          <div class="col-md-8">
+          <div class="col-1">
             <span id="zt">{{randomNumber[3]}}</span>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <span>Xm:</span>
+          <div class="col-1">
+            <span>Xm</span>
           </div>
-          <div class="col-md-8">
-            <span id="xm" >{{randomNumber[4]}}</span>
+          <div class="col-1">
+            <span id="xm">{{randomNumber[4]}}</span>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <span>Ym:</span>
+          <div class="col-1">
+            <span>Ym</span>
           </div>
-          <div class="col-md-8">
-            <span id="ym" >{{randomNumber[5]}}</span>
+          <div class="col-1">
+            <span id="ym">{{randomNumber[5]}}</span>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <span>Zm:</span>
+          <div class="col-1">
+            <span>Zm</span>
           </div>
-          <div class="col-md-8">
-            <span id="zm" >{{randomNumber[6]}}</span>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="row">
-          <div class="col-md-4">
-            <span>Vxt:</span>
-          </div>
-          <div class="col-md-8">
-            <span id="vxt" >{{randomNumber[7]}}</span>
+          <div class="col-1">
+            <span id="zm">{{randomNumber[6]}}</span>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
-            <span>Vyt:</span>
+          <div class="col-1">
+            <span>Vxt</span>
           </div>
-          <div class="col-md-8">
-            <span id="vyt" >{{randomNumber[8]}}</span>
+          <div class="col-1">
+            <span id="vxt">{{randomNumber[7]}}</span>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <span>Vzt:</span>
+
+          <div class="col-1">
+            <span>Vyt</span>
           </div>
-          <div class="col-md-8">
-            <span id="vzt" >{{randomNumber[9]}}</span>
+          <div class="col-1">
+            <span id="vyt">{{randomNumber[8]}}</span>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <span>Vxm:</span>
+
+          <div class="col-1">
+            <span>Vzt</span>
           </div>
-          <div class="col-md-8">
-            <span id="vxm" >{{randomNumber[10]}}</span>
+          <div class="col-1">
+            <span id="vzt">{{randomNumber[9]}}</span>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <span>Vym:</span>
+
+          <div class="col-1">
+            <span>Vxm</span>
           </div>
-          <div class="col-md-8">
-            <span id="vym" >{{randomNumber[9]}}</span>
+          <div class="col-1">
+            <span id="vxm">{{randomNumber[10]}}</span>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <span>Vzm:</span>
+
+          <div class="col-1">
+            <span>Vym</span>
           </div>
-          <div class="col-md-8">
-            <span id="vzm" >{{randomNumber[1]}}</span>
+          <div class="col-1">
+            <span id="vym">{{randomNumber[9]}}</span>
+          </div>
+
+          <div class="col-1">
+            <span>Vzm</span>
+          </div>
+          <div class="col-1">
+            <span id="vzm">{{randomNumber[1]}}</span>
           </div>
         </div>
       </div>
     </div>
-    <div class="col">
-      <form [formGroup]="m1tabform">
-              <div class="col-md-7 ">
-                <div class="row">
-                  <div class="col-md-12">
-                    <span> Downlink Data </span>
-                  </div>
-                  <div class="col-md-12 mt-3">
-                    <div class="form-inline">
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" formControlName="m1downdata" name="m1downdata" id="loopback" value="loopback" checked>
-                        <label class="form-check-label">
-                          LoopBack
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" formControlName="m1downdata" name="m1downdata" id="manual" value="manual">
-                        <label class="form-check-label">
-                          Manual
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" formControlName="m1downdata"  name="m1downdata" id="simulate" value="simulate">
-                        <label class="form-check-label">
-                          Simulate
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12 mt-3">
-                    <div class="row">
-                      <div class="col-sm-2">
-                        <label>Xm</label>
-                      </div>
-                      <div class="col-sm-2">
-                        <input type="number" class="form-control" id="m1xm" placeholder="xm" formControlName="m1xm" name="m1xm" appNumericKeypad>
-                      </div>
-
-                      <div class="col-sm-2">
-                        <label>Ym</label>
-                      </div>
-                      <div class="col-sm-2">
-                        <input type="number" class="form-control" id="m1ym" placeholder="ym" formControlName="m1ym" name="m1ym" appNumericKeypad>
-                      </div>
-                    </div>
-                    <div class="row mt-2">
-                      <div class="col-sm-2">
-                        <label>Zm</label>
-                      </div>
-                      <div class="col-sm-2">
-                        <input type="number" class="form-control" id="m1zm" placeholder="zm" formControlName="m1zm" name="m1zm" appNumericKeypad>
-                      </div>
-                      <div class="col-sm-2">
-                        <label>Status</label>
-                      </div>
-                      <div class="col-sm-2">
-                        <input type="number" class="form-control" id="m1status" placeholder="status" formControlName="m1status" name="m1status" appNumericKeypad>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12 mt-3">
-                    <div class="row">
-                      <div class="col-md-6 mt-3">
-                        <div class="row">
-                          <span >
-                            Self Destruction
-                          </span>
-                          <div class="col-m-12 mt-2">
-                            <div class="row mt-2">
-                              <label>Status</label>
-                              <div class="col-sm-6 ml-5">
-                                <input type="text" inputmode="numeric" class="form-control" id="m1selstatus" placeholder="status"  name="m1selstatus">
-                              </div>
-                            </div>
-                            <div class="row mt-2">
-                              <label>Sd Counter</label>
-                              <div class="col-sm-6 ml-2">
-                                <input type="number" class="form-control" id="m1counter" placeholder="counter"  name="m1counter">
-                              </div>
-                            </div>
-                            <div class="row mt-2">
-                              <label>Common</label>
-                              <div class="col-sm-6 ml-4">
-                                <input type="number" class="form-control" id="m1common" placeholder="common"  name="m1common">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6 mt-3">
-                        <div class="row">
-                          <span>
-                            Link LED Options
-                          </span>
-                          <div class="col-md-12 mt-2">
-                            <div class="row mt-2">
-                              <label>On Time</label>
-                              <div class="col-sm-6">
-                                <input type="number" class="form-control" id="m1ontime" placeholder="onTime"  name="m1ontime">
-                              </div>
-                            </div>
-                            <div class="row mt-2">
-                              <label>Link Led</label>
-                              <div class="col-sm-6">
-                                <input type="number" class="form-control" id="m1linkled" placeholder="linkLed"  name="m1linkled">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+    <div class="row group-container">
+      <div class="group-box">
+        <h3>Downlink Data</h3>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Mode</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" formControlName="m1downdata" name="m1downdata" id="loopback"
+                value="loopback" checked>
+              <label class="form-check-label" for="loopback">LoopBack</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" formControlName="m1downdata" name="m1downdata" id="manual"
+                value="manual">
+              <label class="form-check-label" for="manual">Manual</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" formControlName="m1downdata" name="m1downdata" id="simulate"
+                value="simulate">
+              <label class="form-check-label" for="simulate">Simulate</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1"><span>Xm</span></div>
+          <div class="col-md-2">
+            <input type="number" class="form-control" id="m1xm" formControlName="m1xm" placeholder="0">
+          </div>
+          <div class="col-1"><span>Ym</span></div>
+          <div class="col-md-2">
+            <input type="number" class="form-control" id="m1ym" formControlName="m1ym" placeholder="0">
+          </div>
+          <div class="col-1"><span>Zm</span></div>
+          <div class="col-md-2">
+            <input type="number" class="form-control" id="m1zm" formControlName="m1zm" placeholder="0">
+          </div>
+          <div class="col-1"><span>Status</span></div>
+          <div class="col-md-2">
+            <input type="number" class="form-control" id="m1status" formControlName="m1status" placeholder="0">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 group-box">
+        <div class="row">
+          <div class="col-md-4 group-box">
+            <h3>Self Destruction</h3>
+            <div class="row">
+              <div class="col-7"><span>Status</span></div>
+              <div class="col-5">
+                <input type="text" class="form-control" id="m1selstatus" placeholder="0" name="m1selstatus">
               </div>
-              <div class="col">
-                <div class="row">
-                  <label class="col-md-4">Adm</label>
-                  <div class="col-md-8">
-                    <!--Using ng-option and for loop-->
-                    <ng-select formControlName="m1adm" name="m1adm">
-                      <ng-option *ngFor="let add of addresses" [value]="add.name" >{{add.id}}</ng-option>
-                   </ng-select>
-                  </div>
-                </div>
-                <div class="row mt-2">
-                  <label class="col-md-4">Freq</label>
-                  <div class="col-md-8">
-                  <input type="number" class="form-control" id="mfreq" placeholder="freq" formControlName="mfreq" name="mfreq">
-                  </div>
-                </div>
+            </div>
+            <div class="row">
+              <div class="col-7"><span>SdCount</span></div>
+              <div class="col-5">
+                <input type="number" class="form-control" id="m1counter" placeholder="0" name="m1counter">
               </div>
-      </form>
-     </div>
-
-  </div>
+            </div>
+            <div class="row">
+              <div class="col-7"><span>Common</span></div>
+              <div class="col-5">
+                <input type="number" class="form-control" id="m1common" placeholder="0" name="m1common">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 group-box">
+            <h3>Link LED Option</h3>
+            <div class="row">
+              <div class="col-7"><span>OnTime</span></div>
+              <div class="col-5">
+                <input type="number" class="form-control" id="m1ontime" placeholder="0" name="m1ontime">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-7"><span>Link Led</span></div>
+              <div class="col-5">
+                <div class="red-circle"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 group-box">
+            <h3></h3>
+            <div class="row">
+              <div class="col-7"><span>Adm</span></div>
+              <div class="col-5">
+                <ng-select formControlName="m1adm" name="m1adm">
+                  <ng-option *ngFor="let add of addresses" [value]="add.name">{{add.id}}</ng-option>
+              </ng-select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-7"><span>Freq</span></div>
+              <div class="col-5">
+                <input type="number" class="form-control" id="mfreq" formControlName="mfreq" placeholder="0" name="mfreq" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
