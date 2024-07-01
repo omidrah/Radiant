@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { interval, takeWhile,Subscription, share } from 'rxjs';
 import { SharedFormService } from '../../services/shared-form.service';
 import { Addresses } from '../../models/address';
+import { Selstatus } from '../../models/selstatus';
 
 @Component({
   selector: 'app-m1tab',
@@ -16,13 +17,14 @@ export class M1tabComponent implements OnInit, OnDestroy{
   randomNumber: Array<number> = [];
   private currentDataSubscription: Subscription;
   addresses =Addresses;
+  selstatus = Selstatus;
   constructor(private fb: FormBuilder , private sharedFormService: SharedFormService) {
     this.m1tabform = this.fb.group({
       m1downdata: new FormControl('loopback'),
       m1xm: new FormControl(0),
       m1ym:new FormControl(0) ,
       m1zm:new FormControl(0),
-      m1status:new FormControl(0),
+      m1status:new FormControl('CC'),
       //m1selstatus:new FormControl(0),
       //m1counter:new FormControl(0),
       //m1common:new FormControl(0),
