@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-5 group-container">
       <div class="group-box">
-          <h3>Operation Mode</h3>        
+          <h3>Operation Mode</h3>
         <div class="form-check"      style="padding-left: 80px;">
           <input class="form-check-input radiobuttonLarger" formControlName="testmode"  type="radio"
             name="testmode" id="txoff" value="txoff" (change)="testmodeChanged($event);" checked>
@@ -57,7 +57,7 @@
             <label>Couple</label>
           </div>
           <div class="col-sm-6">
-            <input type="number" class="form-control" id="couple" placeholder="couple" formControlName="couple" name="couple">
+            <input type="number" class="form-control" id="couple" placeholder="couple" formControlName="couple" name="couple" appNumericKeypad>
           </div>
         </div>
         <div class="row mt-2">
@@ -82,7 +82,7 @@
           <div class="col-sm-9">
               <div class="row">
                 <div class="col-sm-6">
-                <input type="number" class="form-control" id="pwr" formControlName="pwr" name="pwr">
+                <input type="number" class="form-control" id="pwr" formControlName="pwr" name="pwr" appNumericKeypad>
                 </div>
                 <div class="col-sm-3">
                   {{unit}}
@@ -97,14 +97,14 @@
         <div class="row">
           <div class="col-sm-3">
               <label>Pout</label>
-          </div>        
+          </div>
           <div class="col-sm-3">
-            <input type="number" class="form-control" id="att" formControlName="att" step=".5" min="-90" max="10">
+            <input type="number" class="form-control" id="att" formControlName="att" step=".5" min="-90" max="10" appNumericKeypad>
           </div>
           <div class="col-sm-6">
             (+10/-90)dBm
-          </div>        
-        </div>      
+          </div>
+        </div>
       </div>
     </div>
   </div>
