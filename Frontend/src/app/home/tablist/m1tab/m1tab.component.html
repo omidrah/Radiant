@@ -4,84 +4,48 @@
       <div class=" group-box">
         <h3>Uplink Data</h3>
         <div class="row">
-          <div class="col-1">
-            xt
+          <div class="col-2">
+            xt<span class="ml-2 label-border" id="xt">123</span>
           </div>
-          <div class="col-1 label-border">
-            <span id="xt" >{{randomNumber[1]}}</span>
+          <div class="col-2">
+            yt<span  class="ml-2 label-border" id="yt">250</span>
           </div>
-          <div class="col-1 ">
-            <span>yt</span>
+          <div class="col-2">
+            zt<span class="ml-2 label-border" id="zt">905</span>
           </div>
-          <div class="col-1 label-border">
-            <span id="yt">{{randomNumber[2]}}</span>
+          <div class="col-2">
+            Xm<span class="ml-2 label-border" id="xm">888</span>
           </div>
-          <div class="col-1">
-            <span>zt</span>
+          <div class="col-2">
+            Ym<span class="ml-2 label-border" id="ym">566</span>
           </div>
-          <div class="col-1 label-border">
-            <span id="zt">{{randomNumber[3]}}</span>
-          </div>
-          <div class="col-1">
-            <span>Xm</span>
-          </div>
-          <div class="col-1 label-border">
-            <span id="xm">{{randomNumber[4]}}</span>
-          </div>
-          <div class="col-1">
-            <span>Ym</span>
-          </div>
-          <div class="col-1 label-border">
-            <span id="ym">{{randomNumber[5]}}</span>
-          </div>
-          <div class="col-1">
-            <span>Zm</span>
-          </div>
-          <div class="col-1 label-border">
-            <span id="zm">{{randomNumber[6]}}</span>
+          <div class="col-2">
+            Zm<span class="ml-2 label-border" id="zm">666</span>
           </div>
         </div>
-        <div class="row">
-          <div class="col-1">
-            <span>Vxt</span>
-          </div>
-          <div class="col-1 label-border">
-            <span id="vxt">{{randomNumber[7]}}</span>
+        <div class="row mt-1">
+          <div class="col-2">
+           Vxt<span class="label-border" id="vxt">111</span>
           </div>
 
-          <div class="col-1">
-            <span>Vyt</span>
-          </div>
-          <div class="col-1 label-border">
-            <span id="vyt">{{randomNumber[8]}}</span>
+          <div class="col-2">
+            Vyt<span class="label-border" id="vyt">222</span>
           </div>
 
-          <div class="col-1">
-            <span>Vzt</span>
-          </div>
-          <div class="col-1 label-border">
-            <span id="vzt">{{randomNumber[9]}}</span>
+          <div class="col-2">
+            Vzt<span class="label-border" id="vzt">333</span>
           </div>
 
-          <div class="col-1">
-            <span>Vxm</span>
-          </div>
-          <div class="col-1 label-border">
-            <span id="vxm">{{randomNumber[10]}}</span>
+          <div class="col-2">
+            Vxm<span class="label-border" id="vxm">444</span>
           </div>
 
-          <div class="col-1">
-            <span>Vym</span>
-          </div>
-          <div class="col-1 label-border">
-            <span id="vym">{{randomNumber[9]}}</span>
+          <div class="col-2">
+            Vym<span class="label-border"  id="vym">555</span>
           </div>
 
-          <div class="col-1">
-            <span>Vzm</span>
-          </div>
-          <div class="col-1 label-border">
-            <span id="vzm">{{randomNumber[1]}}</span>
+          <div class="col-2">
+            Vzm<span class="label-border" id="vzm">777</span>
           </div>
         </div>
       </div>
@@ -89,6 +53,27 @@
     <div class="group-container mt-2">
       <div class="group-box">
         <h3>Downlink Data</h3>
+        <div class="row">
+          <div class="col-6"></div>
+          <div class="col-1"><span>Xm</span></div>
+          <div class="col-md-1">
+            <input type="number" class="form-control" id="m1xm" formControlName="m1xm" placeholder="0" appNumericKeypad>
+          </div>
+          <div class="col-1"><span>Ym</span></div>
+          <div class="col-md-1">
+            <input type="number" class="form-control" id="m1ym" formControlName="m1ym" placeholder="0" appNumericKeypad>
+          </div>
+          <div class="col-1"><span>Zm</span></div>
+          <div class="col-md-1">
+            <input type="number" class="form-control" id="m1zm" formControlName="m1zm" placeholder="0" appNumericKeypad>
+          </div>
+          <div class="col-1"><span>Status</span></div>
+          <div class="col-md-2">
+            <ng-select formControlName="m1status" name="m1status">
+              <ng-option *ngFor="let sts of status" [value]="sts.name">{{sts.id}}</ng-option>
+           </ng-select>
+          </div>
+        </div>
         <div class="row">
           <div class="col-1">Mode</div>
           <div class="col-sm-10">
@@ -107,27 +92,6 @@
                 value="simulate">
               <label class="form-check-label" for="simulate">Simulate</label>
             </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-1"><span>Xm</span></div>
-          <div class="col-md-2">
-            <input type="number" class="form-control" id="m1xm" formControlName="m1xm" placeholder="0" appNumericKeypad>
-          </div>
-          <div class="col-1"><span>Ym</span></div>
-          <div class="col-md-2">
-            <input type="number" class="form-control" id="m1ym" formControlName="m1ym" placeholder="0" appNumericKeypad>
-          </div>
-          <div class="col-1"><span>Zm</span></div>
-          <div class="col-md-2">
-            <input type="number" class="form-control" id="m1zm" formControlName="m1zm" placeholder="0" appNumericKeypad>
-          </div>
-          <div class="col-1"><span>Status</span></div>
-          <div class="col-md-2">
-            <ng-select formControlName="m1status" name="m1status">
-              <ng-option *ngFor="let sts of status" [value]="sts.name">{{sts.id}}</ng-option>
-           </ng-select>
           </div>
         </div>
       </div>

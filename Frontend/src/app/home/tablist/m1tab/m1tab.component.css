@@ -5,3 +5,8 @@
     border-radius: 50%;
     display: inline-block;
 }
+.ml-2
+{
+ margin-left: 0.7rem !important;
+
+}

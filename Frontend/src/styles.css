@@ -27,7 +27,7 @@ body{
   }
 /*border on lable*/
 .label-border {
-  border: 2px solid #abaeb1; /* Blue border */
+  border: 1px solid #abaeb1; /* Blue border */
   padding: 5px 10px;
   display: inline-block;
 }
