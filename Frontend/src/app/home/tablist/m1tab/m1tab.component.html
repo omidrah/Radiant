@@ -52,46 +52,42 @@
     </div>
     <div class="group-container mt-2">
       <div class="group-box">
-        <h3>Downlink Data</h3>
         <div class="row">
-          <div class="col-6"></div>
-          <div class="col-1"><span>Xm</span></div>
-          <div class="col-md-1">
+          <div class="col-6"><h3>Downlink Data</h3></div>
+          <div class="col-2">Xm
             <input type="number" class="form-control" id="m1xm" formControlName="m1xm" placeholder="0" appNumericKeypad>
           </div>
-          <div class="col-1"><span>Ym</span></div>
-          <div class="col-md-1">
+          <div class="col-2">Ym
             <input type="number" class="form-control" id="m1ym" formControlName="m1ym" placeholder="0" appNumericKeypad>
           </div>
-          <div class="col-1"><span>Zm</span></div>
-          <div class="col-md-1">
+          <div class="col-2">Zm
             <input type="number" class="form-control" id="m1zm" formControlName="m1zm" placeholder="0" appNumericKeypad>
           </div>
-          <div class="col-1"><span>Status</span></div>
-          <div class="col-md-2">
+        </div>
+        <div class="row ">
+          <div class="col-8"><h3>Mode</h3>
+            <div class="row">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input  radiobuttonLarger" type="radio" formControlName="m1downdata" name="m1downdata" id="loopback"
+                    value="loopback" checked>
+                  <label class="form-check-label" for="loopback">LoopBack</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input  radiobuttonLarger" type="radio" formControlName="m1downdata" name="m1downdata" id="manual"
+                    value="manual">
+                  <label class="form-check-label" for="manual">Manual</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input  radiobuttonLarger" type="radio" formControlName="m1downdata" name="m1downdata" id="simulate"
+                    value="simulate">
+                  <label class="form-check-label" for="simulate">Simulate</label>
+                </div>
+            </div>
+          </div>
+          <div class="col-3 mt-1">Status
             <ng-select formControlName="m1status" name="m1status">
               <ng-option *ngFor="let sts of status" [value]="sts.name">{{sts.id}}</ng-option>
            </ng-select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-1">Mode</div>
-          <div class="col-sm-10">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input  radiobuttonLarger" type="radio" formControlName="m1downdata" name="m1downdata" id="loopback"
-                value="loopback" checked>
-              <label class="form-check-label" for="loopback">LoopBack</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input  radiobuttonLarger" type="radio" formControlName="m1downdata" name="m1downdata" id="manual"
-                value="manual">
-              <label class="form-check-label" for="manual">Manual</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input  radiobuttonLarger" type="radio" formControlName="m1downdata" name="m1downdata" id="simulate"
-                value="simulate">
-              <label class="form-check-label" for="simulate">Simulate</label>
-            </div>
           </div>
         </div>
       </div>
@@ -110,13 +106,13 @@
             <div class="row">
               <div class="col-7"><span>SdCount</span></div>
               <div class="col-5">
-                <div class="red-circle"></div>
+                <div class="gray-circle"></div>
               </div>
             </div>
             <div class="row">
               <div class="col-7"><span>Comm</span></div>
               <div class="col-5">
-                <div class="red-circle"></div>
+                <div class="green-circle"></div>
               </div>
             </div>
           </div>

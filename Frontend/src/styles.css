@@ -13,15 +13,12 @@ body{
     height: 100%;
     width: 100%;
   }
-
   .group-box {
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
     flex: 1;
   }
-
-
   .group-box h3 {
     margin-top: 0;
   }
@@ -29,5 +26,30 @@ body{
 .label-border {
   border: 1px solid #abaeb1; /* Blue border */
   padding: 5px 10px;
+  display: inline-block;
+}
+
+/*red LED */
+.red-circle {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}
+/*gray LED */
+.gray-circle {
+  width: 20px;
+  height: 20px;
+  background-color: rgb(143, 134, 134);
+  border-radius: 50%;
+  display: inline-block;
+}
+/*Green LED */
+.green-circle {
+  width: 20px;
+  height: 20px;
+  background-color: rgb(44, 192, 31);
+  border-radius: 50%;
   display: inline-block;
 }
