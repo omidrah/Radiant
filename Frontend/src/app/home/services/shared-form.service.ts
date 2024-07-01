@@ -16,14 +16,14 @@ export class SharedFormService implements  OnDestroy  {
     couple: 0,
     att: 0,
     /**unique for all tab */
-    mfreq: 0,
+    mfreq: 1,
     rsvd1:0,
     /**m1 */
     m1downdata: 'loopback',
     m1xm: 0,
     m1ym: 0,
     m1zm: 0,
-    m1status: 0,
+    m1status: 'CC',
     m1adm: '001101',
     rsvd2:0,
     /**m2 */
@@ -31,7 +31,7 @@ export class SharedFormService implements  OnDestroy  {
     m2xm: 0,
     m2ym: 0,
     m2zm: 0,
-    m2status: 0,
+    m2status: 'CC',
     m2adm: '001101',
     rsvd3:0,
     /**m3 */
@@ -39,7 +39,7 @@ export class SharedFormService implements  OnDestroy  {
     m3xm: 0,
     m3ym: 0,
     m3zm: 0,
-    m3status: 0,
+    m3status:'CC',
     m3adm: '001101',
     rsvd4:0,
     /**m4 */
@@ -47,7 +47,7 @@ export class SharedFormService implements  OnDestroy  {
     m4xm: 0,
     m4ym: 0,
     m4zm: 0,
-    m4status: 0,
+    m4status:'CC',
     m4adm: '001101',
     rsvd5:0,
     /**m5 */
@@ -55,7 +55,7 @@ export class SharedFormService implements  OnDestroy  {
     m5xm: 0,
     m5ym: 0,
     m5zm: 0,
-    m5status: 0,
+    m5status: 'CC',
     m5adm: '001101',
     rsvd6:0,
     /**m6 */
@@ -63,7 +63,7 @@ export class SharedFormService implements  OnDestroy  {
     m6xm: 0,
     m6ym: 0,
     m6zm: 0,
-    m6status: 0,
+    m6status: 'CC',
     m6adm: '001101',
     checksum:0,
     rsvd7:0,
