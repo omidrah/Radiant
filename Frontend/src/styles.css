@@ -13,7 +13,7 @@ body{
     height: 100%;
     width: 100%;
   }
-  .group-box {
+.group-box {
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
@@ -21,6 +21,24 @@ body{
   }
   .group-box h3 {
     margin-top: 0;
+  }
+  .powerSection {
+    background-color: #f8f9fa;
+    margin-top: 40px;
+    margin-bottom: -23px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    flex: 1;
+    height: 100%;
+  }
+  .recordSection {
+    background-color: #f8f9fa;
+    margin-top:24px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    flex: 1;
   }
 /*border on lable*/
 .label-border {

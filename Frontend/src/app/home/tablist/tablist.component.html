@@ -10,34 +10,31 @@
         <tab heading="M6" id="m6tab" (selectTab)="changeTab($event)"><app-m6tab></app-m6tab></tab>
       </tabset>
     </div>
-    <div class="col-3">
-      <div class="row">
-        <div class="group-box">
+    <div class="col-4 d-flex flex-column">
+        <div class="mt-1">
             <app-digiclock></app-digiclock>
         </div>
-      </div>
-      <div class="row mt-1">
-        <div class="group-box">
-          <div class="col-12">
-            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25"  aria-valuemin="0" aria-valuemax="100">
-              <div class="progress-bar" style="width: 25%">25%</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row mt-5">
-        <div class="group-box">
-          <div class="col-12">
-            <div class="timer-time timer-container">
-              <div class="timer-time-set timer-box" id="currentTime">
-                <button class="buttonRec Rec" title="record">Recording</button>
-                <span id="hoursValue" class="badge badge-warning">00</span><span>:</span>
-                <span id="minutesValue" class="badge badge-warning">00</span><span>:</span>
-                <span id="secondsValue" class="badge badge-warning">00</span>
+
+        <div class="group-container mt-2">
+          <div class="powerSection">
+            <div class="col-6"><h3>Power</h3></div>
+                <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25"  aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" style="width: 25%">25%</div>
               </div>
             </div>
+        </div>
+        <div class="group-container mt-2">
+          <div class="recordSection">
+            <div class="col-6"><h3>Recorder</h3></div>
+              <div class="timer-time timer-container">
+                <div class="timer-time-set timer-box" id="currentTime">
+                  <button class="buttonRec Rec" title="record">Recording</button>
+                  <span id="hoursValue" class="badge badge-warning">00</span><span>:</span>
+                  <span id="minutesValue" class="badge badge-warning">00</span><span>:</span>
+                  <span id="secondsValue" class="badge badge-warning">00</span>
+                </div>
+            </div>
           </div>
         </div>
-      </div>
     </div>
 </div>
