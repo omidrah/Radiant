@@ -61,10 +61,11 @@
   display: flex;
   justify-content: center;
   margin-top: 10px;
+  padding-left: 16px;
 }
 
 .time-setter input {
-  margin-right: 10px;
+  margin-right: 8px;
   padding: 5px;
   font-size: 18px;
 }
