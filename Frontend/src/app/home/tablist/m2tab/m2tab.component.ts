@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { interval, takeWhile,Subscription } from 'rxjs';
 import { SharedFormService } from '../../services/shared-form.service';
 import { Addresses } from '../../models/address';
+import { Freq, Status } from '../../models/status';
 
 @Component({
   selector: 'app-m2tab',
@@ -14,20 +15,23 @@ export class M2tabComponent implements OnInit, OnDestroy{
   randomNumber: Array<number> = [];
   private currentDataSubscription: Subscription;
   addresses =Addresses;
+  status = Status;
+  freq = Freq;
   constructor(private fb: FormBuilder , private sharedFormService: SharedFormService) {
     this.m2tabform = this.fb.group({
       m2downdata: new FormControl('loopback'),
       m2xm: new FormControl(0),
       m2ym:new FormControl(0) ,
       m2zm:new FormControl(0),
-      m2status:new FormControl(0),
-      //m2selstatus:new FormControl(0),
-      //m2counter:new FormControl(0),
-      //m2common:new FormControl(0),
-     // m2ontime:new FormControl(0),
-      //m2linkled:new FormControl(0),
-      m2adm:new FormControl(1),
-      mfreq:new FormControl(0)
+      m2status:new FormControl('CC'),
+      //m1selstatus:new FormControl(0),
+      //m1counter:new FormControl(0),
+      //m1common:new FormControl(0),
+      //m1ontime:new FormControl(0),
+      //m1linkled:new FormControl(0),
+      m2adm:new FormControl('001101'),
+      mfreq:new FormControl(1)
+
     });
      // Listen for changes in the entire form
      this.m2tabform.valueChanges.subscribe(values => {

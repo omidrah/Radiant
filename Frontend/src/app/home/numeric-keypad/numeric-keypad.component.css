@@ -1,15 +1,14 @@
 .keypad-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  width: 250px;
-  margin: 20px auto;
+  gap: 5px;
+  width: 150px;
+  margin: 10px auto;
 }
 
 .keypad-button {
   width: 100%;
   padding: 20px;
-
   text-align: center;
   cursor: pointer;
   font-size: 24px;

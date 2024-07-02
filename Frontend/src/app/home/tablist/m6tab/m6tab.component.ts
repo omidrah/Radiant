@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { interval, takeWhile,Subscription } from 'rxjs';
 import { SharedFormService } from '../../services/shared-form.service';
 import { Addresses } from '../../models/address';
+import { Freq, Status } from '../../models/status';
 
 @Component({
   selector: 'app-m6tab',
@@ -14,6 +15,8 @@ export class M6tabComponent implements OnInit, OnDestroy{
   randomNumber: Array<number> = [];
   private currentDataSubscription: Subscription;
   addresses =Addresses;
+  status = Status;
+  freq = Freq;
 
   constructor(private fb: FormBuilder , private sharedFormService: SharedFormService) {
     this.m6tabform = this.fb.group({
@@ -21,14 +24,14 @@ export class M6tabComponent implements OnInit, OnDestroy{
       m6xm: new FormControl(0),
       m6ym:new FormControl(0) ,
       m6zm:new FormControl(0),
-      m6status:new FormControl(0),
+      m6status:new FormControl('CC'),
      // m6selstatus:new FormControl(0),
       //m6counter:new FormControl(0),
      // m6common:new FormControl(0),
      // m6ontime:new FormControl(0),
      // m6linkled:new FormControl(0),
-      m6adm:new FormControl(1),
-      mfreq:new FormControl(0)
+      m6adm:new FormControl('001101'),
+      mfreq:new FormControl(1)
     });
      // Listen for changes in the entire form
      this.m6tabform.valueChanges.subscribe(values => {
