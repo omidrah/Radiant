@@ -211,7 +211,7 @@ namespace WebApplication5.Controllers
                     case "m3status":
                         _ = byte.TryParse(property.Value.ToString(), out byte m3staus);
                         res.m3status=  m3staus;    
-                        sb.Append(res.m3status.ToString("X2"));
+                        sb.Append(Utils.convertToHex(res.m3status));
                         break;
                     case "m3adm":
                         byte m3adm = (byte)Utils.ConvertBinaryStringToUInt32("00" + property.Value.ToString());
@@ -231,7 +231,7 @@ namespace WebApplication5.Controllers
                         break;
                     case "m4ym":
                         _ = int.TryParse(property.Value.ToString(), out int m4ym);
-                        res.m4xm = m4ym;
+                        res.m4ym = m4ym;
                         sb.Append(Utils.convertToHex(res.m4ym)); 
                         break;
                     case "m4zm":
@@ -242,12 +242,12 @@ namespace WebApplication5.Controllers
                     case "m4status":
                         _ = byte.TryParse(property.Value.ToString(), out byte m4staus);
                         res.m4status = m4staus;  
-                        sb.Append(Utils.convertToHex(res.m4adm));
+                        sb.Append(Utils.convertToHex(res.m4status));
                         break;
                     case "m4adm":
                         byte m4adm = (byte)Utils.ConvertBinaryStringToUInt32("00" + property.Value.ToString());
                         res.m4adm = m4adm;  
-                        sb.Append(res.m4adm.ToString("X2"));
+                        sb.Append(Utils.convertToHex(res.m4adm));
                         break;
                     case "rsvd5":
                         byte[] rsvd5 = new byte[] { 0, 0 };
