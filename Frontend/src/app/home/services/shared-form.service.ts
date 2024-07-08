@@ -149,7 +149,7 @@ export class SharedFormService implements  OnDestroy  {
   }
 /**start timer every 1 seconds read values and send to dotnetbackend */
   startTimer() {
-    const apiUrl = 'http://localhost:5029'; // Replace with your actual backend API URL
+    const apiUrl = 'http://localhost:5000'; // Replace with your actual backend API URL
     this.timerSubscription =timer(0, 10000).subscribe(value => {
      console.log(this.formData$.value); // Emit the value through the Subject
      this.http.post(`${apiUrl}/Home/saveData`, this.formData$.value).subscribe
