@@ -1,0 +1,55 @@
+1-ng build --configuration production
+
+2- Copy the dist Folder to the Server:
+#Use scp or any other method to transfer the dist folder to your Ubuntu server. For example:
+scp -r ./dist/your-project-name user@your-server-ip:/path/to/target/directory
+************************http-server*********************************************************************************
+3-Install a Web Server (if not already installed):  lightweight HTTP server such as http-server which can be easily installed using Node.js
+   sudo npm install -g http-server
+4-Navigate to the directory containing your dist folder on the server and start the http-server
+  cd /path/to/target/directory/your-project-name
+  http-server -p 8080
+5-Access Your Application:
+  http://your-server-ip:8080
+		
+6-To run the http-server continuously, you might want to use a process manager like pm2:
+ 6-1-Install pm2:
+   sudo npm install -g pm2
+ 
+ 6-2-Start http-server with pm2
+   pm2 start $(which http-server) -- -p 8080
+   
+ 6-3-Save the pm2 Process List and Enable Startup Script:
+  pm2 save
+  pm2 startup
+
+This will ensure that your http-server starts automatically on system reboots.
+****************************nginx*******************************************************************************
+3-Install a Web Server (if not already installed):  nginx
+
+  sudo apt update
+  sudo apt install nginx
+  
+4-Configure Nginx:
+ Nginx configured to serve your Angular application. Open the Nginx configuration file for editing:
+
+  sudo nano /etc/nginx/sites-available/default
+  
+Replace the contents with the following configuration, adjusting the root directive to the path where your dist folder is located:
+server {
+    listen 80;
+    server_name your-server-domain-or-IP;
+
+    location / {
+        root /path/to/your/dist/folder;
+        try_files $uri $uri/ /index.html;
+    }
+}
+
+5-Test the Nginx Configuration:
+  sudo nginx -t
+6-Restart Nginx:
+ sudo systemctl restart nginx
+ 
+7-Access Your Application:
+      you should be able to access your Angular application by navigating to your server's domain or IP address in a web browser.
