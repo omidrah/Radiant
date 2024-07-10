@@ -70,19 +70,19 @@ namespace WebApplication5.Model
         /// <returns></returns>
         public static string convertToHex(int numb)
         {
-            return string.Join("", BitConverter.GetBytes(numb).Reverse().Select(b => b.ToString("X2")));
+            return string.Join("", BitConverter.GetBytes(numb).Select(b => b.ToString("X2")));
         }       
         public static string convertToHex(UInt16 numb)
         {
-            return string.Join("", BitConverter.GetBytes(numb).Reverse().Select(b => b.ToString("X2")));
+            return string.Join("", BitConverter.GetBytes(numb).Select(b => b.ToString("X2")));
         }       
         public static string convertToHex(short numb)
         {
-            return string.Join("", BitConverter.GetBytes(numb).Reverse().Select(b => b.ToString("X2")));
+            return string.Join("", BitConverter.GetBytes(numb).Select(b => b.ToString("X2")));
         }     
         public static string convertToHex(byte[] numb)
         {
-            return string.Join("", numb.Reverse().Select(b => b.ToString("X2")));
+            return string.Join("", numb.Select(b => b.ToString("X2")));
         }       
         public static string convertToHex(byte numb)
         {
