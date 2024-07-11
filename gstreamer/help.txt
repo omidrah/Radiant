@@ -1,0 +1,5 @@
+#play video from command line by vlc
+VLC --fullscreen --random --play-and-stop --play-and-exit E:\Dapper_BulkInsert_Update_Delete.mp4
+
+#gstreamer  video playback by url
+gst-launch-1.0 playbin uri=http://download.blender.org/durian/trailer/sintel_trailer-1080p.mp4
