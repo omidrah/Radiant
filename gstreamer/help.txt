@@ -3,3 +3,7 @@ VLC --fullscreen --random --play-and-stop --play-and-exit E:\Dapper_BulkInsert_U
 
 #gstreamer  video playback by url
 gst-launch-1.0 playbin uri=http://download.blender.org/durian/trailer/sintel_trailer-1080p.mp4
+
+
+Realtime streaming protocol (RTSP)
+RTSP is the standard streaming protocol of the IP cameras
