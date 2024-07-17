@@ -1,1 +1,4 @@
 https://stackoverflow.com/questions/69729517/how-to-convert-a-string-to-a-byte-array-in-node-js
+
+https://stackoverflow.com/questions/8952913/recording-rtsp-stream?rq=3
+
