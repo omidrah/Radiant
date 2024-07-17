@@ -1,12 +1,17 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Gst;
+using Microsoft.Extensions.Configuration;
 using socketServer.Interface;
 using socketServer.Models;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 
 namespace socketServer.Classes
 {
     public class SocketListener : ISocketListener
     {
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool SetDllDirectory(string lpPathName);
+
         private IActions _actions;
         private readonly IConfiguration _config;
         public SocketListener(IActions actions, IConfiguration config)
@@ -90,6 +95,29 @@ namespace socketServer.Classes
                             {
                                 //Console.WriteLine(client.value);
                                 //Array.Clear(client.buffer, 0, client.buffer.Length);
+
+
+                                bool setBinDir = SetDllDirectory(@"D:\GStreamer\1.0\mingw_x86_64\bin");
+                                Gst.Application.Init();
+                                string pipelineDescription = "gst-launch-1.0 -e rtspsrc location=\"rtsp://10.42.0.3:554\"  user-id=admin user-pw=abc123321bca latency=100 ! rtph264depay ! capsfilter caps=\"video/x-h264,width=640,height=480,framerate=(fraction)25/1\" ! mp4mux ! filesink location=video.mp4";
+
+                                var pipeline = Parse.Launch(pipelineDescription) as Pipeline;
+                                if (pipeline == null)
+                                {
+                                    Console.WriteLine("Failed to create pipeline.");
+                                    return;
+                                }
+                                // Start playing the pipeline
+                                pipeline.SetState(State.Playing);
+
+                                // Wait until error or EOS
+                                //var bus = pipeline.Bus;
+                                //var msg = bus.TimedPopFiltered(Constants.CLOCK_TIME_NONE, MessageType.Eos | MessageType.Error);
+                                //// Free resources
+                                //pipeline.SetState(State.Null);
+                                //pipeline.Dispose();
+
+
                                 try
                                 {
                                     if (client.IsConnected)

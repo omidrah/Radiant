@@ -11,5 +11,7 @@ RTSP is the standard streaming protocol of the IP cameras
 
 /*save video in file by command line*/
 gst-launch-1.0 -e rtspsrc location="rtsp://10.42.0.3:554"  user-id=admin user-pw=abc123321bca latency=100 ! rtph264depay ! capsfilter caps="video/x-h264,width=640,height=480,framerate=(fraction)25/1" ! mp4mux ! filesink location=video.mp4
+err===> gst-launch-1.0    rtspsrc location="rtsp://10.42.0.3:554"  user-id=admin user-pw=abc123321bca latency=100 ! rtph264depay ! h264parse ! mp4mux ! filesink location=file.mp4
+
 
 
