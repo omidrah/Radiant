@@ -369,13 +369,7 @@ namespace WebApplication5.Controllers
                         break; // The connection has been closed by the server.
                     }
 
-                    bytesReceived += nRecv;
-
-                    // Append received bytes to the ASCII string builder
-                    for (int i = 0; i < nRecv; i++)
-                    {
-                        asciiBuilder.Append((char)buffer[bytesReceived - nRecv + i]);
-                    }
+                    bytesReceived += nRecv;                    
                     // Assume the end of the message is when the buffer is full or another condition
                     if (bytesReceived >= buffer.Length)
                     {
@@ -383,8 +377,7 @@ namespace WebApplication5.Controllers
                     }
                 }
                 Console.WriteLine("Data received from server byte one byte:");
-                string asciiString = asciiBuilder.ToString();
-                Console.WriteLine(asciiString);
+               
                 /*0-108 is echo of send byte from client*/
                 for (int i = 108; i < bytesReceived; i++)
                 {
@@ -407,8 +400,12 @@ namespace WebApplication5.Controllers
                     Console.WriteLine($"Binary: {binaryRepresentation}");
                     Console.WriteLine($"Hexadecimal: {hexRepresentation}");
                     Console.WriteLine($"ASCII Character: {asciiCharacter}");
-                    Console.WriteLine($"******************************************");
-                }               
+                    Console.WriteLine($"******************************************"); 
+                    asciiBuilder.Append((char)buffer[i]);
+                }
+                Console.WriteLine("Data received from server Ascii:");
+                string asciiString = asciiBuilder.ToString();
+                Console.WriteLine(asciiString);
 
             }
             catch (Exception excp)
