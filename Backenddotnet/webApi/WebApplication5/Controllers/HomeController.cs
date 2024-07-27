@@ -368,47 +368,16 @@ namespace WebApplication5.Controllers
                     {
                         break; // The connection has been closed by the server.
                     }
-                    bytesReceived += nRecv;                    
+                    bytesReceived += nRecv;
                     // Assume the end of the message is when the buffer is full or another condition
                     if (bytesReceived >= buffer.Length)
                     {
                         break;
                     }
                 }
-                Console.WriteLine("Data received from server byte one byte:");
-               
-                /*0-108 is echo of send byte from client*/
-                for (int i = 108; i < bytesReceived; i++)
-                {
-                    Console.WriteLine($"******************************************");
-                    Console.WriteLine($"index: {i}");
 
-                    byte binaryElement = buffer[i];
 
-                    // Convert the byte to its binary representation
-                    string binaryRepresentation = Convert.ToString(buffer[i], 2).PadLeft(8, '0');
-
-                    // Convert the byte to its hexadecimal representation
-                    string hexRepresentation = buffer[i].ToString("X2");
-
-                    // Convert the byte to its ASCII character representation
-                    char asciiCharacter = (char)buffer[i] ;
-
-                    // Print all representations
-                    Console.WriteLine($"Decimal: {binaryElement}");
-                    Console.WriteLine($"Binary: {binaryRepresentation}");
-                    Console.WriteLine($"Hexadecimal: {hexRepresentation}");
-                    Console.WriteLine($"ASCII Character: {asciiCharacter}");
-                    Console.WriteLine($"******************************************");
-
-                    if (asciiCharacter == '\0')
-                        asciiBuilder.Append(binaryElement.ToString());
-                    else
-                        asciiBuilder.Append(asciiCharacter);
-                }
-                Console.WriteLine("Data received from server Ascii:");
-                string asciiString = asciiBuilder.ToString();
-                Console.WriteLine(asciiString);
+                //showByteArray(buffer, asciiBuilder, bytesReceived);
 
                 // Convert byte array to recieve object
                 RecievePacket packet = DataConverter.ByteArrayToDataPacket(buffer);
@@ -452,6 +421,44 @@ namespace WebApplication5.Controllers
                     client.Dispose();
                 }
             }
+        }
+
+        private static void showByteArray(byte[] buffer, StringBuilder asciiBuilder, int bytesReceived)
+        {
+            Console.WriteLine("Data received from server byte one byte:");
+
+            /*0-108 is echo of send byte from client*/
+            for (int i = 108; i < bytesReceived; i++)
+            {
+                Console.WriteLine($"******************************************");
+                Console.WriteLine($"index: {i}");
+
+                byte binaryElement = buffer[i];
+
+                // Convert the byte to its binary representation
+                string binaryRepresentation = Convert.ToString(buffer[i], 2).PadLeft(8, '0');
+
+                // Convert the byte to its hexadecimal representation
+                string hexRepresentation = buffer[i].ToString("X2");
+
+                // Convert the byte to its ASCII character representation
+                char asciiCharacter = (char)buffer[i];
+
+                // Print all representations
+                Console.WriteLine($"Decimal: {binaryElement}");
+                Console.WriteLine($"Binary: {binaryRepresentation}");
+                Console.WriteLine($"Hexadecimal: {hexRepresentation}");
+                Console.WriteLine($"ASCII Character: {asciiCharacter}");
+                Console.WriteLine($"******************************************");
+
+                if (asciiCharacter == '\0')
+                    asciiBuilder.Append(binaryElement.ToString());
+                else
+                    asciiBuilder.Append(asciiCharacter);
+            }
+            Console.WriteLine("Data received from server Ascii:");
+            string asciiString = asciiBuilder.ToString();
+            Console.WriteLine(asciiString);
         }
     }
     

@@ -30,4 +30,5 @@ namespace WebApplication5.Model
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
         public byte[] Footer; // char footer[4]
     }
+}
 
