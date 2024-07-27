@@ -359,7 +359,7 @@ namespace WebApplication5.Controllers
                 Console.WriteLine("Data sent to server.");
 
                 byte[] buffer = new byte[152];
-
+                StringBuilder asciiBuilder = new StringBuilder();
                 int bytesReceived = 0;
                 while (true)
                 {
@@ -371,14 +371,20 @@ namespace WebApplication5.Controllers
 
                     bytesReceived += nRecv;
 
+                    // Append received bytes to the ASCII string builder
+                    for (int i = 0; i < nRecv; i++)
+                    {
+                        asciiBuilder.Append((char)buffer[bytesReceived - nRecv + i]);
+                    }
                     // Assume the end of the message is when the buffer is full or another condition
                     if (bytesReceived >= buffer.Length)
                     {
                         break;
                     }
                 }
-                string rst = string.Empty;
-                Console.WriteLine("Data received from server byte one byte:");                
+                Console.WriteLine("Data received from server byte one byte:");
+                string asciiString = asciiBuilder.ToString();
+                Console.WriteLine(asciiString);
                 /*0-108 is echo of send byte from client*/
                 for (int i = 108; i < bytesReceived; i++)
                 {
@@ -394,17 +400,18 @@ namespace WebApplication5.Controllers
                     string hexRepresentation = buffer[i].ToString("X2");
 
                     // Convert the byte to its ASCII character representation
-                    char asciiCharacter = (char)buffer[i];
+                    char asciiCharacter = (char)buffer[i] ;
 
                     // Print all representations
                     Console.WriteLine($"Decimal: {binaryElement}");
                     Console.WriteLine($"Binary: {binaryRepresentation}");
                     Console.WriteLine($"Hexadecimal: {hexRepresentation}");
                     Console.WriteLine($"ASCII Character: {asciiCharacter}");
-                    rst += asciiCharacter;
                     Console.WriteLine($"******************************************");
                 }
-                Console.WriteLine("Data received Ascii: {0}",rst);            
+
+                Console.WriteLine("Concatenated ASCII data: {0}", asciiString);
+
             }
             catch (Exception excp)
             {
