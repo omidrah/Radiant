@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
@@ -46,7 +47,7 @@ namespace WebApplication5.Controllers
             //{
             //    Console.Write(b.ToString("X2") + " ");
             //}
-            configSocket(byteArray);
+            await configSocketAsync(byteArray).ConfigureAwait(false);
             // Start async Task to Save Image
             var pa= Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + _settings.companyInfo.filePath;
             await Utils.FileWriteAsync(pa, valueFromUi.ToString() + "\n"+ hexValue);
@@ -342,43 +343,58 @@ namespace WebApplication5.Controllers
         /// send byte array to socket
         /// </summary>
         /// <param name="inputArray"></param>
-        private void configSocket(byte[] inputArray)
+        private async Task configSocketAsync(byte[] inputArray)
         {
 
-            Socket client = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            using Socket client = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPAddress ipaddr = IPAddress.Parse("192.168.1.15");
-            int PortInput = 7;
-            //IPAddress ipaddr = IPAddress.Parse("127.0.0.1");
-            // int PortInput = 6060;
+            int portInput = 7;
             try
             {
                 _logger.LogInformation($"{DateTime.Now}");
-                Console.WriteLine(string.Format("IPAddress: {0} - Port: {1}", ipaddr.ToString(), PortInput));
-                client.Connect(ipaddr, PortInput);
+                Console.WriteLine(string.Format("IPAddress: {0} - Port: {1}", ipaddr.ToString(), portInput));
+                await client.ConnectAsync(ipaddr, portInput);
                 Console.WriteLine("Connected to server.");
-                client.Send(inputArray);
+                await client.SendAsync(new ArraySegment<byte>(inputArray), SocketFlags.None);
                 Console.WriteLine("Data sent to server.");
 
-                byte[] buffReceived = new byte[153];
-                int nRecv = client.Receive(buffReceived);
+                byte[] buffer = new byte[153];
+
+                int bytesReceived = 0;
+                while (true)
+                {
+                    int nRecv = await client.ReceiveAsync(new ArraySegment<byte>(buffer, bytesReceived, buffer.Length - bytesReceived), SocketFlags.None);
+                    if (nRecv == 0)
+                    {
+                        break; // The connection has been closed by the server.
+                    }
+
+                    bytesReceived += nRecv;
+
+                    // Assume the end of the message is when the buffer is full or another condition
+                    if (bytesReceived >= buffer.Length)
+                    {
+                        break;
+                    }
+                }
                 string rst = string.Empty;
-                Console.WriteLine("Data received from server byte one byte:");
-                
-                for (int i = 109; i < nRecv; i++)
+                Console.WriteLine("Data received from server byte one byte:");                
+                /*0-108 is echo of send byte from client*/
+                for (int i = 109; i < bytesReceived; i++)
                 {
                     Console.WriteLine($"******************************************");
                     Console.WriteLine($"index: {i}");
 
-                    byte binaryElement = buffReceived[i];
+                    byte binaryElement = buffer[i];
 
                     // Convert the byte to its binary representation
-                    string binaryRepresentation = Convert.ToString(buffReceived[i], 2).PadLeft(8, '0');
+                    string binaryRepresentation = Convert.ToString(buffer[i], 2).PadLeft(8, '0');
 
                     // Convert the byte to its hexadecimal representation
-                    string hexRepresentation = buffReceived[i].ToString("X2");
+                    string hexRepresentation = buffer[i].ToString("X2");
 
                     // Convert the byte to its ASCII character representation
-                    char asciiCharacter = (char)buffReceived[i];
+                    char asciiCharacter = (char)buffer[i];
 
                     // Print all representations
                     Console.WriteLine($"Decimal: {binaryElement}");
@@ -388,8 +404,6 @@ namespace WebApplication5.Controllers
                     rst += asciiCharacter;
                     Console.WriteLine($"******************************************");
                 }
-
-
                 Console.WriteLine("Data received Ascii: {0}",rst);            
             }
             catch (Exception excp)
