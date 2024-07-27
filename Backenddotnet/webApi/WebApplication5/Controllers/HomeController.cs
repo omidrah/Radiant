@@ -359,12 +359,12 @@ namespace WebApplication5.Controllers
                 client.Send(inputArray);
                 Console.WriteLine("Data sent to server.");
 
-                byte[] buffReceived = new byte[44];
+                byte[] buffReceived = new byte[153];
                 int nRecv = client.Receive(buffReceived);
                 string rst = string.Empty;
                 Console.WriteLine("Data received from server byte one byte:");
                 
-                for (int i = 0; i < nRecv; i++)
+                for (int i = 109; i < nRecv; i++)
                 {
                     Console.WriteLine($"******************************************");
                     Console.WriteLine($"index: {i}");
