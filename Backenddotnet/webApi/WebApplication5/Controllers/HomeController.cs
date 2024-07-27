@@ -361,13 +361,13 @@ namespace WebApplication5.Controllers
 
                 byte[] buffReceived = new byte[44];
                 int nRecv = client.Receive(buffReceived);
-
-                Console.WriteLine("Data received from server:");
+                string rst = string.Empty;
+                Console.WriteLine("Data received from server byte one byte:");
                 
                 for (int i = 0; i < nRecv; i++)
                 {
-                    //Console.Write($"{buffReceived[i]:X2} ");
-
+                    Console.WriteLine($"******************************************");
+                    Console.WriteLine($"index: {i}");
 
                     byte binaryElement = buffReceived[i];
 
@@ -385,10 +385,12 @@ namespace WebApplication5.Controllers
                     Console.WriteLine($"Binary: {binaryRepresentation}");
                     Console.WriteLine($"Hexadecimal: {hexRepresentation}");
                     Console.WriteLine($"ASCII Character: {asciiCharacter}");
+                    rst += asciiCharacter;
+                    Console.WriteLine($"******************************************");
                 }
 
 
-                Console.WriteLine("Data received: {0}", Encoding.ASCII.GetString(buffReceived, 0, nRecv));            
+                Console.WriteLine("Data received Ascii: {0}",rst);            
             }
             catch (Exception excp)
             {
