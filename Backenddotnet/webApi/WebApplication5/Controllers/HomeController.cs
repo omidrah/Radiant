@@ -409,8 +409,7 @@ namespace WebApplication5.Controllers
                     Console.WriteLine($"ASCII Character: {asciiCharacter}");
                     Console.WriteLine($"******************************************");
                 }
-
-                Console.WriteLine("Concatenated ASCII data: {0}", asciiString);
+                ع
 
             }
             catch (Exception excp)
