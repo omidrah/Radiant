@@ -358,7 +358,7 @@ namespace WebApplication5.Controllers
                 await client.SendAsync(new ArraySegment<byte>(inputArray), SocketFlags.None);
                 Console.WriteLine("Data sent to server.");
 
-                byte[] buffer = new byte[153];
+                byte[] buffer = new byte[152];
 
                 int bytesReceived = 0;
                 while (true)
@@ -380,7 +380,7 @@ namespace WebApplication5.Controllers
                 string rst = string.Empty;
                 Console.WriteLine("Data received from server byte one byte:");                
                 /*0-108 is echo of send byte from client*/
-                for (int i = 109; i < bytesReceived; i++)
+                for (int i = 108; i < bytesReceived; i++)
                 {
                     Console.WriteLine($"******************************************");
                     Console.WriteLine($"index: {i}");
