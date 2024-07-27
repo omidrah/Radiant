@@ -400,8 +400,12 @@ namespace WebApplication5.Controllers
                     Console.WriteLine($"Binary: {binaryRepresentation}");
                     Console.WriteLine($"Hexadecimal: {hexRepresentation}");
                     Console.WriteLine($"ASCII Character: {asciiCharacter}");
-                    Console.WriteLine($"******************************************"); 
-                    asciiBuilder.Append((char)buffer[i]);
+                    Console.WriteLine($"******************************************");
+
+                    if (asciiCharacter == '\0')
+                        asciiBuilder.Append(binaryElement.ToString());
+                    else
+                        asciiBuilder.Append(asciiCharacter);
                 }
                 Console.WriteLine("Data received from server Ascii:");
                 string asciiString = asciiBuilder.ToString();
