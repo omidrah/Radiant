@@ -363,11 +363,28 @@ namespace WebApplication5.Controllers
                 int nRecv = client.Receive(buffReceived);
 
                 Console.WriteLine("Data received from server:");
-
-                // Display the received data in hex format
+                
                 for (int i = 0; i < nRecv; i++)
                 {
-                    Console.Write($"{buffReceived[i]:X2} ");
+                    //Console.Write($"{buffReceived[i]:X2} ");
+
+
+                    byte binaryElement = buffReceived[i];
+
+                    // Convert the byte to its binary representation
+                    string binaryRepresentation = Convert.ToString(buffReceived[i], 2).PadLeft(8, '0');
+
+                    // Convert the byte to its hexadecimal representation
+                    string hexRepresentation = buffReceived[i].ToString("X2");
+
+                    // Convert the byte to its ASCII character representation
+                    char asciiCharacter = (char)buffReceived[i];
+
+                    // Print all representations
+                    Console.WriteLine($"Decimal: {binaryElement}");
+                    Console.WriteLine($"Binary: {binaryRepresentation}");
+                    Console.WriteLine($"Hexadecimal: {hexRepresentation}");
+                    Console.WriteLine($"ASCII Character: {asciiCharacter}");
                 }
 
 
