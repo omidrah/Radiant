@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Net;
 using System.Net.Sockets;
@@ -356,9 +355,22 @@ namespace WebApplication5.Controllers
                 _logger.LogInformation($"{DateTime.Now}");
                 Console.WriteLine(string.Format("IPAddress: {0} - Port: {1}", ipaddr.ToString(), PortInput));
                 client.Connect(ipaddr, PortInput);
+                Console.WriteLine("Connected to server.");
                 client.Send(inputArray);
-                byte[] buffReceived = new byte[108];
+                Console.WriteLine("Data sent to server.");
+
+                byte[] buffReceived = new byte[44];
                 int nRecv = client.Receive(buffReceived);
+
+                Console.WriteLine("Data received from server:");
+
+                // Display the received data in hex format
+                for (int i = 0; i < nRecv; i++)
+                {
+                    Console.Write($"{buffReceived[i]:X2} ");
+                }
+
+
                 Console.WriteLine("Data received: {0}", Encoding.ASCII.GetString(buffReceived, 0, nRecv));            
             }
             catch (Exception excp)
