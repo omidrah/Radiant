@@ -14,7 +14,9 @@ export class askmodel {
     m1zm:number;
     m1status:string;
     m1adm:string
-    rsvd2:number;
+    bit:string;
+    crc:string;
+
     /******** */
     m2downdata: string;
     m2xm: number;

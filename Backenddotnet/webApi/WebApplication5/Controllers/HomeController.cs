@@ -156,12 +156,16 @@ namespace WebApplication5.Controllers
                         res.m1adm = m1adm;
                         sb.Append(Utils.convertToHex(res.m1adm));
                         break;
-                    case "rsvd2":
-                        byte[] rsvd2 = new byte[] { 0, 0 };
-                        res.rsvd2 = rsvd2;
-                        sb.Append(Utils.convertToHex(res.rsvd2));
+                    case "bit":
+                        _ = byte.TryParse(property.Value.ToString(), out byte bit);
+                        res.bit = bit;
+                        sb.Append(Utils.convertToHex(res.bit));
                         break;
-                   
+                    case "crc":
+                        _ = byte.TryParse(property.Value.ToString(), out byte crc);
+                        res.crc = crc;
+                        sb.Append(Utils.convertToHex(res.crc));
+                        break;
                     case "m2xm":
                         _ = int.TryParse(property.Value.ToString(), out int m2xm);
                         res.m2xm = m2xm;

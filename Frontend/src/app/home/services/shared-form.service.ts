@@ -25,7 +25,8 @@ export class SharedFormService implements  OnDestroy  {
     m1zm: 0,
     m1status: 'CC',
     m1adm: '001101',
-    rsvd2:0,
+    bit:'1',
+    crc:'03',
     /**m2 */
     m2downdata: 'loopback',
     m2xm: 0,

@@ -8,7 +8,7 @@ namespace WebApplication5.Model
         public AskResult()
         {
             for (int i = 0; i < 2; i++) {
-                rsvd2[i] = 0;
+                //rsvd2[i] = 0;
                 rsvd3[i] = 0;
                 rsvd4[i] = 0;
                 rsvd5[i] = 0;
@@ -27,7 +27,9 @@ namespace WebApplication5.Model
         public int m1zm { get; set; }
         public byte m1status { get; set; }
         public byte m1adm { get; set; }
-        public byte[] rsvd2 { get; set; }=new byte[2];
+        public byte bit { get; set; }
+        public byte crc { get; set; }
+
 
         public int m2xm { get; set; }
         public int m2ym { get; set; }
@@ -81,11 +83,11 @@ namespace WebApplication5.Model
             {
                 fullfoot += footer[i].ToString();
             }
-            string r2 = string.Empty;
-            foreach (byte b in rsvd2)
-            {                
-                r2 += b.ToString();
-            }
+            //string r2 = string.Empty;
+            //foreach (byte b in rsvd2)
+            //{                
+            //    r2 += b.ToString();
+            //}
             string r3 = string.Empty;
             foreach (byte b in rsvd3)
             {
@@ -108,7 +110,7 @@ namespace WebApplication5.Model
             }
             return $"{fullHead}{testmode}{datamode}{att}{mfreq}{rsvd1}" +
                 $"{m1xm}{m1ym}{m1zm}{m1status}{m1adm}" +                
-                $"{r2}" +
+                $"{bit}{crc}" +
                 $"{m2xm}{m2ym}{m2zm}{m2status}{m2adm}" +
                 $"{r3}" +
                 $"{m3xm}{m3ym}{m3zm}{m3status}{m3adm}" +
@@ -138,7 +140,7 @@ namespace WebApplication5.Model
         public UInt16 calculateChecksum()
         {
             return (UInt16)(testmode + datamode + att + mfreq +
-                 m1xm + m1ym + m1zm + m1status + m1adm +
+                 m1xm + m1ym + m1zm + m1status + m1adm + bit + crc+
                  m2xm + m2ym + m2zm + m2status + m2adm +
                  m3xm + m3ym + m3zm + m3status + m3adm +
                  m4xm + m4ym + m4zm + m4status + m4adm +
