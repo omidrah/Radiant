@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Runtime.InteropServices;
+using System.Text;
 
 namespace WebApplication5.Model
 {
@@ -137,5 +138,29 @@ namespace WebApplication5.Model
         /* string hexValue = decValue.ToString("X");  OR   string.Format("{0:x}", intValue);*/
         //To convert from hex to decimal 
         /*int decValue = Convert.ToInt32(hexValue, 16);    OR  Convert.ToInt64(hexString, 16);*/
+    }
+    public static class DataConverter
+    {
+        public static RecievePacket ByteArrayToDataPacket(byte[] data)
+        {
+            if (data.Length != 44)
+            {
+                throw new ArgumentException("Data length must be 44 bytes.", nameof(data));
+            }
+
+            // Create a pointer to the byte array
+            GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
+            try
+            {
+                IntPtr ptr = handle.AddrOfPinnedObject();
+                // Convert pointer to DataPacket object
+                return (RecievePacket)Marshal.PtrToStructure(ptr, typeof(RecievePacket));
+            }
+            finally
+            {
+                // Free the pinned handle
+                handle.Free();
+            }
+        }
     }
 }

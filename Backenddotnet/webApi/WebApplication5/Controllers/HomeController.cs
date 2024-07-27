@@ -32,7 +32,7 @@ namespace WebApplication5.Controllers
         /// آرایه ای از بایت ها دریافت شده  و باینری آن در فایل چاپ میشود
         /// </summary>
         /// <param name="inputString"></param>
-        private async Task SavebyteArrayToFile(string  hexValue,AskResult valueFromUi)
+        private async Task SavebyteArrayToFile(string  hexValue,SendPacket valueFromUi)
          {
             //var cnt =  res.toByteArray().Length;    
             Console.WriteLine($"{DateTime.Now}");
@@ -56,7 +56,7 @@ namespace WebApplication5.Controllers
         [HttpPost("saveData")]
         public async Task<IActionResult> saveData([FromBody] JsonObject inputString)
         {
-            AskResult res = new (); StringBuilder sb = new(); 
+            SendPacket res = new (); StringBuilder sb = new(); 
             foreach (var property in inputString)
             {
                 string key = property.Key;
@@ -368,7 +368,6 @@ namespace WebApplication5.Controllers
                     {
                         break; // The connection has been closed by the server.
                     }
-
                     bytesReceived += nRecv;                    
                     // Assume the end of the message is when the buffer is full or another condition
                     if (bytesReceived >= buffer.Length)
@@ -410,6 +409,31 @@ namespace WebApplication5.Controllers
                 Console.WriteLine("Data received from server Ascii:");
                 string asciiString = asciiBuilder.ToString();
                 Console.WriteLine(asciiString);
+
+                // Convert byte array to recieve object
+                RecievePacket packet = DataConverter.ByteArrayToDataPacket(buffer);
+
+                // Now you can access the fields of the DataPacket object
+                Console.WriteLine($"Header: {BitConverter.ToString(packet.Head)}");
+                Console.WriteLine($"Missile Address: {packet.MissleAddress}");
+                Console.WriteLine($"Up Power: {packet.UpPower}");
+                Console.WriteLine($"Xt: {packet.Xt}");
+                Console.WriteLine($"Yt: {packet.Yt}");
+                Console.WriteLine($"Zt: {packet.Zt}");
+                Console.WriteLine($"Xm: {packet.Xm}");
+                Console.WriteLine($"Ym: {packet.Ym}");
+                Console.WriteLine($"Zm: {packet.Zm}");
+                Console.WriteLine($"Vxm: {packet.Vxm}");
+                Console.WriteLine($"Vym: {packet.Vym}");
+                Console.WriteLine($"Vzm: {packet.Vzm}");
+                Console.WriteLine($"Vxt: {packet.Vxt}");
+                Console.WriteLine($"Vyt: {packet.Vyt}");
+                Console.WriteLine($"Vzt: {packet.Vzt}");
+                Console.WriteLine($"Ctrl: {packet.Ctrl}");
+                Console.WriteLine($"Reset Time: {packet.ResetTime}");
+                Console.WriteLine($"CRC16: {packet.CRC16}");
+                Console.WriteLine($"Checksum: {packet.CheckSum}");
+                Console.WriteLine($"Footer: {BitConverter.ToString(packet.Footer)}");
 
             }
             catch (Exception excp)

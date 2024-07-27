@@ -3,9 +3,9 @@ using System.Text;
 
 namespace WebApplication5.Model
 {
-    public class AskResult
+    public class SendPacket
     {
-        public AskResult()
+        public SendPacket()
         {
             for (int i = 0; i < 2; i++) {
                 //rsvd2[i] = 0;
