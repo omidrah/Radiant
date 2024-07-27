@@ -408,8 +408,7 @@ namespace WebApplication5.Controllers
                     Console.WriteLine($"Hexadecimal: {hexRepresentation}");
                     Console.WriteLine($"ASCII Character: {asciiCharacter}");
                     Console.WriteLine($"******************************************");
-                }
-                ع
+                }               
 
             }
             catch (Exception excp)
