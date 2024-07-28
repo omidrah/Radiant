@@ -143,10 +143,10 @@ namespace WebApplication5.Model
     {
         public static RecievePacket ByteArrayToDataPacket(byte[] data)
         {
-            if (data.Length != 44)
-            {
-                throw new ArgumentException("Data length must be 44 bytes.", nameof(data));
-            }
+            //if (data.Length != 44)
+            //{
+            //    throw new ArgumentException("Data length must be 44 bytes.", nameof(data));
+            //}
 
             // Create a pointer to the byte array
             GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);

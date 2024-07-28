@@ -377,13 +377,13 @@ namespace WebApplication5.Controllers
                 }
 
 
-                //showByteArray(buffer, asciiBuilder, bytesReceived);
+                showByteArray(buffer, asciiBuilder, bytesReceived);
 
 
                 
                 int startind = 108; //شروع پکت دریافتی سرور
                 int endind = 152; //پایان پکت دریافتی سرور
-                int packetLen = endind - startind + 1;
+                int packetLen = endind - startind;
                 byte[] recBuffer = new byte[packetLen];
                 Array.Copy(buffer, startind, recBuffer, 0, packetLen);
 

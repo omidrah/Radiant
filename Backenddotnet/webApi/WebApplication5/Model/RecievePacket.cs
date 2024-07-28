@@ -7,7 +7,6 @@ namespace WebApplication5.Model
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
         public byte[] Head; // char head[4]
-
         public ushort MissleAddress; // u16 MissleAddress
         public ushort UpPower; // u16 upPower
         public ushort Xt; // u16 Xt
