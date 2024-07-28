@@ -91,43 +91,38 @@ namespace WebApplication5.Controllers
                         }
                         sb.Append(res.testmode.ToString("X2"));
                         break;                   
-                    case "datamode":
-                        switch (property.Value.ToString())
+                    case "couple":
+                        if (!string.IsNullOrEmpty(property.Value.ToString()))
                         {
-                            case "manual":
-                                res.datamode = 1;
-                                break;
-                            case "simulate":
-                                res.datamode = 2;
-                             break;
-                            case "loopback":
-                                res.datamode = 0;
-                                break;
+                            _ = byte.TryParse(property.Value.ToString(), out byte couple);
+                            res.couple = couple;
+                            sb.Append(res.couple.ToString("X2"));
                         }
-                        sb.Append(res.datamode.ToString("X2"));
                         break;
                     case "att":
                         if (!string.IsNullOrEmpty(property.Value.ToString()))
                         {
                             _ = byte.TryParse(property.Value.ToString(), out byte att);
-                            res.att = att;
-                            sb.Append(res.att.ToString("X2"));
+                            res.ATT_Value = att;
+                            sb.Append(res.ATT_Value.ToString("X2"));
                         }
                         break;
                     case "mfreq":
                         if (!string.IsNullOrEmpty(property.Value.ToString()))
                         {
                             _ = byte.TryParse(property.Value.ToString(), out byte mfreq);
-                            res.mfreq=  mfreq;//frequenty
-                            sb.Append(res.mfreq.ToString("X2"));
+                            res.frequency =  mfreq;//frequenty
+                            sb.Append(res.frequency.ToString("X2"));
                         }
                         break;
-                    case "rsvd1":
-                        byte rsvd1 = 0;
-                            res.rsvd1 = rsvd1;
-                            sb.Append(Utils.convertToHex(res.rsvd1));                        
+                    case "selftest":
+                        if (!string.IsNullOrEmpty(property.Value.ToString()))
+                        {
+                            _ = byte.TryParse(property.Value.ToString(), out byte selftest);
+                            res.selftest = selftest;//frequenty
+                            sb.Append(res.selftest.ToString("X2"));
+                        }                    
                         break;
-
                     case "m1xm":
                         _ = int.TryParse(property.Value.ToString(), out int m1xm);
                         //byte[] M1_Xm = BitConverter.GetBytes(m1xm); //convert int to byteArray
@@ -156,16 +151,26 @@ namespace WebApplication5.Controllers
                         res.m1adm = m1adm;
                         sb.Append(Utils.convertToHex(res.m1adm));
                         break;
-                    case "bit":
-                        _ = byte.TryParse(property.Value.ToString(), out byte bit);
-                        res.bit = bit;
-                        sb.Append(Utils.convertToHex(res.bit));
+                    case "datamode1":
+                        switch (property.Value.ToString())
+                        {
+                            case "manual":
+                                res.downlink_data_mode1 = 1;
+                                break;
+                            case "simulate":
+                                res.downlink_data_mode1 = 2;
+                                break;
+                            case "loopback":
+                                res.downlink_data_mode1 = 0;
+                                break;
+                        }
+                        sb.Append(res.downlink_data_mode1.ToString("X2"));
                         break;
                     case "crc":
                         _ = byte.TryParse(property.Value.ToString(), out byte crc);
                         res.crc = crc;
                         sb.Append(Utils.convertToHex(res.crc));
-                        break;
+                        break;                   
                     case "m2xm":
                         _ = int.TryParse(property.Value.ToString(), out int m2xm);
                         res.m2xm = m2xm;
@@ -191,8 +196,23 @@ namespace WebApplication5.Controllers
                         res.m2adm = m2adm;
                         sb.Append(Utils.convertToHex(res.m2adm)); 
                         break;
+                    case "datamode2":
+                        switch (property.Value.ToString())
+                        {
+                            case "manual":
+                                res.downlink_data_mode2 = 1;
+                                break;
+                            case "simulate":
+                                res.downlink_data_mode2 = 2;
+                                break;
+                            case "loopback":
+                                res.downlink_data_mode2 = 0;
+                                break;
+                        }
+                        sb.Append(res.downlink_data_mode2.ToString("X2"));
+                        break;
                     case "rsvd3":
-                        byte[] rsvd3 =  { 0, 0 };
+                        byte[] rsvd3 =  { 0};
                         res.rsvd3 = rsvd3;
                         sb.Append(Utils.convertToHex(res.rsvd3));
                         break;
@@ -222,8 +242,23 @@ namespace WebApplication5.Controllers
                         res.m3adm = m3adm;  
                         sb.Append(Utils.convertToHex(res.m3adm));
                         break;
+                    case "datamode3":
+                        switch (property.Value.ToString())
+                        {
+                            case "manual":
+                                res.downlink_data_mode3 = 1;
+                                break;
+                            case "simulate":
+                                res.downlink_data_mode3 = 2;
+                                break;
+                            case "loopback":
+                                res.downlink_data_mode3 = 0;
+                                break;
+                        }
+                        sb.Append(res.downlink_data_mode3.ToString("X2"));
+                        break;
                     case "rsvd4":
-                        byte[] rsvd4 = new byte[] { 0, 0 };
+                        byte[] rsvd4 = new byte[] { 0 };
                         res.rsvd4 = rsvd4;
                         sb.Append(Utils.convertToHex(res.rsvd4));
                         break;
@@ -253,8 +288,24 @@ namespace WebApplication5.Controllers
                         res.m4adm = m4adm;  
                         sb.Append(Utils.convertToHex(res.m4adm));
                         break;
+
+                    case "datamode4":
+                        switch (property.Value.ToString())
+                        {
+                            case "manual":
+                                res.downlink_data_mode4 = 1;
+                                break;
+                            case "simulate":
+                                res.downlink_data_mode4 = 2;
+                                break;
+                            case "loopback":
+                                res.downlink_data_mode4 = 0;
+                                break;
+                        }
+                        sb.Append(res.downlink_data_mode4.ToString("X2"));
+                        break;
                     case "rsvd5":
-                        byte[] rsvd5 = new byte[] { 0, 0 };
+                        byte[] rsvd5 = new byte[] { 0 };
                         res.rsvd6 = rsvd5;
                         sb.Append(Utils.convertToHex(res.rsvd5));
                         break;
@@ -284,8 +335,24 @@ namespace WebApplication5.Controllers
                         res.m5adm = m5adm;  
                         sb.Append(Utils.convertToHex(res.m5adm));
                         break;
+
+                    case "datamode5":
+                        switch (property.Value.ToString())
+                        {
+                            case "manual":
+                                res.downlink_data_mode5 = 1;
+                                break;
+                            case "simulate":
+                                res.downlink_data_mode5 = 2;
+                                break;
+                            case "loopback":
+                                res.downlink_data_mode5 = 0;
+                                break;
+                        }
+                        sb.Append(res.downlink_data_mode5.ToString("X2"));
+                        break;
                     case "rsvd6":
-                         byte[] rsvd6 = new byte[] { 0, 0 };
+                         byte[] rsvd6 = new byte[] { 0 };
                         res.rsvd6 = rsvd6;
                         sb.Append(Utils.convertToHex(res.rsvd6));
                         break;
@@ -315,14 +382,35 @@ namespace WebApplication5.Controllers
                         res.m6adm = m6adm;  
                         sb.Append(Utils.convertToHex(res.m6adm));
                         break;
+                    case "datamode6":
+                        switch (property.Value.ToString())
+                        {
+                            case "manual":
+                                res.downlink_data_mode6 = 1;
+                                break;
+                            case "simulate":
+                                res.downlink_data_mode6 = 2;
+                                break;
+                            case "loopback":
+                                res.downlink_data_mode6 = 0;
+                                break;
+                        }
+                        sb.Append(res.downlink_data_mode6.ToString("X2"));
+                        break;
+
+                    case "rsvd7":
+                        byte rsvd7 = 0;
+                        res.rsvd7 = rsvd7;
+                        sb.Append(Utils.convertToHex(res.rsvd7));
+                        break;
                     case "checksum":
                         res.checksum = res.calculateChecksum();
                         sb.Append(Utils.convertToHex(res.checksum));
                         break;
-                    case "rsvd7":
-                        byte rsvd7 = 0 ;
-                        res.rsvd7 = rsvd7;
-                        sb.Append(Utils.convertToHex(res.rsvd7));
+                    case "rsvd8":
+                        byte rsvd8 = 0 ;
+                        res.rsvd8 = rsvd8;
+                        sb.Append(Utils.convertToHex(res.rsvd8));
                         break;
                         
                     case "footer":

@@ -80,12 +80,12 @@ export class SharedFormService implements  OnDestroy  {
     switch (whichtab) {
       case 'cmd':
         cData.testmode = newData['testmode'];
-        cData.datamode = newData['datamode'];
+        //cData.datamode = newData['datamode'];
         cData.couple = newData['couple'];
         cData.att =this.calcPout(newData['att']);
         break;
       case 'm1tab':
-        cData.m1downdata = newData['m1downdata']
+        cData.datamode1 = newData['m1downdata']
         cData.m1xm = newData['m1xm']
         cData.m1ym = newData['m1ym']
         cData.m1zm = newData['m1zm']
@@ -94,7 +94,7 @@ export class SharedFormService implements  OnDestroy  {
         cData.mfreq = newData['mfreq']
         break;
       case 'm2tab':
-        cData.m2downdata = newData['m2downdata']
+        cData.datamode2 = newData['m2downdata']
         cData.m2xm = newData['m2xm']
         cData.m2ym = newData['m2ym']
         cData.m2zm = newData['m2zm']
@@ -104,7 +104,7 @@ export class SharedFormService implements  OnDestroy  {
 
         break;
       case 'm3tab':
-        cData.m3downdata = newData['m3downdata']
+        cData.datamode3 = newData['m3downdata']
         cData.m3xm = newData['m3xm']
         cData.m3ym = newData['m3ym']
         cData.m3zm = newData['m3zm']
@@ -114,7 +114,7 @@ export class SharedFormService implements  OnDestroy  {
 
         break;
       case 'm4tab':
-        cData.m4downdata = newData['m4downdata']
+        cData.datamode4 = newData['m4downdata']
         cData.m4xm = newData['m4xm']
         cData.m4ym = newData['m4ym']
         cData.m4zm = newData['m4zm']
@@ -123,7 +123,7 @@ export class SharedFormService implements  OnDestroy  {
         cData.mfreq = newData['mfreq']
         break;
       case 'm5tab':
-        cData.m5downdata = newData['m5downdata']
+        cData.datamode5 = newData['m5downdata']
         cData.m5xm = newData['m5xm']
         cData.m5ym = newData['m5ym']
         cData.m5zm = newData['m5zm']
@@ -132,7 +132,7 @@ export class SharedFormService implements  OnDestroy  {
         cData.mfreq = newData['mfreq']
         break;
       case 'm6tab':
-        cData.m6downdata = newData['m6downdata']
+        cData.datamode6 = newData['m6downdata']
         cData.m6xm = newData['m6xm']
         cData.m6ym = newData['m6ym']
         cData.m6zm = newData['m6zm']

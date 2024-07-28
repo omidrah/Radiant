@@ -47,6 +47,8 @@ typedef struct
 	u8 M6_status;
 	u8 M6_ADM;
 	u8 downlink_data_mode;
+	u8 rsvd7[1];
 	u16 checkSum;	
+	u8 rsvd8[1];
 	char footer[3];
 } rcv_field_t;
