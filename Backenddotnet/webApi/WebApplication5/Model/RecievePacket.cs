@@ -6,7 +6,7 @@ namespace WebApplication5.Model
     public class RecievePacket
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        public byte[] Head; // char head[4]
+        public char[] Head; 
         public ushort MissleAddress; // u16 MissleAddress
         public ushort UpPower; // u16 upPower
         public ushort Xt; // u16 Xt
@@ -27,7 +27,7 @@ namespace WebApplication5.Model
         public ushort CheckSum; // u16 checkSum
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        public byte[] Footer; // char footer[4]
+        public char[] Footer; 
     }
 }
 

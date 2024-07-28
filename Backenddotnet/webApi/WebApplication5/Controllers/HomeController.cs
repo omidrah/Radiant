@@ -377,10 +377,8 @@ namespace WebApplication5.Controllers
                 }
 
 
-                showByteArray(buffer, asciiBuilder, bytesReceived);
+                //DataConverter.showByteArray(buffer, asciiBuilder, bytesReceived);
 
-
-                
                 int startind = 108; //شروع پکت دریافتی سرور
                 int endind = 152; //پایان پکت دریافتی سرور
                 int packetLen = endind - startind;
@@ -388,10 +386,14 @@ namespace WebApplication5.Controllers
                 Array.Copy(buffer, startind, recBuffer, 0, packetLen);
 
                 // Convert byte array to recieve object
-                RecievePacket packet = DataConverter.ByteArrayToDataPacket(recBuffer);
+                //RecievePacket packet = DataConverter.ByteArrayToDataPacket(recBuffer);
+
+                // Parse byte array to recieve object
+                RecievePacket packet = DataConverter.ParseDataPacket(recBuffer);
+
 
                 // Now you can access the fields of the DataPacket object
-                Console.WriteLine($"Header: {BitConverter.ToString(packet.Head)}");
+                Console.WriteLine($"Header: {packet.Head}");
                 Console.WriteLine($"Missile Address: {packet.MissleAddress}");
                 Console.WriteLine($"Up Power: {packet.UpPower}");
                 Console.WriteLine($"Xt: {packet.Xt}");
@@ -410,7 +412,7 @@ namespace WebApplication5.Controllers
                 Console.WriteLine($"Reset Time: {packet.ResetTime}");
                 Console.WriteLine($"CRC16: {packet.CRC16}");
                 Console.WriteLine($"Checksum: {packet.CheckSum}");
-                Console.WriteLine($"Footer: {BitConverter.ToString(packet.Footer)}");
+                Console.WriteLine($"Footer: {packet.Footer}");
 
             }
             catch (Exception excp)
@@ -430,44 +432,7 @@ namespace WebApplication5.Controllers
                 }
             }
         }
-
-        private static void showByteArray(byte[] buffer, StringBuilder asciiBuilder, int bytesReceived)
-        {
-            Console.WriteLine("Data received from server byte one byte:");
-
-            /*0-108 is echo of send byte from client*/
-            for (int i = 108; i < bytesReceived; i++)
-            {
-                Console.WriteLine($"******************************************");
-                Console.WriteLine($"index: {i}");
-
-                byte binaryElement = buffer[i];
-
-                // Convert the byte to its binary representation
-                string binaryRepresentation = Convert.ToString(buffer[i], 2).PadLeft(8, '0');
-
-                // Convert the byte to its hexadecimal representation
-                string hexRepresentation = buffer[i].ToString("X2");
-
-                // Convert the byte to its ASCII character representation
-                char asciiCharacter = (char)buffer[i];
-
-                // Print all representations
-                Console.WriteLine($"Decimal: {binaryElement}");
-                Console.WriteLine($"Binary: {binaryRepresentation}");
-                Console.WriteLine($"Hexadecimal: {hexRepresentation}");
-                Console.WriteLine($"ASCII Character: {asciiCharacter}");
-                Console.WriteLine($"******************************************");
-
-                if (asciiCharacter == '\0')
-                    asciiBuilder.Append(binaryElement.ToString());
-                else
-                    asciiBuilder.Append(asciiCharacter);
-            }
-            Console.WriteLine("Data received from server Ascii:");
-            string asciiString = asciiBuilder.ToString();
-            Console.WriteLine(asciiString);
-        }
+       
     }
     
 }
