@@ -240,62 +240,267 @@ namespace WebApplication5.Model
             for (int i = 0; i < 4; i++)
             {
                 packet.Head[i] = (char)data[offset++];
-            }
-
-            packet.MissleAddress = BitConverter.ToUInt16(data, offset);
-            offset += 2;
+            }                     
 
             packet.UpPower = BitConverter.ToUInt16(data, offset);
             offset += 2;
-
-            packet.Xt = BitConverter.ToUInt16(data, offset);
+            /************************/
+            packet.M1_ADDR = BitConverter.ToUInt16(data, offset);
             offset += 2;
 
-            packet.Yt = BitConverter.ToUInt16(data, offset);
+            packet.M1_Xt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M1_Yt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M1_Zt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M1_Xm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M1_Ym = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M1_Zm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M1_Vxm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M1_Vym = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M1_Vzm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M1_Vxt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M1_Vyt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M1_Vzt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M1_Status = BitConverter.ToUInt16(data, offset);
+            offset += 2;
+            /************************/
+            packet.M2_ADDR = BitConverter.ToUInt16(data, offset);
             offset += 2;
 
-            packet.Zt = BitConverter.ToUInt16(data, offset);
+            packet.M2_Xt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M2_Yt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M2_Zt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M2_Xm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M2_Ym = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M2_Zm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M2_Vxm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M2_Vym = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M2_Vzm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M2_Vxt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M2_Vyt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M2_Vzt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M2_Status = BitConverter.ToUInt16(data, offset);
+            offset += 2;           
+            /************************/
+            packet.M3_ADDR = BitConverter.ToUInt16(data, offset);
             offset += 2;
 
-            packet.Xm = BitConverter.ToUInt16(data, offset);
+            packet.M3_Xt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M3_Yt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M3_Zt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M3_Xm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M3_Ym = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M3_Zm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M3_Vxm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M3_Vym = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M3_Vzm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M3_Vxt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M3_Vyt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M3_Vzt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M3_Status = BitConverter.ToUInt16(data, offset);
             offset += 2;
 
-            packet.Ym = BitConverter.ToUInt16(data, offset);
+            /************************/
+            packet.M4_ADDR = BitConverter.ToUInt16(data, offset);
             offset += 2;
 
-            packet.Zm = BitConverter.ToUInt16(data, offset);
+            packet.M4_Xt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M4_Yt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M4_Zt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M4_Xm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M4_Ym = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M4_Zm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M4_Vxm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M4_Vym = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M4_Vzm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M4_Vxt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M4_Vyt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M4_Vzt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M4_Status = BitConverter.ToUInt16(data, offset);
+            offset += 2;
+            
+            /************************/
+            packet.M5_ADDR = BitConverter.ToUInt16(data, offset);
             offset += 2;
 
-            packet.Vxm = BitConverter.ToUInt16(data, offset);
+            packet.M5_Xt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M5_Yt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M5_Zt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M5_Xm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M5_Ym = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M5_Zm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M5_Vxm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M5_Vym = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M5_Vzm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M5_Vxt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M5_Vyt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M5_Vzt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M5_Status = BitConverter.ToUInt16(data, offset);
+            offset += 2;          
+            /************************/
+            packet.M6_ADDR = BitConverter.ToUInt16(data, offset);
             offset += 2;
 
-            packet.Vym = BitConverter.ToUInt16(data, offset);
-            offset += 2;
+            packet.M6_Xt = BitConverter.ToInt32(data, offset);
+            offset += 4;
 
-            packet.Vzm = BitConverter.ToUInt16(data, offset);
-            offset += 2;
+            packet.M6_Yt = BitConverter.ToInt32(data, offset);
+            offset += 4;
 
-            packet.Vxt = BitConverter.ToUInt16(data, offset);
-            offset += 2;
+            packet.M6_Zt = BitConverter.ToInt32(data, offset);
+            offset += 4;
 
-            packet.Vyt = BitConverter.ToUInt16(data, offset);
-            offset += 2;
+            packet.M6_Xm = BitConverter.ToInt32(data, offset);
+            offset += 4;
 
-            packet.Vzt = BitConverter.ToUInt16(data, offset);
-            offset += 2;
+            packet.M6_Ym = BitConverter.ToInt32(data, offset);
+            offset += 4;
 
-            packet.Ctrl = BitConverter.ToUInt16(data, offset);
-            offset += 2;
+            packet.M6_Zm = BitConverter.ToInt32(data, offset);
+            offset += 4;
 
-            packet.ResetTime = BitConverter.ToUInt16(data, offset);
-            offset += 2;
+            packet.M6_Vxm = BitConverter.ToInt32(data, offset);
+            offset += 4;
 
-            packet.CRC16 = BitConverter.ToUInt16(data, offset);
+            packet.M6_Vym = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M6_Vzm = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M6_Vxt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M6_Vyt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M6_Vzt = BitConverter.ToInt32(data, offset);
+            offset += 4;
+
+            packet.M6_Status = BitConverter.ToUInt16(data, offset);
             offset += 2;
 
             packet.CheckSum = BitConverter.ToUInt16(data, offset);
             offset += 2;
-
             packet.Footer = new char[4];
             for (int i = 0; i < 4; i++)
             {

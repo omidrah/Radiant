@@ -1,22 +1,92 @@
-export interface ReceivePacket {
-  head: string;
-  missleAddress: number;
-  upPower: number;
-  xt: number;
-  yt: number;
-  zt: number;
-  xm: number;
-  ym: number;
-  zm: number;
-  vxm: number;
-  vym: number;
-  vzm: number;
-  vxt: number;
-  vyt: number;
-  vzt: number;
-  ctrl: number;
-  resetTime: number;
-  crc16: number;
-  checkSum: number;
-  footer: string;
+export class ReceivePacket {
+  constructor(
+      public head: string,
+      public upPower: number,
+      public m1_addr: number,
+      public m1_xt: number,
+      public m1_yt: number,
+      public m1_zt: number,
+      public m1_xm: number,
+      public m1_ym: number,
+      public m1_zm: number,
+      public m1_vxm: number,
+      public m1_vym: number,
+      public m1_vzm: number,
+      public m1_vxt: number,
+      public m1_vyt: number,
+      public m1_vzt: number,
+      public m1_status: number,
+      public m2_addr: number,
+      public m2_xt: number,
+      public m2_yt: number,
+      public m2_zt: number,
+      public m2_xm: number,
+      public m2_ym: number,
+      public m2_zm: number,
+      public m2_vxm: number,
+      public m2_vym: number,
+      public m2_vzm: number,
+      public m2_vxt: number,
+      public m2_vyt: number,
+      public m2_vzt: number,
+      public m2_status: number,
+      public m3_addr: number,
+      public m3_xt: number,
+      public m3_yt: number,
+      public m3_zt: number,
+      public m3_xm: number,
+      public m3_ym: number,
+      public m3_zm: number,
+      public m3_vxm: number,
+      public m3_vym: number,
+      public m3_vzm: number,
+      public m3_vxt: number,
+      public m3_vyt: number,
+      public m3_vzt: number,
+      public m3_status: number,
+      public m4_addr: number,
+      public m4_xt: number,
+      public m4_yt: number,
+      public m4_zt: number,
+      public m4_xm: number,
+      public m4_ym: number,
+      public m4_zm: number,
+      public m4_vxm: number,
+      public m4_vym: number,
+      public m4_vzm: number,
+      public m4_vxt: number,
+      public m4_vyt: number,
+      public m4_vzt: number,
+      public m4_status: number,
+      public m5_addr: number,
+      public m5_xt: number,
+      public m5_yt: number,
+      public m5_zt: number,
+      public m5_xm: number,
+      public m5_ym: number,
+      public m5_zm: number,
+      public m5_vxm: number,
+      public m5_vym: number,
+      public m5_vzm: number,
+      public m5_vxt: number,
+      public m5_vyt: number,
+      public m5_vzt: number,
+      public m5_status: number,
+      public m6_addr: number,
+      public m6_xt: number,
+      public m6_yt: number,
+      public m6_zt: number,
+      public m6_xm: number,
+      public m6_ym: number,
+      public m6_zm: number,
+      public m6_vxm: number,
+      public m6_vym: number,
+      public m6_vzm: number,
+      public m6_vxt: number,
+      public m6_vyt: number,
+      public m6_vzt: number,
+      public m6_status: number,
+      public checkSum: number,
+      public footer: string
+  ) {}
 }

@@ -1,62 +1,53 @@
-export class sendPacket {
-    header:string;
-    testmode: string;
-    couple:number;
-    att:number
-    /**freq uniq for all m tab */
-    mfreq:number
-    selftest:number;
-    /******** m1tab*/
-    m1xm: number;
-    m1ym:number;
-    m1zm:number;
-    m1status:string;
-    m1adm:string;
-    datamode1: string;
-    crc:number;
-    /******** */
-    m2xm: number;
-    m2ym:number;
-    m2zm:number;
-    m2status:string;
-    m2adm:string;
-    datamode2: string;
-    rsvd3:number;
-    /******** */
-    m3xm: number;
-    m3ym:number;
-    m3zm:number;
-    m3status:string;
-    m3adm:string
-    datamode3: string;
-    rsvd4:number;
-    /******** */
-    m4xm: number;
-    m4ym:number;
-    m4zm:number;
-    m4status:string;
-    m4adm:string;
-    datamode4: string;
-    rsvd5:number;
-    /******** */
-    m5xm: number;
-    m5ym:number;
-    m5zm:number;
-    m5status:string;
-    m5adm:string;
-    datamode5: string;
-    rsvd6:number;
-    /******** */
-    m6xm: number;
-    m6ym:number;
-    m6zm:number;
-    m6status:string;
-    m6adm:string;
-    datamode6: string;
-    rsvd7:number;
-    /***/
-    checksum:number;
-    rsvd8:number;
-    /** */
-    footer:string;
-    };
+export class SendPacket {constructor(
+  public header: string,
+  public testmode: string,
+  public couple: number,
+  public att: number,
+  public mfreq: number, //same for all tab
+  public selftest: number,
+  public m1xm: number,
+  public m1ym: number,
+  public m1zm: number,
+  public m1status: string,
+  public m1adm: string,
+  public datamode1: string,
+  public crc: number,
+  public m2xm: number,
+  public m2ym: number,
+  public m2zm: number,
+  public m2status: string,
+  public m2adm: string,
+  public datamode2: string,
+  public rsvd3: number,
+  public m3xm: number,
+  public m3ym: number,
+  public m3zm: number,
+  public m3status: string,
+  public m3adm: string,
+  public datamode3: string,
+  public rsvd4: number,
+  public m4xm: number,
+  public m4ym: number,
+  public m4zm: number,
+  public m4status: string,
+  public m4adm: string,
+  public datamode4: string,
+  public rsvd5: number,
+  public m5xm: number,
+  public m5ym: number,
+  public m5zm: number,
+  public m5status: string,
+  public m5adm: string,
+  public datamode5: string,
+  public rsvd6: number,
+  public m6xm: number,
+  public m6ym: number,
+  public m6zm: number,
+  public m6status: string,
+  public m6adm: string,
+  public datamode6: string,
+  public rsvd7: number,
+  public checksum: number,
+  public rsvd8: number,
+  public footer: string
+) {}   };

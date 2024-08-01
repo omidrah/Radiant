@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -25,7 +26,6 @@ namespace WebApplication5.Controllers
             _logger = logger;
             _settings = settings.Value;
             _socketService = socketService;
-
         }
         [HttpGet]
         public string Get()
@@ -37,7 +37,7 @@ namespace WebApplication5.Controllers
         /// </summary>
         /// <param name="inputString"></param>
         private async Task SavebyteArrayToFile(string  hexValue,SendPacket valueFromUi)
-         {
+        {
             //var cnt =  res.toByteArray().Length;    
             Console.WriteLine($"{DateTime.Now}");
             Console.WriteLine("*******************************************************************");
@@ -53,11 +53,13 @@ namespace WebApplication5.Controllers
             await Utils.FileWriteAsync(pa, valueFromUi.ToString() + "\n"+ hexValue);
         }
        
-        [HttpPost("saveData")]
-        public async Task<IActionResult> saveData([FromBody] JsonObject inputString)
-        {
-            
-            SendPacket res = new (); 
+        [HttpPost("sendData")]
+        public async Task<IActionResult> sendData([FromBody] JsonObject inputString)
+        {            
+            SendPacket res = new ();
+            // Deserialize the JSON into a Packet object
+            //PacketImp packet = JsonConvert.DeserializeObject<SendPacket>(inputString.ToString());
+
             StringBuilder sb = new(); 
             foreach (var property in inputString)
             {

@@ -93,23 +93,21 @@ namespace WebApplication5.Services
         private void LogPacket(RecievePacket packet)
         {
             Console.WriteLine($"Header: {new string(packet.Head)}");
-            Console.WriteLine($"Missile Address: {packet.MissleAddress}");
             Console.WriteLine($"Up Power: {packet.UpPower}");
-            Console.WriteLine($"Xt: {packet.Xt}");
-            Console.WriteLine($"Yt: {packet.Yt}");
-            Console.WriteLine($"Zt: {packet.Zt}");
-            Console.WriteLine($"Xm: {packet.Xm}");
-            Console.WriteLine($"Ym: {packet.Ym}");
-            Console.WriteLine($"Zm: {packet.Zm}");
-            Console.WriteLine($"Vxm: {packet.Vxm}");
-            Console.WriteLine($"Vym: {packet.Vym}");
-            Console.WriteLine($"Vzm: {packet.Vzm}");
-            Console.WriteLine($"Vxt: {packet.Vxt}");
-            Console.WriteLine($"Vyt: {packet.Vyt}");
-            Console.WriteLine($"Vzt: {packet.Vzt}");
-            Console.WriteLine($"Ctrl: {packet.Ctrl}");
-            Console.WriteLine($"Reset Time: {packet.ResetTime}");
-            Console.WriteLine($"CRC16: {packet.CRC16}");
+
+            Console.WriteLine($"Xt: {packet.M1_Xt}");
+            Console.WriteLine($"Yt: {packet.M1_Yt}");
+            Console.WriteLine($"Zt: {packet.M1_Zt}");
+            Console.WriteLine($"Xm: {packet.M1_Xm}");
+            Console.WriteLine($"Ym: {packet.M1_Ym}");
+            Console.WriteLine($"Zm: {packet.M1_Zm}");
+            Console.WriteLine($"Vxm: {packet.M1_Vxm}");
+            Console.WriteLine($"Vym: {packet.M1_Vym}");
+            Console.WriteLine($"Vzm: {packet.M1_Vzm}");
+            Console.WriteLine($"Vxt: {packet.M1_Vxt}");
+            Console.WriteLine($"Vyt: {packet.M1_Vyt}");
+            Console.WriteLine($"Vzt: {packet.M1_Vzt}");
+            
             Console.WriteLine($"Checksum: {packet.CheckSum}");
             Console.WriteLine($"Footer: {new string(packet.Footer)}");
         }

@@ -45,14 +45,14 @@ export class M5tabComponent implements OnInit, OnDestroy{
     // Implement the logic to save formData to a file
     // This could be a server call or local storage operation
     //console.warn(this.m1tabform.value);
-     this.sharedFormService.updateFormData(formData,whichtab);
+     this.sharedFormService.SendFormData(formData,whichtab);
   }
 
   ngOnInit() {
       /**mfreq share between tabs */
       this.currentDataSubscription=this.sharedFormService.currentData.subscribe(data => {
         this.m5tabform.patchValue({
-          mfreq: data.mfreq
+          mfreq: data.sPacket.mfreq
         } ,{ emitEvent: false });
       });
    }
