@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using System;
-using System.Net;
-using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Text.Json.Nodes;
@@ -20,10 +16,12 @@ namespace WebApplication5.Controllers
         private readonly ILogger _logger;
         private readonly Settings _settings;
         private readonly SocketService _socketService;
+        private readonly FileService _fileService;
 
-        public HomeController(ILogger<HomeController> logger, IOptions<Settings> settings,SocketService socketService)
+        public HomeController(ILogger<HomeController> logger, FileService fileService, IOptions<Settings> settings,SocketService socketService)
         {
             _logger = logger;
+            _fileService = fileService;
             _settings = settings.Value;
             _socketService = socketService;
         }
@@ -48,9 +46,8 @@ namespace WebApplication5.Controllers
             byte[] byteArray = Utils.StringToByteArray(hexValue);
             await _socketService.SendDataAsync(byteArray);
 
-            // Start async Task to Save Image
-            var pa = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + _settings.companyInfo.filePath;
-            await Utils.FileWriteAsync(pa, valueFromUi.ToString() + "\n"+ hexValue);
+            // Start async Task to Save send Packet TO file...
+            await _fileService.SendDataToFileAsync(valueFromUi.ToString() + "\n"+ hexValue);
         }
        
         [HttpPost("sendData")]

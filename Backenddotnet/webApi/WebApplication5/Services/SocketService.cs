@@ -11,12 +11,14 @@ namespace WebApplication5.Services
     {
         private readonly IHubContext<DataHub> _hubContext;
         private readonly ILogger<SocketService> _logger;
+        private readonly FileService _fileService;
         private readonly SocketConfig _socketConfig;
 
 
-        public SocketService(IHubContext<DataHub> hubContext, ILogger<SocketService> logger, IOptions<Settings> settings)
+        public SocketService(IHubContext<DataHub> hubContext,FileService fileService, ILogger<SocketService> logger, IOptions<Settings> settings)
         {
             _hubContext = hubContext;
+            _fileService = fileService;
             _logger = logger;
             _socketConfig = settings.Value.SocketConfig;
         }
@@ -54,26 +56,18 @@ namespace WebApplication5.Services
                     }
                 }
 
-                //int startind = 108; // Start index of the packet
-                //int endind = 434; // End index of the packet
-                //int packetLen = endind - startind;
-                //byte[] recBuffer = new byte[packetLen];
-                //Array.Copy(buffer, startind, recBuffer, 0, packetLen);
-
+               
                 // Convert byte array to recieve object
                 //RecievePacket packet = DataConverter.ByteArrayToDataPacket(recBuffer);
                 //DataConverter.showByteArray(buffer, asciiBuilder, bytesReceived);
 
                 RecievePacket packet = DataConverter.ParseDataPacket(buffer);
-
-                // Save to file
-                await SaveDataToFileAsync(packet);
-
-                // Send to clients via SignalR
+                // Receive Data Save to file
+                await ReceiveDataSaveAsync(packet);
+                //Recieve Data Send to clients via SignalR
                 await _hubContext.Clients.All.SendAsync("ReceiveData", packet);
-
-                // Log the packet data
-                LogPacket(packet);
+                // Log the packet data on console
+                ConsoLogPacket(packet);
             }
             catch (Exception excp)
             {
@@ -90,12 +84,13 @@ namespace WebApplication5.Services
             }
         }
 
-        private async Task SaveDataToFileAsync(RecievePacket packet)
+        private async Task ReceiveDataSaveAsync(RecievePacket packet)
         {
-            // Implement your logic to save packet data to a file
+            byte[] byteArray = DataConverter.ToByteArray(packet);
+            await _fileService.ReceiveDataToFileAsync(byteArray);
         }
 
-        private void LogPacket(RecievePacket packet)
+        private void ConsoLogPacket(RecievePacket packet)
         {
             Console.WriteLine($"Header: {new string(packet.Head)}");
             Console.WriteLine($"Up Power: {packet.UpPower}");

@@ -31,13 +31,14 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 // Add services to the container.
 
-builder.Services.Configure<Settings>(builder.Configuration.GetSection("Settings"));
 
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<SocketService>();
+builder.Services.AddSingleton<FileService>();
 //builder.Services.AddHostedService<SocketBackgroundService>();
 
 builder.Services.Configure<Settings>(Conf => builder.Configuration.Bind(Conf));
+//builder.Services.Configure<Settings>(builder.Configuration.GetSection("Settings"));
 
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>

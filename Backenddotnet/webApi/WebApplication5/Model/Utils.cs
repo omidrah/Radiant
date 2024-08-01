@@ -5,23 +5,7 @@ namespace WebApplication5.Model
 {
     public static class Utils
     {
-        public static async Task FileWriteAsync(string filepath,string message, bool append = false)
-        {
-            var namefile = DateTime.Now.ToString("yyyy-dd-M-HH-mm-ss")+".txt";          
-            try
-            {
-                using (FileStream stream = new FileStream(Path.Combine(filepath, namefile), append ? FileMode.Append : FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
-                using (StreamWriter sw = new StreamWriter(stream))
-                {
-                    await sw.WriteAsync(message);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error writing to file: {ex.Message}");
-                // Handle the exception (e.g., log it or take corrective action)
-            }
-        }
+        
         /// <summary>
         /// convert hex string to byteArray
         /// </summary>
@@ -508,6 +492,36 @@ namespace WebApplication5.Model
             }
 
             return packet;
+        }
+
+
+        public static byte[] ToByteArray(RecievePacket packet)
+        {
+            // Convert RecievePacket to byte array here
+            // This is just a sample implementation. You need to adjust based on your RecievePacket structure.
+            using (var ms = new MemoryStream())
+            {
+                using (var bw = new BinaryWriter(ms))
+                {
+                    bw.Write(packet.Head);
+                    bw.Write(packet.UpPower);
+                    
+                    bw.Write(packet.M1_ADDR);
+                    bw.Write(packet.M1_Xm);
+                    bw.Write(packet.M1_Ym);
+                    bw.Write(packet.M1_Zm);
+                    bw.Write(packet.M1_Vxm);
+                    bw.Write(packet.M1_Vym);
+                    bw.Write(packet.M1_Vzm);
+                    bw.Write(packet.M1_Vxt);
+                    bw.Write(packet.M1_Vyt);
+                    bw.Write(packet.M1_Vzt);
+                    
+                    bw.Write(packet.CheckSum);
+                    bw.Write(packet.Footer);
+                }
+                return ms.ToArray();
+            }
         }
     }
 }
