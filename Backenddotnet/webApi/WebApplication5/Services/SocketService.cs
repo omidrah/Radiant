@@ -31,7 +31,7 @@ namespace WebApplication5.Services
                 await client.SendAsync(new ArraySegment<byte>(inputArray), SocketFlags.None);
                 Console.WriteLine("Data sent to server.");
 
-                byte[] buffer = new byte[152];
+                byte[] buffer = new byte[324];
                 int bytesReceived = 0;
 
                 while (true)
@@ -42,6 +42,7 @@ namespace WebApplication5.Services
                         break; // The connection has been closed by the server.
                     }
                     bytesReceived += nRecv;
+
                     // Assume the end of the message is when the buffer is full or another condition
                     if (bytesReceived >= buffer.Length)
                     {
@@ -49,17 +50,17 @@ namespace WebApplication5.Services
                     }
                 }
 
-                int startind = 108; // Start index of the packet
-                int endind = 152; // End index of the packet
-                int packetLen = endind - startind;
-                byte[] recBuffer = new byte[packetLen];
-                Array.Copy(buffer, startind, recBuffer, 0, packetLen);
+                //int startind = 108; // Start index of the packet
+                //int endind = 434; // End index of the packet
+                //int packetLen = endind - startind;
+                //byte[] recBuffer = new byte[packetLen];
+                //Array.Copy(buffer, startind, recBuffer, 0, packetLen);
 
                 // Convert byte array to recieve object
                 //RecievePacket packet = DataConverter.ByteArrayToDataPacket(recBuffer);
                 //DataConverter.showByteArray(buffer, asciiBuilder, bytesReceived);
 
-                RecievePacket packet = DataConverter.ParseDataPacket(recBuffer);
+                RecievePacket packet = DataConverter.ParseDataPacket(buffer);
 
                 // Save to file
                 await SaveDataToFileAsync(packet);
