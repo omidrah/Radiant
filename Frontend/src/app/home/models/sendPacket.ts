@@ -13,7 +13,7 @@ export class sendPacket {
     m1status:string;
     m1adm:string;
     datamode1: string;
-    crc:string;
+    crc:number;
     /******** */
     m2xm: number;
     m2ym:number;

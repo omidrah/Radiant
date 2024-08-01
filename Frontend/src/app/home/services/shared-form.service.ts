@@ -24,8 +24,8 @@ export class SharedFormService implements  OnDestroy  {
     m1zm: 0,
     m1status: 'CC',
     m1adm: '001101',
-     datamode1: 'loopback',
-    crc:'03',
+    datamode1: 'loopback',
+    crc:3,
     /**m2 */
     m2xm: 0,
     m2ym: 0,
@@ -69,9 +69,7 @@ export class SharedFormService implements  OnDestroy  {
     rsvd7:0,
 
     checksum:0,
-
     rsvd8:0,
-
     footer:'END'
   });
 
@@ -87,6 +85,7 @@ export class SharedFormService implements  OnDestroy  {
         cData.couple = newData['couple'];
         cData.att =this.calcPout(newData['att']);
         cData.selftest = newData['selftest'];
+        cData.crc = newData['crc'];
         break;
       case 'm1tab':
         cData.datamode1 = newData['m1downdata']
@@ -95,7 +94,6 @@ export class SharedFormService implements  OnDestroy  {
         cData.m1zm = newData['m1zm']
         cData.m1status = newData['m1status']
         cData.m1adm = newData['m1adm']
-        cData.crc = newData['crc'];
         cData.mfreq = newData['mfreq']
         break;
       case 'm2tab':
@@ -154,7 +152,7 @@ export class SharedFormService implements  OnDestroy  {
 /**start timer every 1 seconds read values and send to dotnetbackend */
   startTimer() {
     const apiUrl = 'http://localhost:5000'; // Replace with your actual backend API URL
-    this.timerSubscription =timer(0, 10000).subscribe(value => {
+    this.timerSubscription =timer(0, 1000).subscribe(value => {
      console.log(this.formData$.value); // Emit the value through the Subject
      this.http.post(`${apiUrl}/Home/saveData`, this.formData$.value).subscribe
         (
