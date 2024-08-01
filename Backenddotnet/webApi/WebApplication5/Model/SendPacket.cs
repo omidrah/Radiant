@@ -7,7 +7,7 @@ namespace WebApplication5.Model
     {
         public SendPacket()
         {
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 1; i++) {
                 //rsvd2[i] = 0;
                 rsvd3[i] = 0;
                 rsvd4[i] = 0;

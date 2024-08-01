@@ -25,7 +25,7 @@
           </label>
         </div>
       </div>
-      <div class="group-box mt-2">
+      <!-- <div class="group-box mt-2">
         <h3>Radiate Mode</h3>
           <div class="form-check mt-2 " style="padding-left: 80px;">
             <input class="form-check-input radiobuttonLarger" formControlName="datamode"  type="radio"
@@ -48,7 +48,24 @@
               SIM
             </label>
           </div>
-      </div>
+      </div> -->
+        <div class="group-box mt-2">
+          <div class="form-check mt-2" style="padding-left: 80px;">
+            <input class="form-check-input radiobuttonLarger" formControlName="SelfTest"  type="checkbox"
+              name="SelfTest" id="SelfTest" (change)="datamodeChanged($event);" value="1">
+            <label class="form-check-label">
+              SelfTest
+            </label>
+          </div>
+          <div class="form-check mt-2" style="padding-left: 80px;">
+            <input class="form-check-input radiobuttonLarger" formControlName="crc" type="checkbox"
+              name="crc" id="crc" (change)="datamodeChanged($event);" value="0">
+            <label class="form-check-label">
+              CRC
+            </label>
+          </div>
+
+        </div>
     </div>
     <div class="col-md-5 group-container" *ngIf="showDirectPwr">
       <div class="mt-5 ml-3 group-box" >

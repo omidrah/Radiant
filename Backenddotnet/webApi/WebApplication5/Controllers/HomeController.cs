@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.Json.Nodes;
 using WebApplication5.Model;
+using WebApplication5.Services;
 using Utils = WebApplication5.Model.Utils;
 
 namespace WebApplication5.Controllers
@@ -17,11 +18,14 @@ namespace WebApplication5.Controllers
     {
         private readonly ILogger _logger;
         private readonly Settings _settings;
+        private readonly SocketService _socketService;
 
-        public HomeController(ILogger<HomeController> logger, IOptions<Settings> settings)
+        public HomeController(ILogger<HomeController> logger, IOptions<Settings> settings,SocketService socketService)
         {
             _logger = logger;
             _settings = settings.Value;
+            _socketService = socketService;
+
         }
         [HttpGet]
         public string Get()
@@ -42,21 +46,19 @@ namespace WebApplication5.Controllers
             Console.WriteLine("*******************************************************************");
             // Convert the hexadecimal string to a byte array
             byte[] byteArray = Utils.StringToByteArray(hexValue);
-            //Console.WriteLine("Byte Array:");
-            //foreach (byte b in byteArray)
-            //{
-            //    Console.Write(b.ToString("X2") + " ");
-            //}
-            await configSocketAsync(byteArray).ConfigureAwait(false);
+            await _socketService.SendDataAsync(byteArray, "192.168.1.15", 7);
+
             // Start async Task to Save Image
-            var pa= Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + _settings.companyInfo.filePath;
+            var pa = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + _settings.companyInfo.filePath;
             await Utils.FileWriteAsync(pa, valueFromUi.ToString() + "\n"+ hexValue);
         }
        
         [HttpPost("saveData")]
         public async Task<IActionResult> saveData([FromBody] JsonObject inputString)
         {
-            SendPacket res = new (); StringBuilder sb = new(); 
+            
+            SendPacket res = new (); 
+            StringBuilder sb = new(); 
             foreach (var property in inputString)
             {
                 string key = property.Key;
@@ -425,100 +427,6 @@ namespace WebApplication5.Controllers
             }                       
             await SavebyteArrayToFile(sb.ToString(),res);
             return Ok();
-        }
-
-        /// <summary>
-        /// send byte array to socket
-        /// </summary>
-        /// <param name="inputArray"></param>
-        private async Task configSocketAsync(byte[] inputArray)
-        {
-
-            using Socket client = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPAddress ipaddr = IPAddress.Parse("192.168.1.15");
-            int portInput = 7;
-            try
-            {
-                _logger.LogInformation($"{DateTime.Now}");
-                Console.WriteLine(string.Format("IPAddress: {0} - Port: {1}", ipaddr.ToString(), portInput));
-                await client.ConnectAsync(ipaddr, portInput);
-                Console.WriteLine("Connected to server.");
-                await client.SendAsync(new ArraySegment<byte>(inputArray), SocketFlags.None);
-                Console.WriteLine("Data sent to server.");
-
-                byte[] buffer = new byte[152];
-                StringBuilder asciiBuilder = new StringBuilder();
-                int bytesReceived = 0;
-                while (true)
-                {
-                    int nRecv = await client.ReceiveAsync(new ArraySegment<byte>(buffer, bytesReceived, buffer.Length - bytesReceived), SocketFlags.None);
-                    if (nRecv == 0)
-                    {
-                        break; // The connection has been closed by the server.
-                    }
-                    bytesReceived += nRecv;
-                    // Assume the end of the message is when the buffer is full or another condition
-                    if (bytesReceived >= buffer.Length)
-                    {
-                        break;
-                    }
-                }
-
-
-                //DataConverter.showByteArray(buffer, asciiBuilder, bytesReceived);
-
-                int startind = 108; //شروع پکت دریافتی سرور
-                int endind = 152; //پایان پکت دریافتی سرور
-                int packetLen = endind - startind;
-                byte[] recBuffer = new byte[packetLen];
-                Array.Copy(buffer, startind, recBuffer, 0, packetLen);
-
-                // Convert byte array to recieve object
-                //RecievePacket packet = DataConverter.ByteArrayToDataPacket(recBuffer);
-
-                // Parse byte array to recieve object
-                RecievePacket packet = DataConverter.ParseDataPacket(recBuffer);
-
-
-                // Now you can access the fields of the DataPacket object
-                Console.WriteLine($"Header: {packet.Head}");
-                Console.WriteLine($"Missile Address: {packet.MissleAddress}");
-                Console.WriteLine($"Up Power: {packet.UpPower}");
-                Console.WriteLine($"Xt: {packet.Xt}");
-                Console.WriteLine($"Yt: {packet.Yt}");
-                Console.WriteLine($"Zt: {packet.Zt}");
-                Console.WriteLine($"Xm: {packet.Xm}");
-                Console.WriteLine($"Ym: {packet.Ym}");
-                Console.WriteLine($"Zm: {packet.Zm}");
-                Console.WriteLine($"Vxm: {packet.Vxm}");
-                Console.WriteLine($"Vym: {packet.Vym}");
-                Console.WriteLine($"Vzm: {packet.Vzm}");
-                Console.WriteLine($"Vxt: {packet.Vxt}");
-                Console.WriteLine($"Vyt: {packet.Vyt}");
-                Console.WriteLine($"Vzt: {packet.Vzt}");
-                Console.WriteLine($"Ctrl: {packet.Ctrl}");
-                Console.WriteLine($"Reset Time: {packet.ResetTime}");
-                Console.WriteLine($"CRC16: {packet.CRC16}");
-                Console.WriteLine($"Checksum: {packet.CheckSum}");
-                Console.WriteLine($"Footer: {packet.Footer}");
-
-            }
-            catch (Exception excp)
-            {
-                Console.WriteLine(excp.ToString());
-            }
-            finally
-            {
-                if (client != null)
-                {
-                    if (client.Connected)
-                    {
-                        client.Shutdown(SocketShutdown.Both);
-                    }
-                    client.Close();
-                    client.Dispose();
-                }
-            }
         }
        
     }

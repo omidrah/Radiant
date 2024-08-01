@@ -1,7 +1,7 @@
 // shared-form.service.ts
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, timer } from 'rxjs';
-import { askmodel } from '../models/ask';
+import { sendPacket } from '../models/sendPacket';
 import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
@@ -9,69 +9,73 @@ import { HttpClient } from '@angular/common/http';
 export class SharedFormService implements  OnDestroy  {
   private timerSubscription: Subscription;
 
-  private formData$ = new BehaviorSubject<askmodel>({
+  private formData$ = new BehaviorSubject<sendPacket>({
     header:'CMD',
-    datamode: 'manual',
+//    datamode: 'manual',
     testmode: 'txoff',
     couple: 0,
     att: 0,
     /**unique for all tab */
     mfreq: 1,
-    rsvd1:0,
+    selftest:1,
     /**m1 */
-    m1downdata: 'loopback',
     m1xm: 0,
     m1ym: 0,
     m1zm: 0,
     m1status: 'CC',
     m1adm: '001101',
-    bit:'1',
+     datamode1: 'loopback',
     crc:'03',
     /**m2 */
-    m2downdata: 'loopback',
     m2xm: 0,
     m2ym: 0,
     m2zm: 0,
     m2status: 'CC',
     m2adm: '001101',
+    datamode2: 'loopback',
     rsvd3:0,
     /**m3 */
-    m3downdata: 'loopback',
     m3xm: 0,
     m3ym: 0,
     m3zm: 0,
     m3status:'CC',
     m3adm: '001101',
+    datamode3: 'loopback',
     rsvd4:0,
     /**m4 */
-    m4downdata: 'loopback',
     m4xm: 0,
     m4ym: 0,
     m4zm: 0,
     m4status:'CC',
     m4adm: '001101',
+    datamode4: 'loopback',
     rsvd5:0,
     /**m5 */
-    m5downdata: 'loopback',
     m5xm: 0,
     m5ym: 0,
     m5zm: 0,
     m5status: 'CC',
     m5adm: '001101',
+    datamode5: 'loopback',
+
     rsvd6:0,
     /**m6 */
-    m6downdata: 'loopback',
     m6xm: 0,
     m6ym: 0,
     m6zm: 0,
     m6status: 'CC',
     m6adm: '001101',
-    checksum:0,
+    datamode6: 'loopback',
     rsvd7:0,
+
+    checksum:0,
+
+    rsvd8:0,
+
     footer:'END'
   });
 
-  get currentData(): Observable<askmodel> { return this.formData$.asObservable(); }
+  get currentData(): Observable<sendPacket> { return this.formData$.asObservable(); }
   constructor(private http: HttpClient) { }
 
   updateFormData(newData: any, whichtab: string) {
@@ -80,9 +84,9 @@ export class SharedFormService implements  OnDestroy  {
     switch (whichtab) {
       case 'cmd':
         cData.testmode = newData['testmode'];
-        //cData.datamode = newData['datamode'];
         cData.couple = newData['couple'];
         cData.att =this.calcPout(newData['att']);
+        cData.selftest = newData['selftest'];
         break;
       case 'm1tab':
         cData.datamode1 = newData['m1downdata']
@@ -91,6 +95,7 @@ export class SharedFormService implements  OnDestroy  {
         cData.m1zm = newData['m1zm']
         cData.m1status = newData['m1status']
         cData.m1adm = newData['m1adm']
+        cData.crc = newData['crc'];
         cData.mfreq = newData['mfreq']
         break;
       case 'm2tab':
@@ -101,7 +106,6 @@ export class SharedFormService implements  OnDestroy  {
         cData.m2status = newData['m2status']
         cData.m2adm = newData['m2adm']
         cData.mfreq = newData['mfreq']
-
         break;
       case 'm3tab':
         cData.datamode3 = newData['m3downdata']
@@ -111,7 +115,6 @@ export class SharedFormService implements  OnDestroy  {
         cData.m3status = newData['m3status']
         cData.m3adm = newData['m3adm']
         cData.mfreq = newData['mfreq']
-
         break;
       case 'm4tab':
         cData.datamode4 = newData['m4downdata']

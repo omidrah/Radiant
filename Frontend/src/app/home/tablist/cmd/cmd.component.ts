@@ -20,11 +20,13 @@ export class CmdComponent implements OnInit {
   ngOnInit() {
     this.cmdForm = this.fb.group({
       testmode: new FormControl('txoff'),
-      datamode: new FormControl('manual'),
+      // datamode: new FormControl('manual'),
       couple:new FormControl(0) ,
       unit:new FormControl('w'),
       pwr:new FormControl(0),
-      att:new FormControl(0)
+      att:new FormControl(0),
+      crc:new FormControl(true),
+      SelfTest:new FormControl(true)
     });
      // Listen for changes in the entire form
      this.cmdForm.valueChanges.subscribe(values => {
@@ -70,5 +72,11 @@ export class CmdComponent implements OnInit {
   }
   get att(): number {
     return this.cmdForm.get('att').value;
+  }
+  get crc(): number {
+    return this.cmdForm.get('crc').value;
+  }
+  get selftest(): number {
+    return this.cmdForm.get('selftest').value;
   }
 }

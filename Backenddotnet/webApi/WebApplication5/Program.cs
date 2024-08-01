@@ -1,6 +1,8 @@
 
 using System.Reflection;
+using WebApplication5.Controllers;
 using WebApplication5.Model;
+using WebApplication5.Services;
 using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,9 +25,15 @@ if (!Directory.Exists(path2)) //created in solution
 }
 
 
+
 // Add services to the container.
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
+// Add services to the container.
+builder.Services.AddSignalR();
+builder.Services.AddSingleton<SocketService>();
+//builder.Services.AddHostedService<SocketBackgroundService>();
+
 builder.Services.Configure<Settings>(Conf => builder.Configuration.Bind(Conf));
 
 builder.Services.AddControllers();
@@ -40,15 +48,12 @@ builder.Services.AddCors(options =>
         });
 });
 
+
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-
-app.UseHttpsRedirection();
 
 app.UseCors("AllowAllOrigins"); 
-app.UseAuthorization();
-
+app.MapHub<DataHub>("/dataHub");
 app.MapControllers();
-
 app.Run();

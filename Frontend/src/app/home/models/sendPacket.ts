@@ -1,4 +1,4 @@
-export class askmodel {
+export class sendPacket {
     header:string;
     testmode: string;
     couple:number;
