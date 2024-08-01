@@ -26,11 +26,13 @@ namespace WebApplication5.Services
 
         public  async Task SendDataToFileAsync(string message, bool append = false)
         {
-            var filename = DateTime.Now.ToString("yyyy-dd-M-HH-mm-ss") + ".Send.bin";
+            var filename = $"{DateTime.Now:yyyyMMdd_HHmmss}.Send.bin";
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _settings.companyInfo.filePath, filename);
             try
             {
-                using (FileStream stream = new FileStream(Path.Combine(filePath, filename), append ? FileMode.Append : FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
+                Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+                using (FileStream stream = new FileStream(filePath, append ? FileMode.Append : FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
                 using (StreamWriter sw = new StreamWriter(stream))
                 {
                     await sw.WriteAsync(message);
