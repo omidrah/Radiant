@@ -46,7 +46,7 @@ namespace WebApplication5.Controllers
             Console.WriteLine("*******************************************************************");
             // Convert the hexadecimal string to a byte array
             byte[] byteArray = Utils.StringToByteArray(hexValue);
-            await _socketService.SendDataAsync(byteArray, "192.168.1.15", 7);
+            await _socketService.SendDataAsync(byteArray);
 
             // Start async Task to Save Image
             var pa = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + _settings.companyInfo.filePath;

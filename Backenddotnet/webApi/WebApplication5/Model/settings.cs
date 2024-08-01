@@ -6,6 +6,8 @@ namespace WebApplication5.Model
     public class Settings
     {
         public CompanyInfo companyInfo { get; set; }
+        public SocketConfig SocketConfig { get; set; }
+
         public Connectionstrings ConnectionStrings { get; set; }
         public required Logging Logging { get; set; }
     }
@@ -20,6 +22,11 @@ namespace WebApplication5.Model
         public string version { get; set; } = null!;
         public string filePath { get; set; } = null!;
 
+    }
+    public class SocketConfig
+    {
+        public string IpAddress { get; set; }
+        public int Port { get; set; }
     }
     public class Logging
     {

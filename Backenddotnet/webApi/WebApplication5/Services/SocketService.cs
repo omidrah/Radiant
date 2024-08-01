@@ -3,6 +3,7 @@ using System.Net.Sockets;
 using System.Net;
 using WebApplication5.Controllers;
 using WebApplication5.Model;
+using Microsoft.Extensions.Options;
 
 namespace WebApplication5.Services
 {
@@ -10,23 +11,26 @@ namespace WebApplication5.Services
     {
         private readonly IHubContext<DataHub> _hubContext;
         private readonly ILogger<SocketService> _logger;
+        private readonly SocketConfig _socketConfig;
 
-        public SocketService(IHubContext<DataHub> hubContext, ILogger<SocketService> logger)
+
+        public SocketService(IHubContext<DataHub> hubContext, ILogger<SocketService> logger, IOptions<Settings> settings)
         {
             _hubContext = hubContext;
             _logger = logger;
+            _socketConfig = settings.Value.SocketConfig;
         }
 
-        public async Task SendDataAsync(byte[] inputArray, string serverIp= "192.168.1.15", int serverPort=7)
+        public async Task SendDataAsync(byte[] inputArray)
         {
             using Socket client = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPAddress ipaddr = IPAddress.Parse(serverIp);
+            IPAddress ipaddr = IPAddress.Parse(_socketConfig.IpAddress);
 
             try
             {
                 _logger.LogInformation($"{DateTime.Now}");
-                Console.WriteLine($"IPAddress: {ipaddr} - Port: {serverPort}");
-                await client.ConnectAsync(ipaddr, serverPort);
+                Console.WriteLine($"IPAddress: {ipaddr} - Port: {_socketConfig.Port}");
+                await client.ConnectAsync(ipaddr, _socketConfig.Port);
                 Console.WriteLine("Connected to server.");
                 await client.SendAsync(new ArraySegment<byte>(inputArray), SocketFlags.None);
                 Console.WriteLine("Data sent to server.");

@@ -1,10 +1,12 @@
-﻿namespace WebApplication5.Services
+﻿using Microsoft.Extensions.Options;
+using WebApplication5.Model;
+
+namespace WebApplication5.Services
 {
     public class SocketBackgroundService : BackgroundService
     {
         private readonly ILogger<SocketBackgroundService> _logger;
         private readonly SocketService _socketService;
-
         public SocketBackgroundService(ILogger<SocketBackgroundService> logger, SocketService socketService)
         {
             _logger = logger;
@@ -24,7 +26,7 @@
 
                 // Here you can call the socket service to perform some periodic work
                 byte[] dummyData = new byte[10]; // Replace with actual data
-                await _socketService.SendDataAsync(dummyData, "192.168.1.15", 7);
+                await _socketService.SendDataAsync(dummyData);
 
                 await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
             }

@@ -30,6 +30,9 @@ if (!Directory.Exists(path2)) //created in solution
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 // Add services to the container.
+
+builder.Services.Configure<Settings>(builder.Configuration.GetSection("Settings"));
+
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<SocketService>();
 //builder.Services.AddHostedService<SocketBackgroundService>();
