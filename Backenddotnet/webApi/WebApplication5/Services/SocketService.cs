@@ -37,7 +37,9 @@ namespace WebApplication5.Services
                 await client.SendAsync(new ArraySegment<byte>(inputArray), SocketFlags.None);
                 Console.WriteLine("Data sent to server.");
 
-                byte[] buffer = new byte[324];
+                //byte[] buffer = new byte[324];
+                byte[] buffer = new byte[434];
+
                 int bytesReceived = 0;
 
                 while (true)
@@ -56,12 +58,13 @@ namespace WebApplication5.Services
                     }
                 }
 
-               
+                byte[] recbuf = new byte[324];
+                Array.Copy(buffer, 110, recbuf, 0, 324);
                 // Convert byte array to recieve object
                 //RecievePacket packet = DataConverter.ByteArrayToDataPacket(recBuffer);
                 //DataConverter.showByteArray(buffer, asciiBuilder, bytesReceived);
 
-                RecievePacket packet = DataConverter.ParseDataPacket(buffer);
+                RecievePacket packet = DataConverter.ParseDataPacket(recbuf);
                 // Receive Data Save to file
                 await ReceiveDataSaveAsync(packet);
                 //Recieve Data Send to clients via SignalR
