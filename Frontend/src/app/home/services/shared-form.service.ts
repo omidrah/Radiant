@@ -10,7 +10,6 @@ import { ReceivePacket } from '../models/recievePacket';
 })
 export class SharedFormService implements  OnDestroy  {
   private timerSubscription: Subscription;
-
    sendPacket = new SendPacket(
     'CMD',
     'txof',
@@ -203,44 +202,36 @@ export class SharedFormService implements  OnDestroy  {
     // 10->0   and -90->200
      return Math.abs((pout -10)*2);
   }
-/**start timer every 1 seconds read values and send to dotnetbackend */
-  startTimer() {
-    const apiUrl = 'http://localhost:5000'; // Replace with your actual backend API URL
-    this.timerSubscription =timer(0, 1000).pipe().subscribe(value => {
+ /**start timer every 1 seconds read values and send to dotnetbackend */
+  SendDataByTimer(apiUrl:string, TimerSecond:number) {
+    this.timerSubscription =timer(0, TimerSecond).pipe().subscribe(value => {
      console.log(this.formData$.value.sPacket); // Emit the value through the Subject
      this.http.post(`${apiUrl}/Home/sendData`, this.formData$.value.sPacket).subscribe
         (
           (response) => {
-            console.log('Data saved successfully!', response);
+            console.log('Send Data saved successfully!', response);
           },
           (error) => {
-            console.error('Error saving data:', error);
+            console.error('Error saving  Send data:', error);
           }
         );
     });
   }
-  startTimer_nodeJsbackend() {
-    const apiUrl = 'http://localhost:3000'; // Replace with your actual backend API URL
-    this.timerSubscription =timer(0, 10000).subscribe(value => {
-     //console.log(this.formData$.value); // Emit the value through the Subject
-     this.http.post(`${apiUrl}/api/save-data`, this.formData$.value).subscribe
-        (
-          (response) => {
-            console.log('Data saved successfully!', response);
-          },
-          (error) => {
-            console.error('Error saving data:', error);
-          }
-        );
-    });
-  }
-  saveFormData() {
-    // Logic to save formData to a file
-    const currentData = this.formData$.value; // Get the current value without subscribing
-    const blob = new Blob([JSON.stringify(this.currentData)], { type: 'application/json' });
-    // Use FileSaver or similar library to trigger the download
-    // FileSaver.saveAs(blob, 'data.json');
-  }
+  // startTimer_nodeJsbackend() {
+  //   const apiUrl = 'http://localhost:3000'; // Replace with your actual backend API URL
+  //   this.timerSubscription =timer(0, 10000).subscribe(value => {
+  //    //console.log(this.formData$.value); // Emit the value through the Subject
+  //    this.http.post(`${apiUrl}/api/save-data`, this.formData$.value).subscribe
+  //       (
+  //         (response) => {
+  //           console.log('Data saved successfully!', response);
+  //         },
+  //         (error) => {
+  //           console.error('Error saving data:', error);
+  //         }
+  //       );
+  //   });
+  // }
   ngOnDestroy() {
     this.timerSubscription.unsubscribe();
   }

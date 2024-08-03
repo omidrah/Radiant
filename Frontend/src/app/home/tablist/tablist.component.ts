@@ -9,13 +9,15 @@ import { SharedFormService } from '../services/shared-form.service';
 })
 export class TablistComponent implements OnInit  {
   @ViewChild('staticTabs') tabset: TabsetComponent;
+  apiUrl = 'http://localhost:5000'; 
+  activeTabId:string='cmd';
+
  constructor(private sharedService:SharedFormService){ }
 
   ngOnInit(): void {
    // this.tabset.tabs[2].active=true;
-  this.sharedService.startTimer();
+  this.sharedService.SendDataByTimer(this.apiUrl,1000);
   }
-  activeTabId:string='cmd';
   changeTab($event) {
     this.activeTabId = $event?.id;
     console.log(this.activeTabId);
