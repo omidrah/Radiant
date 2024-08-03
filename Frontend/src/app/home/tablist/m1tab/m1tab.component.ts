@@ -5,6 +5,8 @@ import { interval, takeWhile,Subscription, share } from 'rxjs';
 import { SharedFormService } from '../../services/shared-form.service';
 import { Addresses } from '../../models/address';
 import { Freq, Status } from '../../models/status';
+import { SignalRService } from '../../services/signal-r.service';
+import { ReceivePacket } from '../../models/recievePacket';
 
 @Component({
   selector: 'app-m1tab',
@@ -19,7 +21,8 @@ export class M1tabComponent implements OnInit, OnDestroy{
   addresses =Addresses;
   status = Status;
   freq = Freq;
-  constructor(private fb: FormBuilder , private sharedFormService: SharedFormService) {
+  resdata: ReceivePacket | null = null;
+  constructor(private fb: FormBuilder , private sharedFormService: SharedFormService,private signalRService: SignalRService) {
     this.m1tabform = this.fb.group({
       m1downdata: new FormControl('loopback'),
       m1xm: new FormControl(0),
@@ -54,6 +57,10 @@ export class M1tabComponent implements OnInit, OnDestroy{
       this.m1tabform.patchValue({
         mfreq: data.sPacket.mfreq
       }, { emitEvent: false });
+    });
+
+    this.signalRService.data$.subscribe(data => {
+      this.resdata = data;
     });
     // Subscribe to the blur event of each form control
     // Object.keys(this.m1tabform.controls).forEach(key => {
