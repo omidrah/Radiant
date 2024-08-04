@@ -25,6 +25,10 @@ namespace WebApplication5.Services
 
         public async Task SendDataAsync(byte[] inputArray)
         {
+            var cpacket = new RecievePacket { M1_Status = 125 };
+            //Recieve Data Send to clients via SignalR
+            await _hubContext.Clients.All.SendAsync("ReceiveData", cpacket);
+            return;
             using Socket client = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPAddress ipaddr = IPAddress.Parse(_socketConfig.IpAddress);
 
@@ -67,6 +71,8 @@ namespace WebApplication5.Services
                 RecievePacket packet = DataConverter.ParseDataPacket(recbuf);
                 // Receive Data Save to file
                 await ReceiveDataSaveAsync(packet);
+
+
                 //Recieve Data Send to clients via SignalR
                 await _hubContext.Clients.All.SendAsync("ReceiveData", packet);
                 // Log the packet data on console
