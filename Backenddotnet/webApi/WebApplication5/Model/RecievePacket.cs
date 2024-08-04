@@ -11,7 +11,7 @@ namespace WebApplication5.Model
 
         public ushort M1_ADDR;
         public int M1_Xt;
-        public int M1_Yt;
+        public int M1_Yt; 
         public int M1_Zt;
         public int M1_Xm;
         public int M1_Ym;

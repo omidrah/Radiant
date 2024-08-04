@@ -1,3 +1,6 @@
+export class ReP {
+  constructor(public m1_xt: number){}
+  }
 export class ReceivePacket {
   constructor(
       public head: string,

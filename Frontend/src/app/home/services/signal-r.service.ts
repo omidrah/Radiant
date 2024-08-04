@@ -1,32 +1,37 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { ReceivePacket } from '../models/recievePacket';
+import { ReceivePacket,ReP } from '../models/recievePacket';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class SignalRService {
-  private dataSource = new BehaviorSubject<ReceivePacket | null>(null);
+  private dataSource = new BehaviorSubject<ReP | null>(null);
   data$ = this.dataSource.asObservable();
-  private hubConnection: signalR.HubConnection
-  public startConnection = () => {
-      this.hubConnection = new signalR.HubConnectionBuilder()
-                              .withUrl('http://localhost:5000/dataHub')
-                              .build();
-      this.hubConnection
-        .start()
-        .then(() => console.log('SignalR Connection started'))
-        .catch(err => console.log('Error while starting connection: ' + err))
-    }
+  private hubConnection: signalR.HubConnection;
 
-   public addTransferHubListener = () => {
-      this.hubConnection.on('ReceiveData', (data: ReceivePacket) => {
-        console.log('Received data from SignalR:', data); // Add a console log to verify data reception
-        this.dataSource.next(data);
-      });
-    }
+  constructor() {
+    this.startConnection();
+    this.addTransferHubListener();
+  }
 
-  constructor() { }
+  private startConnection() {
+    this.hubConnection = new signalR.HubConnectionBuilder()
+      .withUrl('http://localhost:5000/dataHub')
+      .build();
+
+    this.hubConnection
+      .start()
+      .then(() => console.log('SignalR Connection started'))
+      .catch(err => console.log('Error while starting connection:' + err));
+  }
+
+  private addTransferHubListener() {
+    this.hubConnection.on('ReceiveData', (data: ReP) => {
+      console.log('Received data from SignalR:', data); // Log the received data
+      this.dataSource.next(data);
+    });
+  }
 }

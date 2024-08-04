@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Text.Json.Nodes;
@@ -17,13 +20,16 @@ namespace WebApplication5.Controllers
         private readonly Settings _settings;
         private readonly SocketService _socketService;
         private readonly FileService _fileService;
+        private readonly IHubContext<DataHub> _hubContext;
 
-        public HomeController(ILogger<HomeController> logger, FileService fileService, IOptions<Settings> settings,SocketService socketService)
+        public HomeController(IHubContext<DataHub> hubContext, ILogger<HomeController> logger,
+            FileService fileService, IOptions<Settings> settings,SocketService socketService)
         {
             _logger = logger;
             _fileService = fileService;
             _settings = settings.Value;
             _socketService = socketService;
+            _hubContext = hubContext;
         }
         [HttpGet]
         public string Get()
@@ -34,7 +40,7 @@ namespace WebApplication5.Controllers
         /// آرایه ای از بایت ها دریافت شده  و باینری آن در فایل چاپ میشود
         /// </summary>
         /// <param name="inputString"></param>
-        private async Task SavebyteArrayToFile(string  hexValue,SendPacket valueFromUi)
+        private async Task<RecievePacket> SavebyteArrayToFile(string  hexValue,SendPacket valueFromUi)
         {
             //var cnt =  res.toByteArray().Length;    
             Console.WriteLine($"{DateTime.Now}");
@@ -44,10 +50,10 @@ namespace WebApplication5.Controllers
             Console.WriteLine("*******************************************************************");
             // Convert the hexadecimal string to a byte array
             byte[] byteArray = Utils.StringToByteArray(hexValue);
-            await _socketService.SendDataAsync(byteArray);
-
-            // Start async Task to Save send Packet TO file...
+            var recPacket =  await _socketService.SendDataAsync(byteArray);            
+            // Start async Task to Save send Packet To file...
             await _fileService.SendDataToFileAsync(valueFromUi.ToString() + "\n"+ hexValue);
+            return recPacket;
         }
        
         [HttpPost("sendData")]
@@ -56,7 +62,6 @@ namespace WebApplication5.Controllers
             SendPacket res = new ();
             // Deserialize the JSON into a Packet object
             //PacketImp packet = JsonConvert.DeserializeObject<SendPacket>(inputString.ToString());
-
             StringBuilder sb = new(); 
             foreach (var property in inputString)
             {
@@ -412,8 +417,12 @@ namespace WebApplication5.Controllers
                     }
                 }
             }                       
-            await SavebyteArrayToFile(sb.ToString(),res);
-            return Ok();
+           // var recpacket =  await SavebyteArrayToFile(sb.ToString(),res);
+            //Recieve Data Send to clients via SignalR
+            var dp = new ReP { m1_xt = (new Random().Next()) };
+            Console.WriteLine(JsonConvert.SerializeObject(dp)); // Log the data
+            await _hubContext.Clients.All.SendAsync("ReceiveData", dp);
+            return Ok(dp);
         }
        
     }

@@ -9,29 +9,21 @@ namespace WebApplication5.Services
 {
     public class SocketService
     {
-        private readonly IHubContext<DataHub> _hubContext;
         private readonly ILogger<SocketService> _logger;
         private readonly FileService _fileService;
         private readonly SocketConfig _socketConfig;
-
-
-        public SocketService(IHubContext<DataHub> hubContext,FileService fileService, ILogger<SocketService> logger, IOptions<Settings> settings)
-        {
-            _hubContext = hubContext;
+        public SocketService(FileService fileService, ILogger<SocketService> logger, IOptions<Settings> settings)
+        {           
             _fileService = fileService;
             _logger = logger;
             _socketConfig = settings.Value.SocketConfig;
         }
-
-        public async Task SendDataAsync(byte[] inputArray)
+        public async Task<RecievePacket> SendDataAsync(byte[] inputArray)
         {
-            var cpacket = new RecievePacket { M1_Status = 125 };
-            //Recieve Data Send to clients via SignalR
-            await _hubContext.Clients.All.SendAsync("ReceiveData", cpacket);
-            return;
+            
             using Socket client = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPAddress ipaddr = IPAddress.Parse(_socketConfig.IpAddress);
-
+            RecievePacket packet = null;
             try
             {
                 _logger.LogInformation($"{DateTime.Now}");
@@ -41,11 +33,8 @@ namespace WebApplication5.Services
                 await client.SendAsync(new ArraySegment<byte>(inputArray), SocketFlags.None);
                 Console.WriteLine("Data sent to server.");
 
-                //byte[] buffer = new byte[324];
-                byte[] buffer = new byte[434];
-
+                byte[] buffer = new byte[324];
                 int bytesReceived = 0;
-
                 while (true)
                 {
                     int nRecv = await client.ReceiveAsync(new ArraySegment<byte>(buffer, bytesReceived, buffer.Length - bytesReceived), SocketFlags.None);
@@ -61,22 +50,19 @@ namespace WebApplication5.Services
                         break;
                     }
                 }
-
-                byte[] recbuf = new byte[324];
-                Array.Copy(buffer, 110, recbuf, 0, 324);
+                /*if echo in response*/
+                //byte[] recbuf = new byte[324];
+                //Array.Copy(buffer, 110, recbuf, 0, 324);
                 // Convert byte array to recieve object
                 //RecievePacket packet = DataConverter.ByteArrayToDataPacket(recBuffer);
                 //DataConverter.showByteArray(buffer, asciiBuilder, bytesReceived);
 
-                RecievePacket packet = DataConverter.ParseDataPacket(recbuf);
+                packet = DataConverter.ParseDataPacket(buffer);
                 // Receive Data Save to file
-                await ReceiveDataSaveAsync(packet);
-
-
-                //Recieve Data Send to clients via SignalR
-                await _hubContext.Clients.All.SendAsync("ReceiveData", packet);
+                await ReceiveDataSaveAsync(packet);              
                 // Log the packet data on console
                 ConsoLogPacket(packet);
+               
             }
             catch (Exception excp)
             {
@@ -91,14 +77,13 @@ namespace WebApplication5.Services
                 client.Close();
                 client.Dispose();
             }
+            return packet;
         }
-
         private async Task ReceiveDataSaveAsync(RecievePacket packet)
         {
             byte[] byteArray = DataConverter.ToByteArray(packet);
             await _fileService.ReceiveDataToFileAsync(byteArray);
         }
-
         private void ConsoLogPacket(RecievePacket packet)
         {
             Console.WriteLine($"Header: {new string(packet.Head)}");

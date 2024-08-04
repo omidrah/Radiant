@@ -33,8 +33,8 @@ export class SharedFormService implements  OnDestroy  {
     '001101',
     //datamode1:
     'loopback',
-    //crc:
-    3,
+    //crc: //true 1 and false 0
+    1,
     //m2xm:
     0,
     //m2ym:

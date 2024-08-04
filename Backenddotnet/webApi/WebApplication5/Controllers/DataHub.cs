@@ -13,9 +13,8 @@ namespace WebApplication5.Controllers
             _logger = logger;
         }
         //when called, sends the packet to all connected clients.
-        public async Task ReceiveData(RecievePacket packet)
+        public async Task SendData(RecievePacket packet)
         {
-            _logger.LogInformation($"Sending data to Client: {JsonConvert.SerializeObject(packet)}");
             await Clients.All.SendAsync("ReceiveData", packet);
         }
 
