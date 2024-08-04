@@ -8,24 +8,25 @@ import { ReceivePacket } from '../models/recievePacket';
 })
 
 export class SignalRService {
-  private hubConnection: signalR.HubConnection;
   private dataSource = new BehaviorSubject<ReceivePacket | null>(null);
   data$ = this.dataSource.asObservable();
+  private hubConnection: signalR.HubConnection
+  public startConnection = () => {
+      this.hubConnection = new signalR.HubConnectionBuilder()
+                              .withUrl('https://localhost:5000/dataHub')
+                              .build();
+      this.hubConnection
+        .start()
+        .then(() => console.log('SignalR Connection started'))
+        .catch(err => console.log('Error while starting connection: ' + err))
+    }
 
-  constructor() {
-    this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('http://localhost:5000/dataHub') // Ensure the URL is correct and accessible
-      .build();
+   public addTransferHubListener = () => {
+      this.hubConnection.on('ReceiveData', (data: ReceivePacket) => {
+        console.log('Received data from SignalR:', data); // Add a console log to verify data reception
+        this.dataSource.next(data);
+      });
+    }
 
-    this.hubConnection.on('ReceiveData', (data: ReceivePacket) => {
-      console.log('Received data from SignalR:', data); // Add a console log to verify data reception
-      this.dataSource.next(data);
-    });
-
-    this.hubConnection.start().then(() => {
-      console.log('SignalR Connected'); // Confirm successful connection
-    }).catch(err => {
-      console.error('SignalR Connection Error:', err); // Log connection errors
-    });
-  }
+  constructor() { }
 }
