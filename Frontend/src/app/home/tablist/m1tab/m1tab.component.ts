@@ -59,6 +59,9 @@ export class M1tabComponent implements OnInit, OnDestroy{
       console.log('Received data from SignalR in component:', data); // Log received data in the component
       this.resdata = data;
     });
+    this.signalRService.startConnection();
+    this.signalRService.addTransferHubListener();
+    this.signalRService.data$.subscribe(data => { this.resdata = data; });
     // Subscribe to the blur event of each form control
     // Object.keys(this.m1tabform.controls).forEach(key => {
     //   const control = this.m1tabform.get(key);
