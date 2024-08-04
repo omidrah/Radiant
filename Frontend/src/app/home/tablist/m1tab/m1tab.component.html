@@ -1,6 +1,6 @@
 <div style="padding-left:10px;padding-top: 2px; font-size: 20px !important;">
   <form [formGroup]="m1tabform">
-    <div class="group-container">
+    <div class="group-container" *ngIf="resdata">
       <div class=" group-box">
         <h3>Uplink Data</h3>
         <div class="row">
@@ -49,6 +49,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="group-container" *ngIf="!resdata">
+      Loading data...
     </div>
     <div class="group-container mt-2">
       <div class="group-box">

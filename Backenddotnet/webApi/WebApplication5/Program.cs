@@ -30,7 +30,20 @@ if (!Directory.Exists(path2)) //created in solution
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 // Add services to the container.
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder
+                .AllowCredentials()
+                .WithOrigins(
+                    "https://localhost:4200")
+                .SetIsOriginAllowedToAllowWildcardSubdomains()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<SocketService>();
@@ -41,23 +54,15 @@ builder.Services.Configure<Settings>(Conf => builder.Configuration.Bind(Conf));
 //builder.Services.Configure<Settings>(builder.Configuration.GetSection("Settings"));
 
 builder.Services.AddControllers();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAllOrigins",
-        builder =>
-        {
-            builder.AllowAnyOrigin()
-                   .AllowAnyHeader()
-                   .AllowAnyMethod();
-        });
-});
-
-
-
 var app = builder.Build();
+app.UseRouting();
 
-
-app.UseCors("AllowAllOrigins"); 
-app.MapHub<DataHub>("/dataHub");
-app.MapControllers();
+app.UseCors("AllowAllOrigins");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<DataHub>("/dataHub");
+    endpoints.MapControllers();
+});
+//app.MapHub<DataHub>("/dataHub");
+//app.MapControllers();
 app.Run();
