@@ -29,11 +29,6 @@ export class M1tabComponent implements OnInit, OnDestroy{
       m1ym:new FormControl(0) ,
       m1zm:new FormControl(0),
       m1status:new FormControl('CC'),
-      //m1selstatus:new FormControl(0),
-      //m1counter:new FormControl(0),
-      //m1common:new FormControl(0),
-      //m1ontime:new FormControl(0),
-      //m1linkled:new FormControl(0),
       m1adm:new FormControl('001101'),
       mfreq:new FormControl(1)
     });
