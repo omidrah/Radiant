@@ -1,54 +1,57 @@
 <div style="padding-left:10px;padding-top: 2px; font-size: 20px !important;">
   <form [formGroup]="m3tabform">
-    <div class="group-container">
+    <div class="group-container" *ngIf="resPacket">
       <div class=" group-box">
         <h3>Uplink Data</h3>
         <div class="row">
           <div class="col-2">
-            xt<span class="ml-2 label-border" id="xt">123</span>
+            xt<span class="ml-2 label-border" id="xt"> {{ resPacket.m3_Xt }}</span>
           </div>
           <div class="col-2">
-            yt<span  class="ml-2 label-border" id="yt">250</span>
+            yt<span  class="ml-2 label-border" id="yt">{{ resPacket.m3_Yt }}</span>
           </div>
           <div class="col-2">
-            zt<span class="ml-2 label-border" id="zt">905</span>
+            zt<span class="ml-2 label-border" id="zt">{{ resPacket.m3_Zt }}</span>
           </div>
           <div class="col-2">
-            Xm<span class="ml-2 label-border" id="xm">888</span>
+            Xm<span class="ml-2 label-border" id="xm">{{ resPacket.m3_Xm }}</span>
           </div>
           <div class="col-2">
-            Ym<span class="ml-2 label-border" id="ym">566</span>
+            Ym<span class="ml-2 label-border" id="ym">{{ resPacket.m3_Ym }}</span>
           </div>
           <div class="col-2">
-            Zm<span class="ml-2 label-border" id="zm">666</span>
+            Zm<span class="ml-2 label-border" id="zm">{{ resPacket.m3_Zm }}</span>
           </div>
         </div>
         <div class="row mt-1">
           <div class="col-2">
-           Vxt<span class="label-border" id="vxt">111</span>
+           Vxt<span class="label-border" id="vxt">{{ resPacket.m3_Vxt }}</span>
           </div>
 
           <div class="col-2">
-            Vyt<span class="label-border" id="vyt">222</span>
+            Vyt<span class="label-border" id="vyt">{{ resPacket.m3_Vyt }}</span>
           </div>
 
           <div class="col-2">
-            Vzt<span class="label-border" id="vzt">333</span>
+            Vzt<span class="label-border" id="vzt">{{ resPacket.m3_Vzt }}</span>
           </div>
 
           <div class="col-2">
-            Vxm<span class="label-border" id="vxm">444</span>
+            Vxm<span class="label-border" id="vxm">{{ resPacket.m3_Vxm }}</span>
           </div>
 
           <div class="col-2">
-            Vym<span class="label-border"  id="vym">555</span>
+            Vym<span class="label-border"  id="vym">{{ resPacket.m3_Vym }}</span>
           </div>
 
           <div class="col-2">
-            Vzm<span class="label-border" id="vzm">777</span>
+            Vzm<span class="label-border" id="vzm">{{ resPacket.m3_Vzm }}</span>
           </div>
         </div>
       </div>
+    </div>
+    <div class="group-container" *ngIf="!resPacket">
+      Loading...
     </div>
     <div class="group-container mt-2">
       <div class="group-box">

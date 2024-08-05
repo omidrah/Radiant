@@ -4,6 +4,8 @@ import { interval, takeWhile,Subscription } from 'rxjs';
 import { SharedFormService } from '../../services/shared-form.service';
 import { Addresses } from '../../models/address';
 import { Freq, Status } from '../../models/status';
+import { SignalRService } from '../../services/signal-r.service';
+import { ReceivePacket } from '../../models/recievePacket';
 
 
 @Component({
@@ -19,19 +21,16 @@ export class M5tabComponent implements OnInit, OnDestroy{
   status = Status;
   freq = Freq;
 
+  resPacket: ReceivePacket | null = null;
 
-  constructor(private fb: FormBuilder , private sharedFormService: SharedFormService) {
+  constructor(private fb: FormBuilder ,private signalRService: SignalRService
+    , private sharedFormService: SharedFormService) {
     this.m5tabform = this.fb.group({
       m5downdata: new FormControl('loopback'),
       m5xm: new FormControl(0),
       m5ym:new FormControl(0) ,
       m5zm:new FormControl(0),
       m5status:new FormControl('CC'),
-     // m5selstatus:new FormControl(0),
-     // m5counter:new FormControl(0),
-     // m5common:new FormControl(0),
-     // m5ontime:new FormControl(0),
-     // m5linkled:new FormControl(0),
       m5adm:new FormControl('001101'),
       mfreq:new FormControl(1)
     });
@@ -55,6 +54,8 @@ export class M5tabComponent implements OnInit, OnDestroy{
           mfreq: data.sPacket.mfreq
         } ,{ emitEvent: false });
       });
+      this.signalRService.data$.subscribe(data => { this.resPacket = data; });
+
    }
 
   loadData(){

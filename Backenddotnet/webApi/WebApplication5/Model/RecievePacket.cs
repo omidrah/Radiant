@@ -7,100 +7,195 @@ namespace WebApplication5.Model
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
         public char[] Head; 
-        public ushort UpPower; // u16 upPower
+        public ushort UpPower { get; set; } // u16 upPower
+        public ushort M1_ADDR { get; set; }
+        public int M1_Xt { get; set; }
+        public int M1_Yt { get; set; }
+        public int M1_Zt{ get; set; }
+        public int M1_Xm{ get; set; }
+        public int M1_Ym{ get; set; }
+        public int M1_Zm { get; set; }
+        public int M1_Vxm{ get; set; }
+        public int M1_Vym{ get; set; }
+        public int M1_Vzm{ get; set; }
+        public int M1_Vxt{ get; set; }
+        public int M1_Vyt{ get; set; }
+        public int M1_Vzt { get; set; }
+        public ushort M1_Status { get; set; }
 
-        public ushort M1_ADDR;
-        public int M1_Xt;
-        public int M1_Yt; 
-        public int M1_Zt;
-        public int M1_Xm;
-        public int M1_Ym;
-        public int M1_Zm;
-        public int M1_Vxm;
-        public int M1_Vym;
-        public int M1_Vzm;
-        public int M1_Vxt;
-        public int M1_Vyt;
-        public int M1_Vzt;
-        public ushort M1_Status;
+        public ushort M2_ADDR { get; set; }
+        public int M2_Xt{ get; set; }
+        public int M2_Yt{ get; set; }
+        public int M2_Zt{ get; set; }
+        public int M2_Xm{ get; set; }
+        public int M2_Ym{ get; set; }
+        public int M2_Zm { get; set; }
+        public int M2_Vxm{ get; set; }
+        public int M2_Vym{ get; set; }
+        public int M2_Vzm{ get; set; }
+        public int M2_Vxt{ get; set; }
+        public int M2_Vyt{ get; set; }
+        public int M2_Vzt { get; set; }
+        public ushort M2_Status { get; set; }
 
-        public ushort M2_ADDR;
-        public int M2_Xt;
-        public int M2_Yt;
-        public int M2_Zt;
-        public int M2_Xm;
-        public int M2_Ym;
-        public int M2_Zm;
-        public int M2_Vxm;
-        public int M2_Vym;
-        public int M2_Vzm;
-        public int M2_Vxt;
-        public int M2_Vyt;
-        public int M2_Vzt;
-        public ushort M2_Status;
+        public ushort M3_ADDR { get; set; }
+        public int M3_Xt{ get; set; }
+        public int M3_Yt{ get; set; }
+        public int M3_Zt{ get; set; }
+        public int M3_Xm{ get; set; }
+        public int M3_Ym{ get; set; }
+        public int M3_Zm { get; set; }
+        public int M3_Vxm{ get; set; }
+        public int M3_Vym{ get; set; }
+        public int M3_Vzm{ get; set; }
+        public int M3_Vxt{ get; set; }
+        public int M3_Vyt{ get; set; }
+        public int M3_Vzt { get; set; }
+        public ushort M3_Status { get; set; }
 
-        public ushort M3_ADDR;
-        public int M3_Xt;
-        public int M3_Yt;
-        public int M3_Zt;
-        public int M3_Xm;
-        public int M3_Ym;
-        public int M3_Zm;
-        public int M3_Vxm;
-        public int M3_Vym;
-        public int M3_Vzm;
-        public int M3_Vxt;
-        public int M3_Vyt;
-        public int M3_Vzt;
-        public ushort M3_Status;
+        public ushort M4_ADDR { get; set; }
+        public int M4_Xt{ get; set; }
+        public int M4_Yt{ get; set; }
+        public int M4_Zt{ get; set; }
+        public int M4_Xm{ get; set; }
+        public int M4_Ym{ get; set; }
+        public int M4_Zm { get; set; }
+        public int M4_Vxm{ get; set; }
+        public int M4_Vym{ get; set; }
+        public int M4_Vzm{ get; set; }
+        public int M4_Vxt{ get; set; }
+        public int M4_Vyt{ get; set; }
+        public int M4_Vzt { get; set; }
+        public ushort M4_Status { get; set; }
 
-        public ushort M4_ADDR;
-        public int M4_Xt;
-        public int M4_Yt;
-        public int M4_Zt;
-        public int M4_Xm;
-        public int M4_Ym;
-        public int M4_Zm;
-        public int M4_Vxm;
-        public int M4_Vym;
-        public int M4_Vzm;
-        public int M4_Vxt;
-        public int M4_Vyt;
-        public int M4_Vzt;
-        public ushort M4_Status;
+        public ushort M5_ADDR { get; set; }
+        public int M5_Xt{ get; set; }
+        public int M5_Yt{ get; set; }
+        public int M5_Zt{ get; set; }
+        public int M5_Xm{ get; set; }
+        public int M5_Ym{ get; set; }
+        public int M5_Zm { get; set; }
+        public int M5_Vxm{ get; set; }
+        public int M5_Vym{ get; set; }
+        public int M5_Vzm{ get; set; }
+        public int M5_Vxt{ get; set; }
+        public int M5_Vyt{ get; set; }
+        public int M5_Vzt { get; set; }
+        public ushort M5_Status { get; set; }
 
-        public ushort M5_ADDR;
-        public int M5_Xt;
-        public int M5_Yt;
-        public int M5_Zt;
-        public int M5_Xm;
-        public int M5_Ym;
-        public int M5_Zm;
-        public int M5_Vxm;
-        public int M5_Vym;
-        public int M5_Vzm;
-        public int M5_Vxt;
-        public int M5_Vyt;
-        public int M5_Vzt;
-        public ushort M5_Status;
-
-        public ushort M6_ADDR;
-        public int M6_Xt;
-        public int M6_Yt;
-        public int M6_Zt;
-        public int M6_Xm;
-        public int M6_Ym;
-        public int M6_Zm;
-        public int M6_Vxm;
-        public int M6_Vym;
-        public int M6_Vzm;
-        public int M6_Vxt;
-        public int M6_Vyt;
-        public int M6_Vzt;
-        public ushort M6_Status;
-        public ushort CheckSum; // u16 checkSum
+        public ushort M6_ADDR { get; set; }
+        public int M6_Xt{ get; set; }
+        public int M6_Yt{ get; set; }
+        public int M6_Zt{ get; set; }
+        public int M6_Xm{ get; set; }
+        public int M6_Ym{ get; set; }
+        public int M6_Zm { get; set; }
+        public int M6_Vxm{ get; set; }
+        public int M6_Vym{ get; set; }
+        public int M6_Vzm{ get; set; }
+        public int M6_Vxt{ get; set; }
+        public int M6_Vyt{ get; set; }
+        public int M6_Vzt { get; set; }
+        public ushort M6_Status { get; set; }
+        public ushort CheckSum { get; set; } // u16 checkSum
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        public char[] Footer; 
+        public char[] Footer;
     }
+    public class RecievePacketVm
+    {
+       
+        public ushort UpPower { get; set; } 
+        public ushort M1_ADDR { get; set; }
+        public int M1_Xt { get; set; }
+        public int M1_Yt { get; set; }
+        public int M1_Zt { get; set; }
+        public int M1_Xm { get; set; }
+        public int M1_Ym { get; set; }
+        public int M1_Zm { get; set; }
+        public int M1_Vxm { get; set; }
+        public int M1_Vym { get; set; }
+        public int M1_Vzm { get; set; }
+        public int M1_Vxt { get; set; }
+        public int M1_Vyt { get; set; }
+        public int M1_Vzt { get; set; }
+        public ushort M1_Status { get; set; }
+
+        public ushort M2_ADDR { get; set; }
+        public int M2_Xt { get; set; }
+        public int M2_Yt { get; set; }
+        public int M2_Zt { get; set; }
+        public int M2_Xm { get; set; }
+        public int M2_Ym { get; set; }
+        public int M2_Zm { get; set; }
+        public int M2_Vxm { get; set; }
+        public int M2_Vym { get; set; }
+        public int M2_Vzm { get; set; }
+        public int M2_Vxt { get; set; }
+        public int M2_Vyt { get; set; }
+        public int M2_Vzt { get; set; }
+        public ushort M2_Status { get; set; }
+
+        public ushort M3_ADDR { get; set; }
+        public int M3_Xt { get; set; }
+        public int M3_Yt { get; set; }
+        public int M3_Zt { get; set; }
+        public int M3_Xm { get; set; }
+        public int M3_Ym { get; set; }
+        public int M3_Zm { get; set; }
+        public int M3_Vxm { get; set; }
+        public int M3_Vym { get; set; }
+        public int M3_Vzm { get; set; }
+        public int M3_Vxt { get; set; }
+        public int M3_Vyt { get; set; }
+        public int M3_Vzt { get; set; }
+        public ushort M3_Status { get; set; }
+
+        public ushort M4_ADDR { get; set; }
+        public int M4_Xt { get; set; }
+        public int M4_Yt { get; set; }
+        public int M4_Zt { get; set; }
+        public int M4_Xm { get; set; }
+        public int M4_Ym { get; set; }
+        public int M4_Zm { get; set; }
+        public int M4_Vxm { get; set; }
+        public int M4_Vym { get; set; }
+        public int M4_Vzm { get; set; }
+        public int M4_Vxt { get; set; }
+        public int M4_Vyt { get; set; }
+        public int M4_Vzt { get; set; }
+        public ushort M4_Status { get; set; }
+
+        public ushort M5_ADDR { get; set; }
+        public int M5_Xt { get; set; }
+        public int M5_Yt { get; set; }
+        public int M5_Zt { get; set; }
+        public int M5_Xm { get; set; }
+        public int M5_Ym { get; set; }
+        public int M5_Zm { get; set; }
+        public int M5_Vxm { get; set; }
+        public int M5_Vym { get; set; }
+        public int M5_Vzm { get; set; }
+        public int M5_Vxt { get; set; }
+        public int M5_Vyt { get; set; }
+        public int M5_Vzt { get; set; }
+        public ushort M5_Status { get; set; }
+
+        public ushort M6_ADDR { get; set; }
+        public int M6_Xt { get; set; }
+        public int M6_Yt { get; set; }
+        public int M6_Zt { get; set; }
+        public int M6_Xm { get; set; }
+        public int M6_Ym { get; set; }
+        public int M6_Zm { get; set; }
+        public int M6_Vxm { get; set; }
+        public int M6_Vym { get; set; }
+        public int M6_Vzm { get; set; }
+        public int M6_Vxt { get; set; }
+        public int M6_Vyt { get; set; }
+        public int M6_Vzt { get; set; }
+        public ushort M6_Status { get; set; }
+    }
+
+
 }
 

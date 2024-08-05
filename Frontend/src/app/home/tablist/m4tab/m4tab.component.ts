@@ -4,6 +4,8 @@ import { interval, takeWhile,Subscription } from 'rxjs';
 import { SharedFormService } from '../../services/shared-form.service';
 import { Addresses } from '../../models/address';
 import { Freq, Status } from '../../models/status';
+import { SignalRService } from '../../services/signal-r.service';
+import { ReceivePacket } from '../../models/recievePacket';
 
 @Component({
   selector: 'app-m4tab',
@@ -17,19 +19,15 @@ export class M4tabComponent implements OnInit, OnDestroy{
   addresses =Addresses;
   status = Status;
   freq = Freq;
+  resPacket: ReceivePacket | null = null;
 
-  constructor(private fb: FormBuilder , private sharedFormService: SharedFormService) {
+  constructor(private fb: FormBuilder , private sharedFormService: SharedFormService,private signalRService: SignalRService) {
     this.m4tabform = this.fb.group({
       m4downdata: new FormControl('loopback'),
       m4xm: new FormControl(0),
       m4ym:new FormControl(0) ,
       m4zm:new FormControl(0),
       m4status:new FormControl('CC'),
-     // m4selstatus:new FormControl(0),
-    //  m4counter:new FormControl(0),
-     // m4common:new FormControl(0),
-    //  m4ontime:new FormControl(0),
-     // m4linkled:new FormControl(0),
       m4adm:new FormControl('001101'),
       mfreq:new FormControl(1)
     });
@@ -53,6 +51,8 @@ export class M4tabComponent implements OnInit, OnDestroy{
       mfreq: data.sPacket.mfreq
     } ,{ emitEvent: false });
   });
+  this.signalRService.data$.subscribe(data => { this.resPacket = data; });
+
   }
 
   loadData(){

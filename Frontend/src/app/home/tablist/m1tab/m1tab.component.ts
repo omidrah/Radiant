@@ -6,7 +6,7 @@ import { SharedFormService } from '../../services/shared-form.service';
 import { Addresses } from '../../models/address';
 import { Freq, Status } from '../../models/status';
 import { SignalRService } from '../../services/signal-r.service';
-import { ReceivePacket, ReP } from '../../models/recievePacket';
+import { ReceivePacket } from '../../models/recievePacket';
 
 @Component({
   selector: 'app-m1tab',
@@ -21,8 +21,7 @@ export class M1tabComponent implements OnInit, OnDestroy {
   addresses = Addresses;
   status = Status;
   freq = Freq;
-  resdata: ReceivePacket | null = null;
-  aa:ReP |null=null;
+  resPacket: ReceivePacket | null = null;
   constructor(private fb: FormBuilder, private sharedFormService: SharedFormService, private signalRService: SignalRService) {
     this.m1tabform = this.fb.group({
       m1downdata: new FormControl('loopback'),
@@ -55,7 +54,7 @@ export class M1tabComponent implements OnInit, OnDestroy {
       }, { emitEvent: false });
     });
 
-    this.signalRService.data$.subscribe(data => { this.aa = data; });
+    this.signalRService.data$.subscribe(data => { this.resPacket = data; });
     // Subscribe to the blur event of each form control
     // Object.keys(this.m1tabform.controls).forEach(key => {
     //   const control = this.m1tabform.get(key);

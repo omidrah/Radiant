@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { ReceivePacket,ReP } from '../models/recievePacket';
+import { ReceivePacket } from '../models/recievePacket';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class SignalRService {
-  private dataSource = new BehaviorSubject<ReP | null>(null);
+  private dataSource = new BehaviorSubject<ReceivePacket | null>(null);
   data$ = this.dataSource.asObservable();
   private hubConnection: signalR.HubConnection;
 
@@ -29,7 +29,7 @@ export class SignalRService {
   }
 
   private addTransferHubListener() {
-    this.hubConnection.on('ReceiveData', (data: ReP) => {
+    this.hubConnection.on('ReceiveData', (data:ReceivePacket) => {
       console.log('Received data from SignalR:', data); // Log the received data
       this.dataSource.next(data);
     });

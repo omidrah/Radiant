@@ -417,12 +417,99 @@ namespace WebApplication5.Controllers
                     }
                 }
             }                       
-           // var recpacket =  await SavebyteArrayToFile(sb.ToString(),res);
+            var recpacket =  await SavebyteArrayToFile(sb.ToString(),res);
+            var recpacketToUi = new RecievePacketVm
+            {
+                M1_ADDR = recpacket.M1_ADDR,
+                M1_Vxm = recpacket.M1_Vxm,
+                M1_Vym = recpacket.M1_Vym,
+                M1_Vzm = recpacket.M1_Vzm,
+                M1_Status = recpacket.M1_Status,
+                M1_Vxt = recpacket.M1_Vxt,
+                M1_Vyt = recpacket.M1_Vyt,
+                M1_Vzt = recpacket.M1_Vzt,
+                M1_Xm = recpacket.M1_Xm,
+                M1_Xt = recpacket.M1_Xt,
+                M1_Ym = recpacket.M1_Ym,
+                M1_Yt = recpacket.M1_Yt,
+                M1_Zm = recpacket.M1_Zm,
+                M1_Zt = recpacket.M1_Zt,
+                M2_ADDR = recpacket.M2_ADDR,
+                M2_Status = recpacket.M2_Status,
+                M2_Vxm = recpacket.M2_Vxm,
+                M2_Vxt = recpacket.M2_Vxt,
+                M2_Vym = recpacket.M2_Vym,
+                M2_Vyt = recpacket.M2_Vyt,
+                M2_Vzm = recpacket.M2_Vzm,
+                M2_Vzt = recpacket.M2_Vzt,
+                M2_Xm = recpacket.M2_Xm,
+                M2_Xt = recpacket.M2_Xt,
+                M2_Ym = recpacket.M2_Ym,
+                M2_Yt = recpacket.M2_Yt,
+                M2_Zm = recpacket.M2_Zm,
+                M2_Zt = recpacket.M2_Zt,
+                M3_ADDR = recpacket.M3_ADDR,
+                M3_Status = recpacket.M3_Status,
+                M3_Vxm = recpacket.M3_Vxm,
+                M3_Vxt = recpacket.M3_Vxt,
+                M3_Vym = recpacket.M3_Vym,
+                M3_Vyt = recpacket.M3_Vyt,
+                M3_Vzm = recpacket.M3_Vzm,
+                M3_Vzt = recpacket.M3_Vzt,
+                M3_Xm = recpacket.M3_Xm,
+                M3_Xt = recpacket.M3_Xt,
+                M3_Ym = recpacket.M3_Ym,
+                M3_Yt = recpacket.M3_Yt,
+                M3_Zm = recpacket.M3_Zm,
+                M3_Zt = recpacket.M3_Zt,
+                M4_ADDR = recpacket.M4_ADDR,
+                M4_Status = recpacket.M4_Status,
+                M4_Vxm = recpacket.M4_Vxm,
+                M4_Vxt = recpacket.M4_Vxt,
+                M4_Vym = recpacket.M4_Vym,
+                M4_Vyt = recpacket.M4_Vyt,
+                M4_Vzm = recpacket.M4_Vzm,
+                M4_Vzt = recpacket.M4_Vzt,
+                M4_Xm = recpacket.M4_Xm,
+                M4_Xt = recpacket.M4_Xt,
+                M4_Ym = recpacket.M4_Ym,
+                M4_Yt = recpacket.M4_Yt,
+                M4_Zm = recpacket.M4_Zm,
+                M4_Zt = recpacket.M4_Zt,
+                M5_ADDR = recpacket.M5_ADDR,
+                M5_Status = recpacket.M5_Status,
+                M5_Vxm = recpacket.M5_Vxm,
+                M5_Vxt = recpacket.M5_Vxt,
+                M5_Vym = recpacket.M5_Vym,
+                M5_Vyt = recpacket.M5_Vyt,
+                M5_Vzm = recpacket.M5_Vzm,
+                M5_Vzt = recpacket.M5_Vzt,
+                M5_Xm = recpacket.M5_Xm,
+                M5_Xt = recpacket.M5_Xt,
+                M5_Ym = recpacket.M5_Ym,
+                M5_Yt = recpacket.M5_Yt,
+                M5_Zm = recpacket.M5_Zm,
+                M5_Zt = recpacket.M5_Zt,
+                M6_ADDR = recpacket.M6_ADDR,
+                M6_Status = recpacket.M6_Status,
+                M6_Vxm = recpacket.M6_Vxm,
+                M6_Vxt = recpacket.M6_Vxt,
+                M6_Vym = recpacket.M6_Vym,
+                M6_Vyt = recpacket.M6_Vyt,
+                M6_Vzm = recpacket.M6_Vzm,
+                M6_Vzt = recpacket.M6_Vzt,
+                M6_Xm = recpacket.M6_Xm,
+                M6_Xt = recpacket.M6_Xt,
+                M6_Ym = recpacket.M6_Ym,
+                M6_Yt = recpacket.M6_Yt,
+                M6_Zm = recpacket.M6_Zm,
+                M6_Zt = recpacket.M6_Zt,
+                UpPower = recpacket.UpPower
+            };
             //Recieve Data Send to clients via SignalR
-            var dp = new ReP { m1_xt = (new Random().Next()) };
-            Console.WriteLine(JsonConvert.SerializeObject(dp)); // Log the data
-            await _hubContext.Clients.All.SendAsync("ReceiveData", dp);
-            return Ok(dp);
+            Console.WriteLine(JsonConvert.SerializeObject(recpacket)); // Log the data
+            await _hubContext.Clients.All.SendAsync("ReceiveData", recpacketToUi);
+            return Ok(recpacketToUi);
         }
        
     }
