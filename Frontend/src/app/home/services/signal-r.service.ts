@@ -30,7 +30,7 @@ export class SignalRService {
 
   private addTransferHubListener() {
     this.hubConnection.on('ReceiveData', (data:ReceivePacket) => {
-      console.log('Received data from SignalR:', data); // Log the received data
+     // console.log('Received data from SignalR:', data); // Log the received data
       this.dataSource.next(data);
     });
   }

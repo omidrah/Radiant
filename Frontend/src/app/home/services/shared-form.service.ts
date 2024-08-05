@@ -205,7 +205,7 @@ export class SharedFormService implements  OnDestroy  {
  /**start timer every 1 seconds read values and send to dotnetbackend */
   SendDataByTimer(apiUrl:string, TimerSecond:number) {
     this.timerSubscription =timer(0, TimerSecond).pipe().subscribe(value => {
-     console.log(this.formData$.value.sPacket); // Emit the value through the Subject
+     //console.log(this.formData$.value.sPacket); // Emit the value through the Subject
      this.http.post(`${apiUrl}/Home/sendData`, this.formData$.value.sPacket).subscribe
         (
           (response) => {

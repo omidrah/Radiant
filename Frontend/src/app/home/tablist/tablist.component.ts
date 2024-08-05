@@ -9,7 +9,7 @@ import { SharedFormService } from '../services/shared-form.service';
 })
 export class TablistComponent implements OnInit  {
   @ViewChild('staticTabs') tabset: TabsetComponent;
-  apiUrl = 'http://localhost:5000'; 
+  apiUrl = 'http://localhost:5000';
   activeTabId:string='cmd';
 
  constructor(private sharedService:SharedFormService){ }
@@ -20,7 +20,7 @@ export class TablistComponent implements OnInit  {
   }
   changeTab($event) {
     this.activeTabId = $event?.id;
-    console.log(this.activeTabId);
+   // console.log(this.activeTabId);
  }
 }
 /**change record to unrecord button */
