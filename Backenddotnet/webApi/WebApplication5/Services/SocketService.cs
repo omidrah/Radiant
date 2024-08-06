@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using System.Net.Sockets;
+﻿ using Microsoft.Extensions.Options;
+using System.Data;
 using System.Net;
-using WebApplication5.Controllers;
+using System.Net.Sockets;
 using WebApplication5.Model;
-using Microsoft.Extensions.Options;
 
 namespace WebApplication5.Services
 {
@@ -19,21 +18,21 @@ namespace WebApplication5.Services
             _socketConfig = settings.Value.SocketConfig;
         }
         public async Task<RecievePacket> SendDataAsync(byte[] inputArray)
-        {
-            
+        {            
             using Socket client = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPAddress ipaddr = IPAddress.Parse(_socketConfig.IpAddress);
             RecievePacket packet = null;
             try
             {
-                _logger.LogInformation($"{DateTime.Now}");
-                Console.WriteLine($"IPAddress: {ipaddr} - Port: {_socketConfig.Port}");
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.WriteLine("*******************************************************************");
+                Console.WriteLine($"*       Socket on {ipaddr} :{_socketConfig.Port}                                 *");
                 await client.ConnectAsync(ipaddr, _socketConfig.Port);
-                Console.WriteLine("Connected to server.");
+                Console.WriteLine($"*       Connected to server@{DateTime.Now}                   *");
                 await client.SendAsync(new ArraySegment<byte>(inputArray), SocketFlags.None);
-                Console.WriteLine("Data sent to server.");
+                Console.WriteLine($"*       Sending @ {DateTime.Now}                             *");
 
-                byte[] buffer = new byte[324];
+                byte[] buffer = new byte[324];//receive packet 
                 int bytesReceived = 0;
                 while (true)
                 {
@@ -54,15 +53,13 @@ namespace WebApplication5.Services
                 //byte[] recbuf = new byte[324];
                 //Array.Copy(buffer, 110, recbuf, 0, 324);
                 // Convert byte array to recieve object
-                //RecievePacket packet = DataConverter.ByteArrayToDataPacket(recBuffer);
-                //DataConverter.showByteArray(buffer, asciiBuilder, bytesReceived);
+                //RecievePacket packet = Utils.ByteArrayToDataPacket(recBuffer);
+                //Utils.showByteArray(buffer, asciiBuilder, bytesReceived);
 
-                packet = DataConverter.ParseDataPacket(buffer);
-                // Receive Data Save to file
-                await ReceiveDataSaveAsync(packet);              
-                // Log the packet data on console
-                ConsoLogPacket(packet);
-               
+                await _fileService.SaveReceivePacketAsync(buffer); //save buffer in file
+
+                packet = Utils.BufferToRecievePacket(buffer); //parse buffer to recievepacket               
+                
             }
             catch (Exception excp)
             {
@@ -78,32 +75,7 @@ namespace WebApplication5.Services
                 client.Dispose();
             }
             return packet;
-        }
-        private async Task ReceiveDataSaveAsync(RecievePacket packet)
-        {
-            byte[] byteArray = DataConverter.ToByteArray(packet);
-            await _fileService.ReceiveDataToFileAsync(byteArray);
-        }
-        private void ConsoLogPacket(RecievePacket packet)
-        {
-            Console.WriteLine($"Header: {new string(packet.Head)}");
-            Console.WriteLine($"Up Power: {packet.UpPower}");
-
-            Console.WriteLine($"Xt: {packet.M1_Xt}");
-            Console.WriteLine($"Yt: {packet.M1_Yt}");
-            Console.WriteLine($"Zt: {packet.M1_Zt}");
-            Console.WriteLine($"Xm: {packet.M1_Xm}");
-            Console.WriteLine($"Ym: {packet.M1_Ym}");
-            Console.WriteLine($"Zm: {packet.M1_Zm}");
-            Console.WriteLine($"Vxm: {packet.M1_Vxm}");
-            Console.WriteLine($"Vym: {packet.M1_Vym}");
-            Console.WriteLine($"Vzm: {packet.M1_Vzm}");
-            Console.WriteLine($"Vxt: {packet.M1_Vxt}");
-            Console.WriteLine($"Vyt: {packet.M1_Vyt}");
-            Console.WriteLine($"Vzt: {packet.M1_Vzt}");
-            
-            Console.WriteLine($"Checksum: {packet.CheckSum}");
-            Console.WriteLine($"Footer: {new string(packet.Footer)}");
-        }
+        }       
+       
     }
 }

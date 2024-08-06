@@ -13,7 +13,7 @@ namespace WebApplication5.Services
             _settings = settings.Value;
         }
 
-        public async Task ReceiveDataToFileAsync(byte[] data)
+        public async Task SaveReceivePacketAsync(byte[] data)
         {
             string fileName = $"{DateTime.Now:yyyyMMdd_HHmmss}.Receive.bin";
 
@@ -24,7 +24,7 @@ namespace WebApplication5.Services
             await File.WriteAllBytesAsync(filePath, data);
         }
 
-        public  async Task SendDataToFileAsync(string message, bool append = false)
+        public  async Task SaveSendPakcetAsync(string message, bool append = false)
         {
             var filename = $"{DateTime.Now:yyyyMMdd_HHmmss}.Send.bin";
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _settings.companyInfo.filePath, filename);

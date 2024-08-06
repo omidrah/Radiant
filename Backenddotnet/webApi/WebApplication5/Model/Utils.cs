@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
+using WebApplication5.Services;
 
 namespace WebApplication5.Model
 {
@@ -10,7 +11,7 @@ namespace WebApplication5.Model
         /// convert hex string to byteArray
         /// </summary>
         /// <param name="hex"></param>
-        /// <returns></returns>
+        /// <returns></returns>       
         public static byte[] StringToByteArray(string hex)
         {
             int length = hex.Length;
@@ -46,7 +47,6 @@ namespace WebApplication5.Model
                 hex.AppendFormat("{0:x2}", b);
             return hex.ToString();
         }
-
         /// <summary>
         ///  To represent Int32,short,byte,byte[] as a Hexadecimal string in C#,
         ///  use the ToString() method and set the base as the ToString() method’s second parameter i.e. 16 for Hexadecimal.
@@ -73,7 +73,6 @@ namespace WebApplication5.Model
         {
             return string.Join("0x", numb.ToString("X2"));
         }
-
         /// <summary>
         /// convert a binary string to an uint
         /// </summary>
@@ -116,24 +115,7 @@ namespace WebApplication5.Model
             }
 
             return result;
-        }
-
-        //To convert from decimal to hex
-        /* string hexValue = decValue.ToString("X");  OR   string.Format("{0:x}", intValue);*/
-        //To convert from hex to decimal 
-        /*int decValue = Convert.ToInt32(hexValue, 16);    OR  Convert.ToInt64(hexString, 16);*/
-
-
-        
-
-
-
-    }
-
-    
-    
-    public static class DataConverter
-    {
+        }    
         /// <summary>
         /// Help Methood To Read byte Array and For Every byte Show binary code ,Hex code ,Decimal code ,Ascii Character.
         /// /// </summary>
@@ -178,18 +160,8 @@ namespace WebApplication5.Model
             Console.WriteLine(asciiString);
         }
 
-         /// <summary>
-        /// Convert byte Array to Specific Class. Here convert to RecievePacket Class
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
         public static RecievePacket ByteArrayToDataPacket(byte[] data)
         {
-            //if (data.Length != 44)
-            //{
-            //    throw new ArgumentException("Data length must be 44 bytes.", nameof(data));
-            //}
-
             // Create a pointer to the byte array
             GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
@@ -204,20 +176,14 @@ namespace WebApplication5.Model
                 handle.Free();
             }
         }
-
-        /// <summary>
-        /// Parse the byte array into the RecievePacket class. This involves reading the byte array and assigning values to each field in the class:
+                /// <summary>
+        /// Parse the byte array into the RecievePacke
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public static RecievePacket ParseDataPacket(byte[] data)
+        public static RecievePacket BufferToRecievePacket(byte[] data)
         {
-            //if (data.Length != 44)
-            //{
-            //    throw new ArgumentException("Data length must be 44 bytes.");
-            //}
-
-            RecievePacket packet = new RecievePacket();
+            RecievePacket packet = new();
             int offset = 0;
 
             packet.Head = new char[4];
@@ -490,14 +456,31 @@ namespace WebApplication5.Model
             {
                 packet.Footer[i] = (char)data[offset++];
             }
-
+            if (packet != null)
+            {
+                LogRecievePacket(packet);
+                switch (packet.Head.ToString())
+                {
+                    case "CMD":
+                        Console.WriteLine("echo from server");
+                        break;
+                    case "RCUV":
+                        Console.WriteLine("response from server");
+                        break;
+                    default:
+                        break;
+                }
+            }
             return packet;
         }
-
-
-        public static byte[] ToByteArray(RecievePacket packet)
+        /// <summary>
+        /// Convert RecievePacket to byte array here
+        /// </summary>
+        /// <param name="packet"></param>
+        /// <returns></returns>
+        public static byte[] RecievePacketToByteArray(RecievePacket packet)
         {
-            // Convert RecievePacket to byte array here
+            
             // This is just a sample implementation. You need to adjust based on your RecievePacket structure.
             using (var ms = new MemoryStream())
             {
@@ -523,5 +506,39 @@ namespace WebApplication5.Model
                 return ms.ToArray();
             }
         }
+        /// <summary>
+        /// show receive packet in console
+        /// </summary>
+        /// <param name="packet"></param>
+        public static void LogRecievePacket(RecievePacket packet)
+        {
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.WriteLine($"*******************************************************************");
+            Console.WriteLine($"*                 Receive Packet                                  *");
+            Console.WriteLine($"*******************************************************************");
+            Console.WriteLine($"Header: {new string(packet.Head)}  |  Up Power: {packet.UpPower}  ");            
+            Console.WriteLine($"*******************************************************************");
+            Console.WriteLine($"     M1  |  M2   |  M3  |  M4  |   M5    |  M6  ");
+            Console.WriteLine($"*******************************************************************");
+            Console.WriteLine($"Xt:  {packet.M1_Xt }  |  {packet.M2_Xt }   |  {packet.M3_Xt }  |  {packet.M4_Xt }   |  {packet.M5_Xt }  |  {packet.M6_Xt }");
+            Console.WriteLine($"Yt:  {packet.M1_Yt }  |  {packet.M2_Yt }   |  {packet.M3_Yt }  |  {packet.M4_Yt }   |  {packet.M5_Yt }  |  {packet.M6_Yt }");
+            Console.WriteLine($"Zt:  {packet.M1_Zt }  |  {packet.M2_Zt }   |  {packet.M3_Zt }  |  {packet.M4_Zt }   |  {packet.M5_Zt }  |  {packet.M6_Zt }");
+            Console.WriteLine($"Xm:  {packet.M1_Xm }  |  {packet.M2_Xm }   |  {packet.M3_Xm }  |  {packet.M4_Xm }   |  {packet.M5_Xm }  |  {packet.M6_Xm }");
+            Console.WriteLine($"Ym:  {packet.M1_Ym }  |  {packet.M2_Ym }   |  {packet.M3_Ym }  |  {packet.M4_Ym }   |  {packet.M5_Ym }  |  {packet.M6_Ym }");
+            Console.WriteLine($"Zm:  {packet.M1_Zm }  |  {packet.M2_Zm }   |  {packet.M3_Zm }  |  {packet.M4_Zm }   |  {packet.M5_Zm }  |  {packet.M6_Zm }");
+            Console.WriteLine($"Vxm: {packet.M1_Vxm}  |  {packet.M2_Vxm}   |  {packet.M3_Vxm}  |  {packet.M4_Vxm}   |  {packet.M5_Vxm}  |  {packet.M6_Vxm}");
+            Console.WriteLine($"Vym: {packet.M1_Vym}  |  {packet.M2_Vym}   |  {packet.M3_Vym}  |  {packet.M4_Vym}   |  {packet.M5_Vym}  |  {packet.M6_Vym}");
+            Console.WriteLine($"Vzm: {packet.M1_Vzm}  |  {packet.M2_Vzm}   |  {packet.M3_Vzm}  |  {packet.M4_Vzm}   |  {packet.M5_Vzm}  |  {packet.M6_Vzm}");
+            Console.WriteLine($"Vxt: {packet.M1_Vxt}  |  {packet.M2_Vxt}   |  {packet.M3_Vxt}  |  {packet.M4_Vxt}   |  {packet.M5_Vxt}  |  {packet.M6_Vxt}");
+            Console.WriteLine($"Vyt: {packet.M1_Vyt}  |  {packet.M2_Vyt}   |  {packet.M3_Vyt}  |  {packet.M4_Vyt}   |  {packet.M5_Vyt}  |  {packet.M6_Vyt}");
+            Console.WriteLine($"Vzt: {packet.M1_Vzt}  |  {packet.M2_Vzt}   |  {packet.M3_Vzt}  |  {packet.M4_Vzt}   |  {packet.M5_Vzt}  |  {packet.M6_Vzt}");
+            Console.WriteLine($"*******************************************************************");
+            Console.WriteLine($"Checksum: {packet.CheckSum}  | Footer: {new string(packet.Footer)}");
+            Console.WriteLine($"*******************************************************************");
+            Console.WriteLine($"*                 Receive Packet Finish                           *");
+            Console.WriteLine($"*******************************************************************");
+        }
+
+        
     }
 }

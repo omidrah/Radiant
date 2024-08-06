@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System.Net.Sockets;
-using System.Reflection;
 using System.Text;
 using System.Text.Json.Nodes;
 using WebApplication5.Model;
@@ -35,26 +33,7 @@ namespace WebApplication5.Controllers
         public string Get()
         {
             return _settings.companyInfo.name; 
-        }
-        /// <summary>
-        /// آرایه ای از بایت ها دریافت شده  و باینری آن در فایل چاپ میشود
-        /// </summary>
-        /// <param name="inputString"></param>
-        private async Task<RecievePacket> SavebyteArrayToFile(string  hexValue,SendPacket valueFromUi)
-        {
-            //var cnt =  res.toByteArray().Length;    
-            Console.WriteLine($"{DateTime.Now}");
-            Console.WriteLine("*******************************************************************");
-            Console.WriteLine($"Value in UI  {valueFromUi}");
-            Console.WriteLine($"Value in Hex {hexValue}");
-            Console.WriteLine("*******************************************************************");
-            // Convert the hexadecimal string to a byte array
-            byte[] byteArray = Utils.StringToByteArray(hexValue);
-            var recPacket =  await _socketService.SendDataAsync(byteArray);            
-            // Start async Task to Save send Packet To file...
-            await _fileService.SendDataToFileAsync(valueFromUi.ToString() + "\n"+ hexValue);
-            return recPacket;
-        }
+        }      
        
         [HttpPost("sendData")]
         public async Task<IActionResult> sendData([FromBody] JsonObject inputString)
@@ -416,9 +395,21 @@ namespace WebApplication5.Controllers
                             break;
                     }
                 }
-            }                       
-            var recpacket =  await SavebyteArrayToFile(sb.ToString(),res);
-            Console.WriteLine(JsonConvert.SerializeObject(recpacket)); // Log the data
+            }
+            var hexvalue = sb.ToString();
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.WriteLine("*******************************************************************");
+            Console.WriteLine($"*                    Send Packet                                  *");
+            Console.WriteLine("*******************************************************************");
+            Console.WriteLine($"DataSend in Decimal \n {res} \n");            
+            Console.WriteLine($"DataSend in Hex     \n {hexvalue} \n");
+
+            // Start async Task to Save send Packet To file...
+            await _fileService.SaveSendPakcetAsync($"{DateTime.Now.ToString()}==> {res} \n {hexvalue}");
+            /*prepare array send on socket to server*/
+            var byteArray = Utils.StringToByteArray(hexvalue); //hexvalue to bytearray
+            var recpacket = await _socketService.SendDataAsync(byteArray);
+            /*send receieve packet from server to Ui by signalr hub*/
             if (recpacket != null)
             {
                 var recpacketToUi = new RecievePacketVm
@@ -509,9 +500,7 @@ namespace WebApplication5.Controllers
                     M6_Zt = recpacket.M6_Zt,
                     UpPower = recpacket.UpPower
                 };
-                //Recieve Data Send to clients via SignalR
                 await _hubContext.Clients.All.SendAsync("ReceiveData", recpacketToUi);
-                return Ok(recpacketToUi);
             }
             return Ok(recpacket);
         }

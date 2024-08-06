@@ -16,7 +16,7 @@ export class TablistComponent implements OnInit  {
 
   ngOnInit(): void {
    // this.tabset.tabs[2].active=true;
-  this.sharedService.SendDataByTimer(this.apiUrl,1000);
+  this.sharedService.SendDataByTimer(this.apiUrl,10000);
   }
   changeTab($event) {
     this.activeTabId = $event?.id;
