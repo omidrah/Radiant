@@ -1,6 +1,6 @@
 // shared-form.service.ts
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription, timer } from 'rxjs';
+import { BehaviorSubject, catchError, interval, Observable, Subscription, switchMap, timer } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Packet, PacketImpl } from '../models/packet';
 import { SendPacket } from '../models/sendPacket';
@@ -204,18 +204,29 @@ export class SharedFormService implements  OnDestroy  {
   }
  /**start timer every 1 seconds read values and send to dotnetbackend */
   SendDataByTimer(apiUrl:string, TimerSecond:number) {
-    this.timerSubscription =timer(0, TimerSecond).pipe().subscribe(value => {
-     //console.log(this.formData$.value.sPacket); // Emit the value through the Subject
-     this.http.post(`${apiUrl}/Home/sendData`, this.formData$.value.sPacket).subscribe
-        (
-          (response) => {
-            console.log('Send Data saved successfully!', response);
-          },
-          (error) => {
-            console.error('Error saving  Send data:', error);
-          }
-        );
-    });
+
+    this.timerSubscription =timer(0,TimerSecond).pipe(
+      switchMap(() => {
+        const formData = this.formData$.value.sPacket;
+        console.log(`Sending data at ${new Date().toISOString()}:`, formData);
+        return this.sendData(apiUrl, formData);
+      })
+    ).subscribe(
+      (response) => {
+        console.log('Received response from server:', response);
+      },
+      (error) => {
+        console.error('Error receiving response:', error);
+      }
+    );
+  }
+  private sendData(apiUrl: string, data: any) {
+   return this.http.post(`${apiUrl}/Home/sendData`, data).pipe(
+      catchError((error) => {
+        console.error('Error sending data:', error);
+        throw error;
+      })
+    );
   }
   // startTimer_nodeJsbackend() {
   //   const apiUrl = 'http://localhost:3000'; // Replace with your actual backend API URL
@@ -232,6 +243,7 @@ export class SharedFormService implements  OnDestroy  {
   //       );
   //   });
   // }
+
   ngOnDestroy() {
     this.timerSubscription.unsubscribe();
   }
