@@ -3,7 +3,6 @@ using System.Reflection;
 using WebApplication5.Controllers;
 using WebApplication5.Model;
 using WebApplication5.Services;
-using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 /*read section of config file for generat wwwroot folder dynamic*/
@@ -23,8 +22,6 @@ if (!Directory.Exists(path2)) //created in solution
 {
     Directory.CreateDirectory(path2);
 }
-
-
 
 // Add services to the container.
 builder.Logging.ClearProviders();

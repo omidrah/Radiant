@@ -39,9 +39,7 @@ export class M2tabComponent implements OnInit, OnDestroy{
   }
 
   saveFormState(formData: any,whichtab:string): void {
-    // Implement the logic to save formData to a file
-    // This could be a server call or local storage operation
-    //console.warn(this.m1tabform.value);
+
      this.sharedFormService.SendFormData(formData,whichtab);
   }
 
@@ -49,20 +47,10 @@ export class M2tabComponent implements OnInit, OnDestroy{
     /**mfreq share between tabs */
     this.currentDataSubscription=this.sharedFormService.currentData.subscribe(data => {
       this.m2tabform.patchValue({
-        mfreq: data.sPacket.mfreq
+        mfreq: data.mfreq
       } ,{ emitEvent: false });
     });
     this.signalRService.data$.subscribe(data => { this.resPacket = data; });
-
-   // Subscribe to the blur event of each form control
-  //  Object.keys(this.m2tabform.controls).forEach(key => {
-  //   const control = this.m2tabform.get(key);
-  //   if (control) {
-  //     control.valueChanges.subscribe(value => {
-  //       this.saveFormState(this.m2tabform.value, 'm2tab');
-  //     });
-  //   }
-  // });
   }
 
   loadData(){
