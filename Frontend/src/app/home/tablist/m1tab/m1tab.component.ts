@@ -50,7 +50,7 @@ export class M1tabComponent implements OnInit, OnDestroy {
     /**mfreq share between tabs */
     this.currentDataSubscription = this.sharedFormService.currentData.subscribe(data => {
       this.m1tabform.patchValue({
-        mfreq: data.sPacket.mfreq
+        mfreq: data.mfreq
       }, { emitEvent: false });
     });
 

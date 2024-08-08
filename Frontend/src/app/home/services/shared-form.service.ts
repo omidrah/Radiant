@@ -1,10 +1,8 @@
 // shared-form.service.ts
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription, timer } from 'rxjs';
+import { BehaviorSubject, catchError,  Observable, Subscription, switchMap, timer } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Packet, PacketImpl } from '../models/packet';
 import { SendPacket } from '../models/sendPacket';
-import { ReceivePacket } from '../models/recievePacket';
 @Injectable({
   providedIn: 'root'
 })
@@ -112,21 +110,10 @@ export class SharedFormService implements  OnDestroy  {
     //footer:
     'END'
   );
-// Create an instance of ReceivePacket
- receivePacket = new ReceivePacket(
-  31, 32, 33, 34,  35,  36,  37,  38,  39,  40,  41,  42,
-  43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,
-  56,  57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,
-  69,  70,  71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,
-  82,  83,  84,  85,  86,  87,  88,  89,  90,  91,  92,  93,  94,
-  95,  96,  97,  98,  99,  100,  101,  102,  103,  104,  105,  106,
-  107,  108,  109,  110,  111,  112,  113,  114,89
-);
 
-// Create an instance of PacketImpl
- packet = new PacketImpl(this.sendPacket, this.receivePacket);
-  private formData$ = new BehaviorSubject<Packet>(this.packet);
-  get currentData(): Observable<Packet> { return this.formData$.asObservable(); }
+
+  private formData$ = new BehaviorSubject<SendPacket>(this.sendPacket);
+  get currentData(): Observable<SendPacket> { return this.formData$.asObservable(); }
   constructor(private http: HttpClient) { }
 
   SendFormData(newData: any, whichtab: string) {
@@ -134,88 +121,99 @@ export class SharedFormService implements  OnDestroy  {
     let cData = this.formData$.value;
     switch (whichtab) {
       case 'cmd':
-        cData.sPacket.testmode = newData['testmode'];
-        cData.sPacket.couple = newData['couple'];
-        cData.sPacket.att =this.calcPout(newData['att']);
-        cData.sPacket.selftest = newData['selftest'];
-        cData.sPacket.crc = newData['crc'];
+        cData.testmode = newData['testmode'];
+        cData.couple = newData['couple'];
+        cData.att =this.calcPout(newData['att']);
+        cData.selftest = newData['selftest'];
+        cData.crc = newData['crc'];
         break;
       case 'm1tab':
-        cData.sPacket.datamode1 = newData['m1downdata']
-        cData.sPacket.m1xm = newData['m1xm']
-        cData.sPacket.m1ym = newData['m1ym']
-        cData.sPacket.m1zm = newData['m1zm']
-        cData.sPacket.m1status = newData['m1status']
-        cData.sPacket.m1adm = newData['m1adm']
-        cData.sPacket.mfreq = newData['mfreq']
+        cData.datamode1 = newData['m1downdata']
+        cData.m1xm = newData['m1xm']
+        cData.m1ym = newData['m1ym']
+        cData.m1zm = newData['m1zm']
+        cData.m1status = newData['m1status']
+        cData.m1adm = newData['m1adm']
+        cData.mfreq = newData['mfreq']
         break;
       case 'm2tab':
-        cData.sPacket.datamode2 = newData['m2downdata']
-        cData.sPacket.m2xm = newData['m2xm']
-        cData.sPacket.m2ym = newData['m2ym']
-        cData.sPacket.m2zm = newData['m2zm']
-        cData.sPacket.m2status = newData['m2status']
-        cData.sPacket.m2adm = newData['m2adm']
-        cData.sPacket.mfreq = newData['mfreq']
+        cData.datamode2 = newData['m2downdata']
+        cData.m2xm = newData['m2xm']
+        cData.m2ym = newData['m2ym']
+        cData.m2zm = newData['m2zm']
+        cData.m2status = newData['m2status']
+        cData.m2adm = newData['m2adm']
+        cData.mfreq = newData['mfreq']
         break;
       case 'm3tab':
-        cData.sPacket.datamode3 = newData['m3downdata']
-        cData.sPacket.m3xm = newData['m3xm']
-        cData.sPacket.m3ym = newData['m3ym']
-        cData.sPacket.m3zm = newData['m3zm']
-        cData.sPacket.m3status = newData['m3status']
-        cData.sPacket.m3adm = newData['m3adm']
-        cData.sPacket.mfreq = newData['mfreq']
+        cData.datamode3 = newData['m3downdata']
+        cData.m3xm = newData['m3xm']
+        cData.m3ym = newData['m3ym']
+        cData.m3zm = newData['m3zm']
+        cData.m3status = newData['m3status']
+        cData.m3adm = newData['m3adm']
+        cData.mfreq = newData['mfreq']
         break;
       case 'm4tab':
-        cData.sPacket.datamode4 = newData['m4downdata']
-        cData.sPacket.m4xm = newData['m4xm']
-        cData.sPacket.m4ym = newData['m4ym']
-        cData.sPacket.m4zm = newData['m4zm']
-        cData.sPacket.m4status = newData['m4status']
-        cData.sPacket.m4adm = newData['m4adm']
-        cData.sPacket.mfreq = newData['mfreq']
+        cData.datamode4 = newData['m4downdata']
+        cData.m4xm = newData['m4xm']
+        cData.m4ym = newData['m4ym']
+        cData.m4zm = newData['m4zm']
+        cData.m4status = newData['m4status']
+        cData.m4adm = newData['m4adm']
+        cData.mfreq = newData['mfreq']
         break;
       case 'm5tab':
-        cData.sPacket.datamode5 = newData['m5downdata']
-        cData.sPacket.m5xm = newData['m5xm']
-        cData.sPacket.m5ym = newData['m5ym']
-        cData.sPacket.m5zm = newData['m5zm']
-        cData.sPacket.m5status = newData['m5status']
-        cData.sPacket.m5adm = newData['m5adm']
-        cData.sPacket.mfreq = newData['mfreq']
+        cData.datamode5 = newData['m5downdata']
+        cData.m5xm = newData['m5xm']
+        cData.m5ym = newData['m5ym']
+        cData.m5zm = newData['m5zm']
+        cData.m5status = newData['m5status']
+        cData.m5adm = newData['m5adm']
+        cData.mfreq = newData['mfreq']
         break;
       case 'm6tab':
-        cData.sPacket.datamode6 = newData['m6downdata']
-        cData.sPacket.m6xm = newData['m6xm']
-        cData.sPacket.m6ym = newData['m6ym']
-        cData.sPacket.m6zm = newData['m6zm']
-        cData.sPacket.m6status = newData['m6status']
-        cData.sPacket.m6adm = newData['m6adm']
-        cData.sPacket.mfreq = newData['mfreq']
+        cData.datamode6 = newData['m6downdata']
+        cData.m6xm = newData['m6xm']
+        cData.m6ym = newData['m6ym']
+        cData.m6zm = newData['m6zm']
+        cData.m6status = newData['m6status']
+        cData.m6adm = newData['m6adm']
+        cData.mfreq = newData['mfreq']
         break;
     }
     this.formData$.next(cData);
   }
-  calcPout(pout:number){
-    //1403-02-31 . mr.Nader said for calculate pout..
+  //1403-02-31 . mr.Nader said for calculate pout..
     // 10->0   and -90->200
+  calcPout(pout:number){
      return Math.abs((pout -10)*2);
   }
  /**start timer every 1 seconds read values and send to dotnetbackend */
   SendDataByTimer(apiUrl:string, TimerSecond:number) {
-    this.timerSubscription =timer(0, TimerSecond).pipe().subscribe(value => {
-     //console.log(this.formData$.value.sPacket); // Emit the value through the Subject
-     this.http.post(`${apiUrl}/Home/sendData`, this.formData$.value.sPacket).subscribe
-        (
-          (response) => {
-            console.log('Send Data saved successfully!', response);
-          },
-          (error) => {
-            console.error('Error saving  Send data:', error);
-          }
-        );
-    });
+
+    this.timerSubscription =timer(0,TimerSecond).pipe(
+      switchMap(() => {
+        const formData = this.formData$.value;
+        console.log(`Sending data at ${new Date().toISOString()}:`, formData);
+        return this.sendData(apiUrl, formData);
+      })
+    ).subscribe(
+      (response) => {
+        console.log('Received response from server:', response);
+      },
+      (error) => {
+        console.error('Error receiving response:', error);
+      }
+    );
+  }
+  private sendData(apiUrl: string, data: any) {
+   return this.http.post(`${apiUrl}/Home/sendData`, data).pipe(
+      catchError((error) => {
+        console.error('Error sending data:', error);
+        throw error;
+      })
+    );
   }
   // startTimer_nodeJsbackend() {
   //   const apiUrl = 'http://localhost:3000'; // Replace with your actual backend API URL
@@ -232,6 +230,7 @@ export class SharedFormService implements  OnDestroy  {
   //       );
   //   });
   // }
+
   ngOnDestroy() {
     this.timerSubscription.unsubscribe();
   }
