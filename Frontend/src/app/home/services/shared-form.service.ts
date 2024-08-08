@@ -181,7 +181,7 @@ export class SharedFormService implements  OnDestroy  {
         cData.m6adm = newData['m6adm']
         cData.mfreq = newData['mfreq']
         break;
-        case 'm6tab':
+        case 'm7tab':
           cData.cfar_coef = newData['cfar_coef']
           cData.downlink_att = newData['downlink_att']
           cData.uplink_gain = newData['uplink_gain']
