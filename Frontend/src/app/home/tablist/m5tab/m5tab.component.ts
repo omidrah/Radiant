@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { interval, takeWhile,Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { SharedFormService } from '../../services/shared-form.service';
 import { Addresses } from '../../models/address';
 import { Freq, Status } from '../../models/status';
@@ -41,21 +41,15 @@ export class M5tabComponent implements OnInit, OnDestroy{
   }
 
   saveFormState(formData: any,whichtab:string): void {
-    // Implement the logic to save formData to a file
-    // This could be a server call or local storage operation
-    //console.warn(this.m1tabform.value);
      this.sharedFormService.SendFormData(formData,whichtab);
   }
-
   ngOnInit() {
-      /**mfreq share between tabs */
       this.currentDataSubscription=this.sharedFormService.currentData.subscribe(data => {
         this.m5tabform.patchValue({
-          mfreq: data.sPacket.mfreq
+          mfreq: data.mfreq
         } ,{ emitEvent: false });
       });
       this.signalRService.data$.subscribe(data => { this.resPacket = data; });
-
    }
 
   loadData(){
