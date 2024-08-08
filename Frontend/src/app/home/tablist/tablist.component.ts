@@ -1,7 +1,7 @@
 import { Component,  OnInit, ViewChild } from '@angular/core';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { SharedFormService } from '../services/shared-form.service';
-//import { dataService } from '../services/data.service';
+import { Constants } from '../../config/constants';
 @Component({
   selector: 'app-tablist',
   templateUrl: './tablist.component.html',
@@ -9,10 +9,13 @@ import { SharedFormService } from '../services/shared-form.service';
 })
 export class TablistComponent implements OnInit  {
   @ViewChild('staticTabs') tabset: TabsetComponent;
-  apiUrl = 'http://localhost:5000';
+  title = Constants.TitleOfSite; 
+  apiUrl = Constants.API_ENDPOINT;
   activeTabId:string='cmd';
 
- constructor(private sharedService:SharedFormService){ }
+ constructor(private sharedService:SharedFormService){ 
+  console.log(Constants.API_ENDPOINT); 
+ }
 
   ngOnInit(): void {
    // this.tabset.tabs[2].active=true;

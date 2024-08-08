@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { ReceivePacket } from '../models/recievePacket';
+import { Constants } from '../../config/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class SignalRService {
   private dataSource = new BehaviorSubject<ReceivePacket | null>(null);
   data$ = this.dataSource.asObservable();
   private hubConnection: signalR.HubConnection;
-
+  apiUrl = Constants.API_ENDPOINT;
   constructor() {
     this.startConnection();
     this.addTransferHubListener();
@@ -19,7 +20,7 @@ export class SignalRService {
 
   private startConnection() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('http://localhost:5000/dataHub')
+      .withUrl(`${this.apiUrl}/dataHub}`)
       .build();
 
     this.hubConnection

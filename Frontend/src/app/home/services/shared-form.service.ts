@@ -1,6 +1,6 @@
 // shared-form.service.ts
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, catchError,  Observable, Subscription, switchMap, timer } from 'rxjs';
+import { BehaviorSubject, catchError,  Observable, Subscription, switchMap, tap, timer } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { SendPacket } from '../models/sendPacket';
 @Injectable({
@@ -191,13 +191,14 @@ export class SharedFormService implements  OnDestroy  {
   }
  /**start timer every 1 seconds read values and send to dotnetbackend */
   SendDataByTimer(apiUrl:string, TimerSecond:number) {
-
     this.timerSubscription =timer(0,TimerSecond).pipe(
       switchMap(() => {
         const formData = this.formData$.value;
         console.log(`Sending data at ${new Date().toISOString()}:`, formData);
         return this.sendData(apiUrl, formData);
-      })
+      }),
+     // with tap you can see the result returned by each call
+      tap(data => console.log(data)),
     ).subscribe(
       (response) => {
         console.log('Received response from server:', response);
