@@ -19,35 +19,35 @@ typedef struct
 	u8 M2_status;
 	u8 M2_ADM;
 	u8 downlink_data_mode;
-	u8 rsvd3[1];
+	u8 rsvd3[1]; // cfar_coef 2000-10000 LSB (num && 0x00FF)
 	s32 M3_Xm;
 	s32 M3_Ym;
 	s32 M3_Zm;
 	u8 M3_status;
 	u8 M3_ADM;
 	u8 downlink_data_mode;
-	u8 rsvd4[1];
+	u8 rsvd4[1]; // cfar_coef 2000-10000 MSB (num >> 8 yaaaa num%256)
 	s32 M4_Xm;
 	s32 M4_Ym;
 	s32 M4_Zm;
 	u8 M4_status;
 	u8 M4_ADM;	
 	u8 downlink_data_mode;
-	u8 rsvd5[1];
+	u8 rsvd5[1]; //downlink_att 0-84 1-byte
 	s32 M5_Xm;
 	s32 M5_Ym;
 	s32 M5_Zm;
 	u8 M5_status;
 	u8 M5_ADM;
 	u8 downlink_data_mode;
-	u8 rsvd6[1];
+	u8 rsvd6[1]; // uplink_gain 0-74 1-byte
 	s32 M6_Xm;
 	s32 M6_Ym;
 	s32 M6_Zm;
 	u8 M6_status;
 	u8 M6_ADM;
 	u8 downlink_data_mode;
-	u8 rsvd7[1];
+	u8 rsvd7[1]; //self_tester_att 0-89 1-byte
 	u16 checkSum;	
 	u8 rsvd8[1];
 	char footer[3];
