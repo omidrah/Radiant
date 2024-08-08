@@ -183,12 +183,11 @@ namespace WebApplication5.Controllers
                             }
                             sb.Append(res.downlink_data_mode2.ToString("X2"));
                             break;
-                        case "rsvd3":
-                            byte[] rsvd3 = { 0 };
-                            res.rsvd3 = rsvd3;
-                            sb.Append(Utils.convertToHex(res.rsvd3));
+                        case "cfar_coef":
+                            _ = byte.TryParse(property.Value.ToString(), out byte cfar_coef);
+                            res.cfar_coef = cfar_coef;
+                            sb.Append(Utils.convertToHex(res.cfar_coef));
                             break;
-
                         case "m3xm":
                             _ = int.TryParse(property.Value.ToString(), out int m3xm);
                             res.m3xm = m3xm;
@@ -277,9 +276,10 @@ namespace WebApplication5.Controllers
                             sb.Append(res.downlink_data_mode4.ToString("X2"));
                             break;
                         case "rsvd5":
-                            byte[] rsvd5 = new byte[] { 0 };
-                            res.rsvd6 = rsvd5;
-                            sb.Append(Utils.convertToHex(res.rsvd5));
+                            _ = byte.TryParse(property.Value.ToString(), out byte downlink_att);
+                            //byte[] rsvd5 = new byte[] { 0 };
+                            res.downlink_att = downlink_att;
+                            sb.Append(Utils.convertToHex(res.downlink_att));
                             break;
 
                         case "m5xm":
@@ -324,9 +324,9 @@ namespace WebApplication5.Controllers
                             sb.Append(res.downlink_data_mode5.ToString("X2"));
                             break;
                         case "rsvd6":
-                            byte[] rsvd6 = new byte[] { 0 };
-                            res.rsvd6 = rsvd6;
-                            sb.Append(Utils.convertToHex(res.rsvd6));
+                            _ = byte.TryParse(property.Value.ToString(), out byte uplink_gain);                            
+                            res.uplink_gain = uplink_gain;
+                            sb.Append(Utils.convertToHex(res.uplink_gain));
                             break;
 
                         case "m6xm":
@@ -371,9 +371,9 @@ namespace WebApplication5.Controllers
                             break;
 
                         case "rsvd7":
-                            byte rsvd7 = 0;
-                            res.rsvd7 = rsvd7;
-                            sb.Append(Utils.convertToHex(res.rsvd7));
+                            _ = byte.TryParse(property.Value.ToString(), out byte self_tester_att);
+                            res.self_tester_att = self_tester_att;
+                            sb.Append(Utils.convertToHex(res.self_tester_att));
                             break;
                         case "checksum":
                             res.checksum = res.calculateChecksum();

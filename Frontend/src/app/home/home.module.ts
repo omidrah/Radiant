@@ -16,6 +16,7 @@ import { M6tabComponent } from './tablist/m6tab/m6tab.component';
 import { SharedFormService } from './services/shared-form.service';
 import { NumericKeypadComponent } from './numeric-keypad/numeric-keypad.component';
 import { NumericKeypadDirective } from './directive/numeric-keypad.directive';
+import { M7tabComponent } from './tablist/m7tab/m7tab.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NumericKeypadDirective } from './directive/numeric-keypad.directive';
     M4tabComponent,
     M5tabComponent,
     M6tabComponent,
+    M7tabComponent,
     NumericKeypadComponent,
     NumericKeypadDirective
 

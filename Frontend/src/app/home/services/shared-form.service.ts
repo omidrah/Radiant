@@ -45,7 +45,7 @@ export class SharedFormService implements  OnDestroy  {
     '001101',
     //datamode2:
     'loopback',
-    //rsvd3:
+    //cfar_coef:
     0,
     //m3xm:
      0,
@@ -73,7 +73,7 @@ export class SharedFormService implements  OnDestroy  {
     '001101',
     //datamode4:
     'loopback',
-    //rsvd5:
+    //downlink_att:
     0,
     //m5xm:
     0,
@@ -87,7 +87,7 @@ export class SharedFormService implements  OnDestroy  {
     '001101',
     //datamode5:
     'loopback',
-    //rsvd6:
+    //uplink_gain:
     0,
     //m6xm:
      0,
@@ -101,7 +101,7 @@ export class SharedFormService implements  OnDestroy  {
     '001101',
     //datamode6:
     'loopback',
-    //rsvd7:
+    //self_tester_att:
     0,
     //checksum:
     0,
@@ -181,6 +181,12 @@ export class SharedFormService implements  OnDestroy  {
         cData.m6adm = newData['m6adm']
         cData.mfreq = newData['mfreq']
         break;
+        case 'm6tab':
+          cData.cfar_coef = newData['cfar_coef']
+          cData.downlink_att = newData['downlink_att']
+          cData.uplink_gain = newData['uplink_gain']
+          cData.self_tester_att = newData['self_tester_att']
+          break;
     }
     this.formData$.next(cData);
   }

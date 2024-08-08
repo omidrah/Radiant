@@ -1,0 +1,23 @@
+<div style="padding-left:10px;padding-top: 2px; font-size: 20px !important;">
+  <form [formGroup]="m7tabform">
+    <div class="group-container mt-2">
+      <div class="group-box">
+        <div class="row">
+          <div class="col-6"><h3>-------------</h3></div>
+
+          <div class="col-2">cfar_coef
+            <input type="number" class="form-control" id="cfar_coef" formControlName="cfar_coef" placeholder="0" appNumericKeypad>
+          </div>
+          <div class="col-2">downlink_att
+            <input type="number" class="form-control" id="downlink_att" formControlName="downlink_att" placeholder="0" appNumericKeypad>
+          </div>
+          <div class="col-2">uplink_gain
+            <input type="number" class="form-control" id="uplink_gain" formControlName="uplink_gain" placeholder="0" appNumericKeypad>
+          </div>
+        </div>
+        <div class="row ">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
