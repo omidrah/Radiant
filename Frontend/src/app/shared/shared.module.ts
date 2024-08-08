@@ -11,6 +11,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { UtilService } from './util/UtilService';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CollapseModule.forRoot(),
     TabsModule.forRoot(),
     AlertModule.forRoot(),
+    NgxSliderModule,
     NgSelectModule
   ],
   exports:[
@@ -35,6 +37,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     TabsModule,
     NgSelectModule,
     AlertModule,
+    NgxSliderModule,
     DigiclockComponent,
   ],
   providers:[UtilService]

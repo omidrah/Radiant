@@ -1,0 +1,16 @@
+.slider-container {
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.ngx-slider-pointer {
+  background-color: #007bff; /* Customize slider handle color */
+}
+
+.ngx-slider-bar {
+  background-color: #be1f1f; /* Customize slider bar color */
+}
+
+.ngx-slider-full-bar {
+  background-color: #2e9309; /* Customize slider track color */
+}

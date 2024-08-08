@@ -3,19 +3,18 @@
     <div class="group-container mt-2">
       <div class="group-box">
         <div class="row">
-          <div class="col-6"><h3>Maint</h3></div>
+              <div class="col-6"><h3>Maint</h3></div>
 
-          <div class="col-2">cfar_coef
-            <input type="number" class="form-control" id="cfar_coef" formControlName="cfar_coef" placeholder="0" appNumericKeypad>
-          </div>
-          <div class="col-2">downlink_att
-            <input type="number" class="form-control" id="downlink_att" formControlName="downlink_att" placeholder="0" appNumericKeypad>
-          </div>
-          <div class="col-2">uplink_gain
-            <input type="number" class="form-control" id="uplink_gain" formControlName="uplink_gain" placeholder="0" appNumericKeypad>
-          </div>
-        </div>
-        <div class="row ">
+              <br>
+              cfar_coef <ngx-slider [(value)]="value1"   [options]="options1" formControlName="cfar_coef"></ngx-slider>
+              <br>
+              downlink_att <ngx-slider [(value)]="value2"  [options]="options2"  formControlName="downlink_att"></ngx-slider>
+              <br>
+              uplink_gain <ngx-slider [(value)]="value3"  [options]="options3"  formControlName="uplink_gain"></ngx-slider>
+              <br>
+              self_tester_att <ngx-slider [(value)]="value4" [options]="options4"  formControlName="self_tester_att"></ngx-slider>
+              <br>
+
         </div>
       </div>
     </div>
