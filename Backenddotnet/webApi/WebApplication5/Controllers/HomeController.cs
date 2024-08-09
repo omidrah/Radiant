@@ -275,7 +275,7 @@ namespace WebApplication5.Controllers
                             }
                             sb.Append(res.downlink_data_mode4.ToString("X2"));
                             break;
-                        case "rsvd5":
+                        case "downlink_att":
                             _ = byte.TryParse(property.Value.ToString(), out byte downlink_att);
                             //byte[] rsvd5 = new byte[] { 0 };
                             res.downlink_att = downlink_att;
@@ -323,7 +323,7 @@ namespace WebApplication5.Controllers
                             }
                             sb.Append(res.downlink_data_mode5.ToString("X2"));
                             break;
-                        case "rsvd6":
+                        case "uplink_gain":
                             _ = byte.TryParse(property.Value.ToString(), out byte uplink_gain);                            
                             res.uplink_gain = uplink_gain;
                             sb.Append(Utils.convertToHex(res.uplink_gain));
@@ -369,8 +369,7 @@ namespace WebApplication5.Controllers
                             }
                             sb.Append(res.downlink_data_mode6.ToString("X2"));
                             break;
-
-                        case "rsvd7":
+                        case "self_tester_att":
                             _ = byte.TryParse(property.Value.ToString(), out byte self_tester_att);
                             res.self_tester_att = self_tester_att;
                             sb.Append(Utils.convertToHex(res.self_tester_att));
